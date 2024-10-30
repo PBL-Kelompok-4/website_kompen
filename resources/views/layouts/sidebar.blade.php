@@ -2,14 +2,10 @@
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
           <img 
-            @if (file_exists(public_path('storage/uploads/profile_pictures/'.auth()->user()->username.'/'.auth()->user()->username.'_profile.png')))
-                src="{{ asset('storage/uploads/profile_pictures/'. auth()->user()->username .'/'.auth()->user()->username.'_profile.png') }}"
-            @endif
-            @if (file_exists(public_path('storage/uploads/profile_pictures/'.auth()->user()->username.'/'.auth()->user()->username.'_profile.jpg')))
-                src="{{ asset('storage/uploads/profile_pictures/'. auth()->user()->username .'/'.auth()->user()->username.'_profile.jpg') }}"
-            @endif
-            @if (file_exists(public_path('storage/uploads/profile_pictures/'.auth()->user()->username.'/'.auth()->user()->username.'_profile.jpeg')))
-                src="{{ asset('storage/uploads/profile_pictures/'. auth()->user()->username .'/'.auth()->user()->username.'_profile.jpeg') }}"
+            @if (auth()->user()->profile_image)
+                src="{{ asset('storage/photos/' . auth()->user()->profile_image) }}"
+            @else
+                src="{{ asset('assets/polinema-bw.png') }}"
             @endif
           class="img-circle elevation-2" alt="User Image">
         </div>
@@ -37,6 +33,7 @@
                     <p>Dashboard</p>
                 </a>
             </li>
+            @if(auth()->user()->level->level_kode == "ADM")
             <li class="nav-header">Data Pengguna</li>
             <li class="nav-item">
                 <a href="{{ url('/level') }}" class="nav-link {{ $activeMenu == 'level' ? 'active' : '' }} ">
@@ -71,7 +68,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/barang') }}" class="nav-link {{ $activeMenu == 'penjualan' ? 'active' : '' }} ">
+                <a href="{{ url('/penjualan') }}" class="nav-link {{ $activeMenu == 'penjualan' ? 'active' : '' }} ">
                     <i class="nav-icon fas fa-cash-register"></i>
                     <p>Transaksi Penjualan</p>
                 </a>
@@ -83,6 +80,57 @@
                     <p>Data Supplier</p>
                 </a>
             </li>
+            @endif
+            @if (auth()->user()->level->level_kode == "MNG")
+            <li class="nav-header">Data Barang</li>
+            <li class="nav-item">
+                <a href="{{ url('/kategori') }}" class="nav-link {{ $activeMenu == 'kategori' ? 'active' : '' }} ">
+                    <i class="nav-icon far fa-bookmark"></i>
+                    <p>Kategori Barang</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('/barang') }}" class="nav-link {{ $activeMenu == 'barang' ? 'active' : '' }} ">
+                    <i class="nav-icon far fa-list-alt"></i>
+                    <p>Data Barang</p>
+                </a>
+            </li>
+            <li class="nav-header">Data Transaksi</li>
+            <li class="nav-item">
+                <a href="{{ url('/stok') }}" class="nav-link {{ $activeMenu == 'stok' ? 'active' : '' }} ">
+                    <i class="nav-icon fas fa-cubes"></i>
+                    <p>Stok Barang</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('/penjualan') }}" class="nav-link {{ $activeMenu == 'penjualan' ? 'active' : '' }} ">
+                    <i class="nav-icon fas fa-cash-register"></i>
+                    <p>Transaksi Penjualan</p>
+                </a>
+            </li>
+            <li class="nav-header">Data Supplier</li>
+            <li class="nav-item">
+                <a href="{{ url('/supplier') }}" class="nav-link {{ $activeMenu == 'supplier' ? 'active' : '' }} ">
+                    <i class="nav-icon far fa-user"></i>
+                    <p>Data Supplier</p>
+                </a>
+            </li>
+            @endif
+            @if (auth()->user()->level->level_kode == "KSR")
+            <li class="nav-header">Data Transaksi</li>
+            <li class="nav-item">
+                <a href="{{ url('/stok') }}" class="nav-link {{ $activeMenu == 'stok' ? 'active' : '' }} ">
+                    <i class="nav-icon fas fa-cubes"></i>
+                    <p>Stok Barang</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('/penjualan') }}" class="nav-link {{ $activeMenu == 'penjualan' ? 'active' : '' }} ">
+                    <i class="nav-icon fas fa-cash-register"></i>
+                    <p>Transaksi Penjualan</p>
+                </a>
+            </li>
+            @endif
         </ul>
     </nav>
 </div>
