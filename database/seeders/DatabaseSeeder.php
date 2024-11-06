@@ -12,11 +12,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        /* Sebagai Parent */
+        $this->call(ProdiSeeder::class);
+        $this->call(LevelSeeder::class);
+        $this->call(KompetensiSeeder::class);
+        $this->call(JenisKompenSeeder::class);
+        $this->call(StatusAcceptacenSeeder::class);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        /* CHILD 1 : Foreign key dari Parent */
+        $this->call(MahasiswaSeeder::class);
+        $this->call(PersonilAkademikSeeder::class);
+        $this->call(KompenSeeder::class);
+        $this->call(ListKompetensiMahasiswaSeeder::class);
     }
 }
