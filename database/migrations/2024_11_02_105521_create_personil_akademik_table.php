@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('username', 20);
             $table->string('nama', 255);
             $table->string('password', 255);
-            $table->char('nomor_telp', 15);
+            $table->char('nomor_telp', 15)->nullable();
             $table->unsignedBigInteger('id_level')->index();
             $table->timestamps();
 

@@ -9,11 +9,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                <input value="5" type="number" name="id_level" id="id_level" class="form-control" hidden>
                 <div class="form-group">
                     <label>Level Personil</label>
                     <select name="id_level" id="id_level" class="form-control" required>
-                        <option value="">- Pilih Prodi -</option>
+                        <option value="">- Pilih Level -</option>
                         @foreach ($level as $l)
                             <option value="{{ $l->id_level }}">{{ $l->nama_level }}</option>
                         @endforeach
@@ -65,7 +64,7 @@
     $(document).ready(function() {
         $("#form-tambah").validate({
             rules: {
-                id_level: { required:true, number: true }
+                id_level: { required:true, number: true },
                 nomor_induk: { required: true, maxlength: 18 },
                 username: { required: true, minlength: 3, maxlength: 20 },
                 nama: { required: true, minlength: 3, maxlength: 150 },

@@ -1,4 +1,4 @@
-@empty($mahasiswa_alpha)
+@empty($kompen_dibuka)
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -12,7 +12,7 @@
                     <h5><i class="icon fas fa-ban"></i>Kesalahan!!!</h5>
                     Data yang anda cari tidak ditemukan
                 </div>
-                <a href="{{ url('/mahasiswa_alpha') }}" class="btn btn-warning">Kembali</a>
+                <a href="{{ url('/kompen_dibuka') }}" class="btn btn-warning">Kembali</a>
             </div>
         </div>
     </div>
@@ -20,44 +20,48 @@
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Detail Data Mahasiswa</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Detail Data Kompen</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="alert alert-info">
-                    <h5><i class="icon fas fa-info"></i> Data Mahasiswa Alpha </h5>
-                    Berikut adalah detail dari data mahasiswa alpha
+                    <h5><i class="icon fas fa-info"></i> Data Kompen </h5>
+                    Berikut adalah detail dari data kompen
                 </div>
                 <table class="table table-sm table-bordered table-stripped">
                     <tr>
-                        <th class="text-right col-3">Prodi Mahasiswa : </th>
-                        <td class="col-9">{{ $mahasiswa_alpha->prodi->nama_prodi }}</td>
+                        <th class="text-right col-3">Nama Kompen : </th>
+                        <td class="col-9">{{ $kompen_dibuka->nama }}</td>
                     </tr>
                     <tr>
-                        <th class="text-right col-3">NIM : </th>
-                        <td class="col-9">{{ $mahasiswa_alpha->nomor_induk }} </td>
+                        <th class="text-right col-3">Deskripsi : </th>
+                        <td class="col-9">{{ $kompen_dibuka->deskripsi }} </td>
                     </tr>
                     <tr>
-                        <th class="text-right col-3">Username : </th>
-                        <td class="col-9">{{ $mahasiswa_alpha->username }}</td>
+                        <th class="text-right col-3">Pemberi Tugas : </th>
+                        <td class="col-9">{{ $kompen_dibuka->personilAkademik->nama }}</td>
                     </tr>
                     <tr>
-                        <th class="text-right col-3">Nama : </th>
-                        <td class="col-9">{{ $mahasiswa_alpha->nama }}</td>
+                        <th class="text-right col-3">Jenis Kompen : </th>
+                        <td class="col-9">{{ $kompen_dibuka->jenisKompen->nama_jenis }}</td>
                     </tr>
                     <tr>
-                        <th class="text-right col-3">Semester : </th>
-                        <td class="col-9">{{ $mahasiswa_alpha->semester }}</td>
+                        <th class="text-right col-3">Kuota Maksimal : </th>
+                        <td class="col-9">{{ $kompen_dibuka->kuota }}</td>
                     </tr>
                     <tr>
-                        <th class="text-right col-3">Jumlah Alpha : </th>
-                        <td class="col-9">{{ $mahasiswa_alpha->jam_alpha }}</td>
+                        <th class="text-right col-3">Jam Konversi : </th>
+                        <td class="col-9">{{ $kompen_dibuka->jam_kompen }}</td>
                     </tr>
                     <tr>
-                        <th class="text-right col-3">List Kompetensi</th>
-                        <td class="col-9"></td>
+                        <th class="text-right col-3">Tanggal Mulai : </th>
+                        <td class="col-9">{{ $kompen_dibuka->tanggal_mulai }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-right col-3">Tanggal Selesai : </th>
+                        <td class="col-9">{{ $kompen_dibuka->tanggal_selesai }}</td>
                     </tr>
                 </table>
             </div>

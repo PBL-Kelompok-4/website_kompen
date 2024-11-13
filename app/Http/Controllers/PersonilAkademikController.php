@@ -65,9 +65,8 @@ class PersonilAkademikController extends Controller
                 'nomor_induk' => 'required|string|max:18|unique:personil_akademik,nomor_induk',
                 'username' => 'required|string|min:3|max:20|unique:personil_akademik,username',
                 'nama' => 'required|string|min:3|max:150',
-                'semester' => 'required|integer',
                 'password' => 'required|min:6|max:20',
-                'nomor_telp' => 'required|integer|max:15'
+                'nomor_telp' => 'required|string|max:15'
             ];
 
             //use Illuminate\Support\Facades\Validator;
