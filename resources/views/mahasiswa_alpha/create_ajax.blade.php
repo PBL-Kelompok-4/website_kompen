@@ -85,7 +85,7 @@
                 username: { required: true, minlength: 3, maxlength: 20 },
                 nama: { required: true, minlength: 3, maxlength: 150 },
                 semester: { required: true, number: true },
-                password: {required:true, minlength: 6, maxlength: 20 },
+                password: { required:true, minlength: 6, maxlength: 20 },
                 jam_alpha: { required: true, number: true },
                 jam_kompen: { required: true, number: true },
                 jam_kompen_selesai: { required: true, number: true },

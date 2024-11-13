@@ -20,10 +20,11 @@ return new class extends Migration
             $table->unsignedBigInteger('id_jenis_kompen')->index();
             $table->integer('kuota');
             $table->integer('jam_kompen');
-            $table->boolean('status');
-            $table->boolean('is_selesai');
+            $table->boolean('status')->default(0);
+            $table->boolean('is_selesai')->default(0);
             $table->dateTime('tanggal_mulai');
             $table->dateTime('tanggal_selesai');
+            $table->enum('status_acceptance', ['pending', 'accept', 'reject'])->default('pending');
             $table->timestamps();
 
             $table->foreign('id_personil')->references('id_personil')->on('personil_akademik');

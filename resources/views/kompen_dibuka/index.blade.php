@@ -5,10 +5,10 @@
         <div class="card-header">
             <h3 class="card-title">{{ $page->title}}</h3>
             <div class="card-tools">
-                {{-- <button onclick="modalAction('{{ url('/mahasiswa/import') }}')" class="btn btn-info">Import Data Mahasiswa</button>
-                <a href="{{ url('/mahasisawa/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i> Export Data Mahasiswa</a>
-                <a href="{{ url('/mahasisawa/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i> Export Data Mahasiswa</a> --}}
-                <button onclick="modalAction('{{ url('mahasiswa/create_ajax') }}')" class="btn btn-success">Tambah Data (Ajax)</button>
+                {{-- <button onclick="modalAction('{{ url('/kompen/import') }}')" class="btn btn-info">Import Data Mahasiswa</button>
+                <a href="{{ url('/kompen/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i> Export Data Mahasiswa</a>
+                <a href="{{ url('/kompen/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i> Export Data Mahasiswa</a> --}}
+                <button onclick="modalAction('{{ url('kompen/create_ajax') }}')" class="btn btn-success">Tambah Data (Ajax)</button>
             </div>
         </div>
         <div class="card-body">
@@ -23,49 +23,38 @@
                     <div class="form-group row">
                         <label class="col-1 control-label col-form-label">Filter:</label>
                         <div class="col-3">
-                            <select name="filter_prodi" id="filter_prodi" class="form-control" required>
+                            <select name="filter_kompetensi" id="filter_kompetensi" class="form-control" required>
                                 <option value="">- Semua -</option>
-                                @foreach ($prodi as $item)
-                                    <option value="{{ $item->id_prodi }}">{{ $item->nama_prodi }}</option>
+                                @foreach ($kompetensi as $item)
+                                    <option value="{{ $item->id_kompetensi }}">{{ $item->nama_kompetensi }}</option>
                                 @endforeach
                             </select>
-                            <small class="form-text text-muted">Prodi Mahasiswa</small>
+                            <small class="form-text text-muted">Kompetensi Kompen</small>
                         </div>
                         <div class="col-3">
-                            <select name="filter_semester" id="filter_semester" class="form-control" required>
+                            <select name="filter_jenis_kompen" id="filter_jenis_kompen" class="form-control" required>
                                 <option value="">- Semua -</option>
-                                <option value="1">Semester 1</option>
-                                <option value="2">Semester 2</option>
-                                <option value="3">Semester 3</option>
-                                <option value="4">Semester 4</option>
-                                <option value="5">Semester 5</option>
-                                <option value="6">Semester 6</option>
-                                <option value="7">Semester 7</option>
-                                <option value="8">Semester 8</option>
-                                <option value="9">Semester 9</option>
-                                <option value="10">Semester 10</option>
-                                <option value="11">Semester 11</option>
-                                <option value="12">Semester 12</option>
-                                <option value="13">Semester 13</option>
-                                <option value="14">Semester 14</option>
+                                @foreach ($jenis_kompen as $j)
+                                    <option value="{{ $j->id_jenis_kompen }}">{{ $j->nama_jenis }}</option>
+                                @endforeach
                             </select>
-                            <small class="form-text text-muted">Semester Mahasiswa</small>
+                            <small class="form-text text-muted">Jenis Kompen</small>
                         </div>
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered table-striped table-hover table-sm" id="table_mahasiswa">
+            <table class="table table-bordered table-striped table-hover table-sm" id="table_kompen">
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>NIM</th>
-                        <th>Username</th>
-                        <th>Nama</th>
-                        <th>Semester</th>
-                        <th>Prodi</th>
-                        <th>Jam Alpha</th>
-                        <th>Jam Kompen</th>
-                        <th>Jam Kompen Selesai</th>
+                        <th>Nama Kompen</th>
+                        <th>Deskripsi</th>
+                        <th>Pemberi Tugas</th>
+                        <th>Jenis Kompen</th>
+                        <th>Kuota</th>
+                        <th>Jam Konversi</th>
+                        <th>Tanggal Mulai Pengerjaan</th>
+                        <th>Tanggal Selesai Pengerjaan</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -86,19 +75,19 @@
             });
         }
 
-        var dataMahasiswa;
+        var dataKompenDibuka;
         $(document).ready(function(){
-            dataMahasiswa = $('#table_mahasiswa').DataTable({
+            dataKompenDibuka = $('#table_kompen').DataTable({
                 processing: true,
                 //serverSide: true, jika ingin menggunakan server side processing
                 serverSide: true,
                 ajax:{
-                    "url": "{{ url('mahasiswa/list') }}",
+                    "url": "{{ url('kompen_dibuka/list') }}",
                     "dataType": "json",
                     "type": "POST",
                     "data": function (d){
-                        d.id_prodi = $('#filter_prodi').val();
-                        d.semester = $('#filter_semester').val();
+                        d.id_kompetensi = $('#filter_kompetensi').val();
+                        d.id_jenis_kompen = $('#filter_jenis_kompen').val();
                     }
                 },
                 columns:[
@@ -109,46 +98,47 @@
                         orderable: false,
                         searchable: false
                     },{
-                        data: "nomor_induk",
-                        className: "",
+                        data: "nama",
+                        className: "text-center",
                         //orderable: true, jika ingin kolom bisa diurutkan
                         orderable: true,
                         //searchable: true, jika ingin kolom bisa dicari
                         searchable: true
                     },{
-                        data: "username",
-                        className: "",
+                        data: "deskripsi",
+                        className: "text-center",
                         orderable:true,
                         searchable: true
                     },{
-                        data: "nama",
-                        className: "",
+                        // mengambil data personil akademik dari hasil ORM berelasi
+                        data: "personil_akademik.nama",
+                        className: "text-center",
                         orderable: true,
                         searchable: true
                     },{
-                        data: "semester",
-                        className: "",
+                        // mengambil data jenis kompen dari hasil ORM berelasi
+                        data: "jenis_kompen.nama_jenis",
+                        className: "text-center",
                         orderable: true,
                         searchable: true
                     },{
-                        // mengambil data prodi dari hasil ORM berelasi
-                        data: "prodi.nama_prodi",
-                        className: "",
+                        data: "kuota",
+                        className: "text-center",
                         orderable: false,
                         searchable: false
                     },{
-                        data: "jam_alpha",
-                        className: "",
-                        orderable: true,
-                        searchable: false
-                    },{
                         data: "jam_kompen",
-                        className: "",
+                        className: "text-center",
                         orderable: true,
                         searchable: false
                     },{
-                        data: "jam_kompen_selesai",
-                        className: "",
+                        data: "tanggal_mulai",
+                        className: "text-center",
+                        orderable: true,
+                        searchable: false
+                    },{
+                        data: "tanggal_selesai",
+                        className: "text-center",
                         orderable: true,
                         searchable: false
                     },{
@@ -161,14 +151,14 @@
             });
             $('#table_mahasiswa_filter input').unbind().bind().on('keyup', function(e){
                 if(e.keyCode == 13){ // enter key
-                    dataMahasiswa.search(this.value).draw();
+                    dataKompenDibuka.search(this.value).draw();
                 }
             });
-            $('#filter_prodi').on('change', function(){
-                dataMahasiswa.ajax.reload();
+            $('#filter_kompetensi').on('change', function(){
+                dataKompenDibuka.ajax.reload();
             });
-            $('#filter_semester').on('change', function(){
-                dataMahasiswa.ajax.reload();
+            $('#filter_jenis_kompen').on('change', function(){
+                dataKompenDibuka.ajax.reload();
             });
         });
     </script>

@@ -28,7 +28,7 @@ class KompenSeeder extends Seeder
                 'is_selesai' => 0,
                 'tanggal_mulai' => now(),
                 'tanggal_selesai' => '2024-11-13 13:00:00',
-                'id_status_acceptance' => 3
+                'status_acceptance' => 3
             ],
             [
                 'id_kompen' => 2,
@@ -43,7 +43,7 @@ class KompenSeeder extends Seeder
                 'is_selesai' => 0,
                 'tanggal_mulai' => '2024-12-01 16:30:00',
                 'tanggal_selesai' => '2024-12-10 08:00:00',
-                'id_status_acceptance' => 1
+                'status_acceptance' => 1
             ],
             [
                 'id_kompen' => 3,
@@ -58,7 +58,7 @@ class KompenSeeder extends Seeder
                 'is_selesai' => 0,
                 'tanggal_mulai' => '2024-12-01 16:30:00',
                 'tanggal_selesai' => '2024-12-10 08:00:00',
-                'id_status_acceptance' => 1
+                'status_acceptance' => 1
             ],
             [
                 'id_kompen' => 4,
@@ -73,7 +73,7 @@ class KompenSeeder extends Seeder
                 'is_selesai' => 0,
                 'tanggal_mulai' => '2024-12-01 16:30:00',
                 'tanggal_selesai' => '2024-12-10 08:00:00',
-                'id_status_acceptance' => 3
+                'status_acceptance' => 3
             ],
             [
                 'id_kompen' => 5,
@@ -88,7 +88,7 @@ class KompenSeeder extends Seeder
                 'is_selesai' => 1,
                 'tanggal_mulai' => '2024-12-01 16:30:00',
                 'tanggal_selesai' => '2024-12-10 08:00:00',
-                'id_status_acceptance' => 2
+                'status_acceptance' => 2
             ],
             [
                 'id_kompen' => 6,
@@ -103,7 +103,7 @@ class KompenSeeder extends Seeder
                 'is_selesai' => 1,
                 'tanggal_mulai' => '2024-12-01 16:30:00',
                 'tanggal_selesai' => '2024-12-10 08:00:00',
-                'id_status_acceptance' => 2
+                'status_acceptance' => 2
             ],
             [
                 'id_kompen' => 7,
@@ -118,7 +118,7 @@ class KompenSeeder extends Seeder
                 'is_selesai' => 0,
                 'tanggal_mulai' => '2024-12-01 16:30:00',
                 'tanggal_selesai' => '2024-12-10 08:00:00',
-                'id_status_acceptance' => 2
+                'status_acceptance' => 2
             ]
         ];
 

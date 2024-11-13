@@ -19,9 +19,9 @@ return new class extends Migration
             $table->smallInteger('semester');
             $table->unsignedBigInteger('id_prodi')->index();
             $table->string('password', 255);
-            $table->integer('jam_alpha');
-            $table->integer('jam_kompen');
-            $table->integer('jam_kompen_selesai');
+            $table->integer('jam_alpha')->default(0);
+            $table->integer('jam_kompen')->default(0);
+            $table->integer('jam_kompen_selesai')->default(0);
             $table->unsignedBigInteger('id_level')->index()->default(5);
             $table->timestamps();
 

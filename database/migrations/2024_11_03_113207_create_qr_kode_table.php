@@ -15,10 +15,7 @@ return new class extends Migration
             $table->id('id_qr_kode');
             $table->unsignedBigInteger('id_kompen')->index();
             $table->unsignedBigInteger('id_mahasiswa')->index();
-            $table->string('qr_pemberi_tugas', 26)->unique();
-            $table->dateTime('tanggal_qr_pemberi_tugas');
-            $table->string('qr_petinggi_jurusan', 26)->unique();
-            $table->dateTime('tanggal_qr_petinggi_jurusan');
+            $table->string('qr_code', 255);
             $table->timestamps();
 
             $table->foreign('id_kompen')->references('id_kompen')->on('kompen');
