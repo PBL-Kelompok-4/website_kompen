@@ -117,7 +117,7 @@ class MahasiswaSeeder extends Seeder
                 'jam_alpha' => 0,
                 'jam_kompen' => 0,
                 'jam_kompen_selesai' => 0,
-                'id_level' => 4 
+                'id_level' => 4
             ],
             [
                 'id_mahasiswa' => 9,
@@ -130,7 +130,7 @@ class MahasiswaSeeder extends Seeder
                 'jam_alpha' => 30,
                 'jam_kompen' => 24,
                 'jam_kompen_selesai' => 12,
-                'id_level' => 4 
+                'id_level' => 4
             ],
             [
                 'id_mahasiswa' => 10,
@@ -143,7 +143,7 @@ class MahasiswaSeeder extends Seeder
                 'jam_alpha' => 44,
                 'jam_kompen' => 32,
                 'jam_kompen_selesai' => 19,
-                'id_level' => 4 
+                'id_level' => 4
             ]
         ];
 
