@@ -72,7 +72,7 @@
             <li class="nav-item">
                 <a href="{{ url('/kompen_selesai') }}" class="nav-link {{ $activeMenu == 'kompen_selesai' ? 'active' : '' }} ">
                     <i class="nav-icon fa-solid fa-file-lines"></i>
-                    <p>Kompen Selesai</p>
+                    <p>Status Kompen</p>
                 </a>
             </li>
         </ul>
