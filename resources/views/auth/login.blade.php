@@ -109,7 +109,7 @@
                             if (response.status) { // jika sukses
                                 Swal.fire({
                                     icon: 'success',
-                                    title: 'Berhasil',
+                                    title: 'Login Berhasil',
                                     text: response.message,
                                 }).then(function() {
                                     window.location = response.redirect;

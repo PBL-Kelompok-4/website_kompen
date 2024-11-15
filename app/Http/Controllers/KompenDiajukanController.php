@@ -32,7 +32,7 @@ class KompenDiajukanController extends Controller
     }
 
     public function list(Request $request){
-        $kompens = KompenModel::select('id_kompen' ,'nomor_kompen', 'nama', 'deskripsi', 'id_personil', 'id_jenis_kompen', 'kuota', 'jam_kompen', 'status', 'is_selesai', 'tanggal_mulai', 'tanggal_selesai', 'status_acceptance')->where('status', 0)->where('is_selesai', 0)->where('status_acceptance', 'pending')->with('jenisKompen', 'personilAkademik')->get();
+        $kompens = KompenModel::select('id_kompen' ,'nomor_kompen', 'nama', 'deskripsi', 'id_personil', 'id_jenis_kompen', 'kuota', 'jam_kompen', 'status', 'is_selesai', 'tanggal_mulai', 'tanggal_selesai', 'status_acceptance')->where('status', 'ditutup')->where('is_selesai', 'no')->where('status_acceptance', 'pending')->with('jenisKompen', 'personilAkademik')->get();
 
         //Filter data kompen berdasarkan id_jenis_kompen
         if($request->id_jenis_kompen){
@@ -60,5 +60,44 @@ class KompenDiajukanController extends Controller
         $kompen_diajukan = KompenModel::find($id);
 
         return view('kompen_diajukan.show_ajax', ['kompen_diajukan' => $kompen_diajukan]);
+    }
+
+    public function ditolak(string $id){
+
+        $check = KompenModel::find($id);
+        if($check){
+            $check->update([
+                'status_acceptance' => 'reject'
+            ]);
+            return response()->json([
+                'status' => true,
+                'message' => 'Data berhasil diupdate'
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ]);
+        }
+    }
+
+    public function diterima(string $id){
+
+        $check = KompenModel::find($id);
+        if($check){
+            $check->update([
+                'status' => 'dibuka',
+                'status_acceptance' => 'accept'
+            ]);
+            return response()->json([
+                'status' => true,
+                'message' => 'Data berhasil diupdate'
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ]);
+        }
     }
 }
