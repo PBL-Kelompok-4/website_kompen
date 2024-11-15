@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id('id_kompen_detail');
             $table->unsignedBigInteger('id_kompen')->index();
             $table->unsignedBigInteger('id_mahasiswa')->index();
-            $table->string('progres_1', 255);
-            $table->string('progres_2', 255);
+            $table->string('progres_1', 255)->nullable();
+            $table->string('progres_2', 255)->nullable();
             $table->timestamps();
 
             $table->foreign('id_kompen')->references('id_kompen')->on('kompen');

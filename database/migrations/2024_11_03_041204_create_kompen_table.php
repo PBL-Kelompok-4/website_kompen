@@ -20,8 +20,9 @@ return new class extends Migration
             $table->unsignedBigInteger('id_jenis_kompen')->index();
             $table->integer('kuota');
             $table->integer('jam_kompen');
-            $table->boolean('status');
-            $table->boolean('is_selesai');
+            $table->enum('status', ['ditutup', 'dibuka', 'progres'])->default('ditutup');
+            $table->enum('is_selesai', ['no', 'yes'])->default('no');
+            $table->enum('status_acceptance', ['pending', 'accept', 'reject'])->default('pending');
             $table->dateTime('tanggal_mulai');
             $table->dateTime('tanggal_selesai');
             $table->timestamps();

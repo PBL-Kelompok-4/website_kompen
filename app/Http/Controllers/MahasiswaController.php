@@ -56,6 +56,12 @@ class MahasiswaController extends Controller
             ->make(true);
     }
 
+    public function show_ajax(string $id){
+        $mahasiswa = MahasiswaModel::find($id);
+
+        return view('mahasiswa.show_ajax', ['mahasiswa' => $mahasiswa]);
+    }
+
     public function create_ajax() {
         $prodi = ProdiModel::select('id_prodi', 'nama_prodi')->get();
 
@@ -193,11 +199,5 @@ class MahasiswaController extends Controller
             //jika terjadi error ketika menghapus data, redirect kembali ke halaman dengan membawa pesan error
             return redirect('/mahasiswa')->with('error', 'Data mahasiswa gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
         }
-    }
-
-    public function show_ajax(string $id){
-        $mahasiswa = MahasiswaModel::find($id);
-
-        return view('mahasiswa.show_ajax', ['mahasiswa' => $mahasiswa]);
     }
 }

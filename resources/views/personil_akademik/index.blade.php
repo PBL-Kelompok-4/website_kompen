@@ -113,7 +113,7 @@
                         searchable: true
                     },{
                         data: "aksi",
-                        className: "",
+                        className: "text-center",
                         orderable:false,
                         searchable: false
                     }

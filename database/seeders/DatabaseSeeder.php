@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(LevelSeeder::class);
         $this->call(KompetensiSeeder::class);
         $this->call(JenisKompenSeeder::class);
-        $this->call(StatusAcceptacenSeeder::class);
 
         /* CHILD 1 : Foreign key dari Parent */
         $this->call(MahasiswaSeeder::class);

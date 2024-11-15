@@ -161,7 +161,7 @@
                         // }
                     },{
                         data: "aksi",
-                        className: "",
+                        className: "text-center",
                         orderable:false,
                         searchable: false
                     }
@@ -169,14 +169,14 @@
             });
             $('#table_mahasiswa_alpha_filter input').unbind().bind().on('keyup', function(e){
                 if(e.keyCode == 13){ // enter key
-                    dataMahasiswa.search(this.value).draw();
+                    dataMahasiswaAlpha.search(this.value).draw();
                 }
             });
             $('#filter_prodi').on('change', function(){
-                dataMahasiswa.ajax.reload();
+                dataMahasiswaAlpha.ajax.reload();
             });
             $('#filter_semester').on('change', function(){
-                dataMahasiswa.ajax.reload();
+                dataMahasiswaAlpha.ajax.reload();
             });
         });
     </script>
