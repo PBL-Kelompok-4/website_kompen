@@ -16,7 +16,8 @@
                     <p>Dashboard</p>
                 </a>
             </li>
-            <li class="nav-item">
+            @if (auth()->user()->level->kode_level == "ADM")
+            <li class="nav-item {{ ($activeMenu == 'mahasiswa' || $activeMenu == 'personil_akademik' || $activeMenu == 'level') ? 'menu-open' : '' }} ">
                 <a href="#" class="nav-link {{ ($activeMenu == 'mahasiswa' || $activeMenu == 'personil_akademik' || $activeMenu == 'level') ? 'active' : '' }} ">
                     <i class="nav-icon fa-solid fa-user"></i>
                     <p>
@@ -45,12 +46,14 @@
                     </li>
                 </ul>
             </li>
+            @endif
             <li class="nav-item">
                 <a href="{{ url('/kompetensi') }}" class="nav-link {{ $activeMenu == 'kompetensi' ? 'active' : '' }} ">
                     <i class="nav-icon fa-solid fa-list-check"></i>
                     <p>Daftar Kompetensi</p>
                 </a>
             </li>
+            @if (auth()->user()->level->kode_level == "ADM" || auth()->user()->level->kode_level == "DSN" || auth()->user()->level->kode_level == "TDK")
             <li class="nav-item">
                 <a href="{{ url('/mahasiswa_alpha') }}" class="nav-link {{ $activeMenu == 'mahasiswa_alpha' ? 'active' : '' }} ">
                     <i class="nav-icon fa-solid fa-users"></i>
@@ -63,17 +66,43 @@
                     <p>Data Mahasiswa Kompen</p>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="{{ url('/tugas_kompen') }}" class="nav-link {{ $activeMenu == 'tugas_kompen' ? 'active' : '' }} ">
+            @endif
+            <li class="nav-item {{ ($activeMenu == 'kompen_dibuka' || $activeMenu == 'kompen_selesai' || $activeMenu == 'kompen_diajukan' || $activeMenu == 'kompen_ditolak') ? 'menu-open' : '' }} ">
+                <a href="#" class="nav-link {{ ($activeMenu == 'kompen_dibuka' || $activeMenu == 'kompen_selesai' || $activeMenu == 'kompen_diajukan' || $activeMenu == 'kompen_ditolak') ? 'active' : '' }} ">
                     <i class="nav-icon fa-solid fa-file-pen"></i>
-                    <p>Data Tugas Kompen</p>
+                    <p>
+                      Tugas Kompen
+                      <i class="right fas fa-angle-left"></i>
+                    </p>
                 </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ url('/kompen_selesai') }}" class="nav-link {{ $activeMenu == 'kompen_selesai' ? 'active' : '' }} ">
-                    <i class="nav-icon fa-solid fa-file-lines"></i>
-                    <p>Status Kompen</p>
-                </a>
+                <ul class="nav nav-treeview">
+                    @if (auth()->user()->level->kode_level == "ADM")
+                    <li class="nav-item">
+                        <a href="{{ url('/kompen_diajukan') }}" class="nav-link {{ $activeMenu == 'kompen_diajukan' ? 'active' : '' }} ">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Kompen Diajukan</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/kompen_ditolak') }}" class="nav-link {{ $activeMenu == 'kompen_ditolak' ? 'active' : '' }} ">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Kompen Ditolak</p>
+                        </a>
+                    </li>
+                    @endif
+                    <li class="nav-item">
+                        <a href="{{ url('/kompen_dibuka') }}" class="nav-link {{ $activeMenu == 'kompen_dibuka' ? 'active' : '' }} ">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Kompen Dibuka</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/kompen_selesai') }}" class="nav-link {{ $activeMenu == 'kompen_selesai' ? 'active' : '' }} ">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Kompen Selesai</p>
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </nav>

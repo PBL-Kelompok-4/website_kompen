@@ -18,7 +18,7 @@ class KompetensiModel extends Model
         return $this->hasMany(ListKompetensiMahasiswaModel::class, 'id_kompetensi', 'id_kompetensi');
     }
 
-    // public function kompetensiKompen(): HasMany {
-    //     return $this->hasMany(ListKompetensiKompenModel::class, 'id_kompetensi', 'id_kompetensi');
-    // }
+    public function kompetensiKompen(): HasMany {
+        return $this->hasMany(ListKompetensiKompenModel::class, 'id_kompetensi', 'id_kompetensi');
+    }
 }

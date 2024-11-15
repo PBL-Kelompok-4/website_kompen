@@ -24,11 +24,11 @@ class KompenSeeder extends Seeder
                 'deskripsi' => 'Membantu Menginputkan Nilai UTS',
                 'kuota' => 1,
                 'jam_kompen' => 4,
-                'status' => 0,
-                'is_selesai' => 0,
+                'status' => 'ditutup',
+                'is_selesai' => 'no',
                 'tanggal_mulai' => now(),
                 'tanggal_selesai' => '2024-11-13 13:00:00',
-                'id_status_acceptance' => 3
+                'status_acceptance' => 3
             ],
             [
                 'id_kompen' => 2,
@@ -39,11 +39,11 @@ class KompenSeeder extends Seeder
                 'deskripsi' => 'Menguji Aplikasi Sikompen',
                 'kuota' => 4,
                 'jam_kompen' => 6,
-                'status' => 0,
-                'is_selesai' => 0,
+                'status' => 'ditutup',
+                'is_selesai' => 'no',
                 'tanggal_mulai' => '2024-12-01 16:30:00',
                 'tanggal_selesai' => '2024-12-10 08:00:00',
-                'id_status_acceptance' => 1
+                'status_acceptance' => 1
             ],
             [
                 'id_kompen' => 3,
@@ -54,11 +54,11 @@ class KompenSeeder extends Seeder
                 'deskripsi' => 'Membantu Program Jurusan Bagi-Bagi Nasi ke Panti Asuhan',
                 'kuota' => 2,
                 'jam_kompen' => 8,
-                'status' => 0,
-                'is_selesai' => 0,
+                'status' => 'ditutup',
+                'is_selesai' => 'no',
                 'tanggal_mulai' => '2024-12-01 16:30:00',
                 'tanggal_selesai' => '2024-12-10 08:00:00',
-                'id_status_acceptance' => 1
+                'status_acceptance' => 1
             ],
             [
                 'id_kompen' => 4,
@@ -69,11 +69,11 @@ class KompenSeeder extends Seeder
                 'deskripsi' => 'Membuat Landing Page Website dan Dashboard menggunakan HTML, CSS, JS',
                 'kuota' => 1,
                 'jam_kompen' => 10,
-                'status' => 0,
-                'is_selesai' => 0,
+                'status' => 'ditutup',
+                'is_selesai' => 'no',
                 'tanggal_mulai' => '2024-12-01 16:30:00',
                 'tanggal_selesai' => '2024-12-10 08:00:00',
-                'id_status_acceptance' => 3
+                'status_acceptance' => 3
             ],
             [
                 'id_kompen' => 5,
@@ -84,11 +84,11 @@ class KompenSeeder extends Seeder
                 'deskripsi' => 'Membuat Halaman profil aplikasi menggunakan Flutter',
                 'kuota' => 1,
                 'jam_kompen' => 15,
-                'status' => 1,
-                'is_selesai' => 1,
+                'status' => 'dibuka',
+                'is_selesai' => 'yes',
                 'tanggal_mulai' => '2024-12-01 16:30:00',
                 'tanggal_selesai' => '2024-12-10 08:00:00',
-                'id_status_acceptance' => 2
+                'status_acceptance' => 2
             ],
             [
                 'id_kompen' => 6,
@@ -99,11 +99,11 @@ class KompenSeeder extends Seeder
                 'deskripsi' => 'Membuat laporan keuangan menggunakan excel',
                 'kuota' => 1,
                 'jam_kompen' => 10,
-                'status' => 1,
-                'is_selesai' => 1,
+                'status' => 'dibuka',
+                'is_selesai' => 'yes',
                 'tanggal_mulai' => '2024-12-01 16:30:00',
                 'tanggal_selesai' => '2024-12-10 08:00:00',
-                'id_status_acceptance' => 2
+                'status_acceptance' => 2
             ],
             [
                 'id_kompen' => 7,
@@ -114,11 +114,41 @@ class KompenSeeder extends Seeder
                 'deskripsi' => 'Membuat Query nantinya digunakan untuk analisis kedepannya',
                 'kuota' => 1,
                 'jam_kompen' => 10,
-                'status' => 1,
-                'is_selesai' => 0,
+                'status' => 'dibuka',
+                'is_selesai' => 'yes',
                 'tanggal_mulai' => '2024-12-01 16:30:00',
                 'tanggal_selesai' => '2024-12-10 08:00:00',
-                'id_status_acceptance' => 2
+                'status_acceptance' => 2
+            ],
+            [
+                'id_kompen' => 8,
+                'nomor_kompen' => Str::uuid(),
+                'nama' => 'Bersih-bersih',
+                'id_personil' => 2,
+                'id_jenis_kompen' => 3,
+                'deskripsi' => 'Membersihkan toilet LT 7',
+                'kuota' => 2,
+                'jam_kompen' => 10,
+                'status' => 'dibuka',
+                'is_selesai' => 'no',
+                'tanggal_mulai' => '2024-12-01 16:30:00',
+                'tanggal_selesai' => '2024-12-10 08:00:00',
+                'status_acceptance' => 2
+            ],
+            [
+                'id_kompen' => 9,
+                'nomor_kompen' => Str::uuid(),
+                'nama' => 'Bersih PC',
+                'id_personil' => 1,
+                'id_jenis_kompen' => 3,
+                'deskripsi' => 'Membersihkan PC yang ada di ruang kelas',
+                'kuota' => 3,
+                'jam_kompen' => 5,
+                'status' => 'dibuka',
+                'is_selesai' => 'no',
+                'tanggal_mulai' => '2024-12-01 16:30:00',
+                'tanggal_selesai' => '2024-12-10 08:00:00',
+                'status_acceptance' => 2
             ]
         ];
 

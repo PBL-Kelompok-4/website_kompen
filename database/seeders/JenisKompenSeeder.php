@@ -28,6 +28,11 @@ class JenisKompenSeeder extends Seeder
                 'id_jenis_kompen' => 3,
                 'kode_jenis' => 'TKNS',
                 'nama_jenis' => 'Teknis'
+            ],
+            [
+                'id_jenis_kompen' => 4,
+                'kode_jenis' => 'ADMN',
+                'nama_jenis' => 'Administratif'
             ]
         ];
 

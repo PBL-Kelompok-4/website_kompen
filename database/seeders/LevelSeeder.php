@@ -31,11 +31,6 @@ class LevelSeeder extends Seeder
             ],
             [
                 'id_level' => 4,
-                'kode_level' => 'KPD',
-                'nama_level' => 'Kepala Prodi'
-            ],
-            [
-                'id_level' => 5,
                 'kode_level' => 'MHS',
                 'nama_level' => 'Mahasiswa'
             ],

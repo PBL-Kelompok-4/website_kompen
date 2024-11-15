@@ -84,11 +84,11 @@
                 nomor_induk: { required: true, maxlength: 10 },
                 username: { required: true, minlength: 3, maxlength: 20 },
                 nama: { required: true, minlength: 3, maxlength: 150 },
-                semester: { required: true, number: true },
+                semester: { required: true, number: true, max: 14, min: 1 },
                 password: {required:true, minlength: 6, maxlength: 20 },
-                jam_alpha: { required: true, number: true },
-                jam_kompen: { required: true, number: true },
-                jam_kompen_selesai: { required: true, number: true },
+                jam_alpha: { required: true, number: true, min: 0 },
+                jam_kompen: { required: true, number: true, min: 0 },
+                jam_kompen_selesai: { required: true, number: true, min: 0 },
                 id_level: { number: true }
             },
             submitHandler: function(form) {
