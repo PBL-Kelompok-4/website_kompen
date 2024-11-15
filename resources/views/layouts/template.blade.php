@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
     <style>
@@ -14,7 +13,7 @@
         }
 
         .sidebar .nav-link.active {
-            background-color: #003366 !important;
+            background-color: #3A6D8C !important;
             /* slightly darker for active items */
             color: #ffffff !important;
         }
