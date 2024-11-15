@@ -46,19 +46,8 @@ class AuthController extends Controller
     }
 
     public function logout(Request $request){
-
-        // if (Auth::guard('web')->check()) {
-        //     Auth::guard('web')->logout();
-        //     Auth::guard('personil')->logout();
-        // } elseif (Auth::guard('personil')->check()) {
-        //     Auth::guard('personil')->logout();
-        // } else {
-        //     return redirect('/mahasiswa');
-        // }
-
         
         Auth::logout();
-        // Auth::logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();

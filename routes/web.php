@@ -10,6 +10,7 @@ use App\Http\Controllers\MahasiswaAlphaController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\PersonilAkademikController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\KompenDitolakController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -129,6 +130,7 @@ Route::middleware(['auth:web,personil'])->group(function () {
         Route::get('/{id}/show_ajax', [KompenDibukaController::class, 'show_ajax']);
         Route::get('/{id}/edit_ajax', [KompenDibukaController::class, 'edit_ajax']);
         Route::put('/{id}/update_ajax', [KompenDibukaController::class, 'update_ajax']);
+        Route::post('/ajukan_kompen', [KompenDibukaController::class, 'ajukan_kompen'])->name('ajukan_kompen');
         // Route::get('/{id}/delete_ajax', [KompenDibukaController::class, 'confirm_ajax']);
         // Route::delete('/{id}/delete_ajax', [KompenDibukaController::class, 'delete_ajax']);
         // Route::delete('/{id}', [KompenDibukaController::class, 'destroy']); // untuk proses hapus
@@ -152,10 +154,20 @@ Route::middleware(['auth:web,personil'])->group(function () {
         Route::get('/', [KompenDiajukanController::class, 'index']);
         Route::post('/list', [KompenDiajukanController::class, 'list']); // untuk list json datatables
         Route::get('/{id}/show_ajax', [KompenDiajukanController::class, 'show_ajax']);
+        Route::post('/{id}/diterima', [KompenDiajukanController::class, 'diterima']);
+        Route::post('/{id}/ditolak', [KompenDiajukanController::class, 'ditolak']);
         // Route::get('/import', [KompenDiajukanController::class, 'import']); // ajax form upload excel
         // Route::post('/import_ajax', [KompenDiajukanController::class, 'import_ajax']); // ajax import excel
         Route::get('/export_excel', [KompenDiajukanController::class, 'export_excel']); // ajax import excel
         Route::get('/export_pdf', [KompenDiajukanController::class, 'export_pdf']); // ajax export pdf
+    });
+
+    Route::group(['prefix' => 'kompen_ditolak', 'middleware' => 'authorize:ADM'], function () {
+        Route::get('/', [KompenDitolakController::class, 'index']);
+        Route::post('/list', [KompenDitolakController::class, 'list']); // untuk list json datatables
+        Route::get('/{id}/show_ajax', [KompenDitolakController::class, 'show_ajax']);
+        Route::get('/export_excel', [KompenDitolakController::class, 'export_excel']); // ajax import excel
+        Route::get('/export_pdf', [KompenDitolakController::class, 'export_pdf']); // ajax export pdf
     });
 });
 

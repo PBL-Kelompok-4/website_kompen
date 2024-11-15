@@ -26,7 +26,7 @@ class MahasiswaSeeder extends Seeder
                 'jam_alpha' => 6,
                 'jam_kompen' => 4,
                 'jam_kompen_selesai' => 2,
-                'id_level' => 5 
+                'id_level' => 4 
             ],
             [
                 'id_mahasiswa' => 2,
@@ -39,7 +39,7 @@ class MahasiswaSeeder extends Seeder
                 'jam_alpha' => 20,
                 'jam_kompen' => 15,
                 'jam_kompen_selesai' => 0,
-                'id_level' => 5 
+                'id_level' => 4 
             ],
             [
                 'id_mahasiswa' => 3,
@@ -52,7 +52,7 @@ class MahasiswaSeeder extends Seeder
                 'jam_alpha' => 50,
                 'jam_kompen' => 50,
                 'jam_kompen_selesai' => 10,
-                'id_level' => 5 
+                'id_level' => 4 
             ],
             [
                 'id_mahasiswa' => 4,
@@ -65,7 +65,7 @@ class MahasiswaSeeder extends Seeder
                 'jam_alpha' => 30,
                 'jam_kompen' => 23,
                 'jam_kompen_selesai' => 0,
-                'id_level' => 5 
+                'id_level' => 4 
             ],
             [
                 'id_mahasiswa' => 5,
@@ -78,7 +78,7 @@ class MahasiswaSeeder extends Seeder
                 'jam_alpha' => 66,
                 'jam_kompen' => 33,
                 'jam_kompen_selesai' => 33,
-                'id_level' => 5 
+                'id_level' => 4 
             ],
             [
                 'id_mahasiswa' => 6,
@@ -91,7 +91,7 @@ class MahasiswaSeeder extends Seeder
                 'jam_alpha' => 0,
                 'jam_kompen' => 0,
                 'jam_kompen_selesai' => 0,
-                'id_level' => 5 
+                'id_level' => 4 
             ],
             [
                 'id_mahasiswa' => 7,
@@ -104,7 +104,7 @@ class MahasiswaSeeder extends Seeder
                 'jam_alpha' => 10,
                 'jam_kompen' => 9,
                 'jam_kompen_selesai' => 5,
-                'id_level' => 5 
+                'id_level' => 4 
             ],
             [
                 'id_mahasiswa' => 8,
@@ -117,7 +117,7 @@ class MahasiswaSeeder extends Seeder
                 'jam_alpha' => 0,
                 'jam_kompen' => 0,
                 'jam_kompen_selesai' => 0,
-                'id_level' => 5 
+                'id_level' => 4 
             ],
             [
                 'id_mahasiswa' => 9,
@@ -130,7 +130,7 @@ class MahasiswaSeeder extends Seeder
                 'jam_alpha' => 30,
                 'jam_kompen' => 24,
                 'jam_kompen_selesai' => 12,
-                'id_level' => 5 
+                'id_level' => 4 
             ],
             [
                 'id_mahasiswa' => 10,
@@ -143,7 +143,46 @@ class MahasiswaSeeder extends Seeder
                 'jam_alpha' => 44,
                 'jam_kompen' => 32,
                 'jam_kompen_selesai' => 19,
-                'id_level' => 5 
+                'id_level' => 4 
+            ],
+            [
+                'id_mahasiswa' => 11,
+                'nomor_induk' => '2241760199',
+                'username' => 'Roger',
+                'nama' => 'Roger Sumatra',
+                'semester' => 7,
+                'id_prodi' => 2,
+                'password' => Hash::make('123456789'),
+                'jam_alpha' => 12,
+                'jam_kompen' => 8,
+                'jam_kompen_selesai' => 0,
+                'id_level' => 4 
+            ],
+            [
+                'id_mahasiswa' => 12,
+                'nomor_induk' => '2241760180',
+                'username' => 'Kania',
+                'nama' => 'Kania Putri',
+                'semester' => 3,
+                'id_prodi' => 1,
+                'password' => Hash::make('123456789'),
+                'jam_alpha' => 4,
+                'jam_kompen' => 2,
+                'jam_kompen_selesai' => 0,
+                'id_level' => 4 
+            ],
+            [
+                'id_mahasiswa' => 13,
+                'nomor_induk' => '2241760189',
+                'username' => 'Mahasiswa',
+                'nama' => 'Mahasiswa',
+                'semester' => 1,
+                'id_prodi' => 2,
+                'password' => Hash::make('123456789'),
+                'jam_alpha' => 20,
+                'jam_kompen' => 18,
+                'jam_kompen_selesai' => 0,
+                'id_level' => 4 
             ]
         ];
 

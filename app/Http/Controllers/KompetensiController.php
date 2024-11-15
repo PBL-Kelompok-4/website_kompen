@@ -34,9 +34,13 @@ class KompetensiController extends Controller
             ->addIndexColumn()
             ->addColumn('aksi', function ($kompetensi){ //menambahkan kolom aksi
 
-                $btn = '<button onclick="modalAction(\''.url('/kompetensi/'. $kompetensi->id_kompetensi . '/show_ajax').'\')" class="btn btn-info btn-sm">Detail</button> ';
-                $btn .= '<button onclick="modalAction(\''.url('/kompetensi/' . $kompetensi->id_kompetensi . '/edit_ajax').'\')" class="btn btn-warning btn-sm">Edit</button> ';
-                $btn .= '<button onclick="modalAction(\''.url('/kompetensi/' . $kompetensi->id_kompetensi . '/delete_ajax').'\')" class="btn btn-danger btn-sm">Hapus</button>';
+                if(auth()->user()->level->kode_level == "DSN" || auth()->user()->level->kode_level == "TDK" || auth()->user()->level->kode_level == "MHS"){
+                    $btn = '<button onclick="modalAction(\''.url('/kompetensi/'. $kompetensi->id_kompetensi . '/show_ajax').'\')" class="btn btn-info btn-sm col-12">Detail</button> ';
+                } elseif(auth()->user()->level->kode_level == "ADM") {
+                    $btn = '<button onclick="modalAction(\''.url('/kompetensi/'. $kompetensi->id_kompetensi . '/show_ajax').'\')" class="btn btn-info btn-sm">Detail</button> ';
+                    $btn .= '<button onclick="modalAction(\''.url('/kompetensi/' . $kompetensi->id_kompetensi . '/edit_ajax').'\')" class="btn btn-warning btn-sm">Edit</button> ';
+                    $btn .= '<button onclick="modalAction(\''.url('/kompetensi/' . $kompetensi->id_kompetensi . '/delete_ajax').'\')" class="btn btn-danger btn-sm">Hapus</button>';
+                }
                 return $btn;
             })
             ->rawColumns(['aksi']) // memberitahu bahwa kolom aksi adalah html

@@ -64,19 +64,19 @@
                         searchable: false
                     },{
                         data: "nama_kompetensi",
-                        className: "",
+                        className: "dt-head-center",
                         //orderable: true, jika ingin kolom bisa diurutkan
                         orderable: true,
                         //searchable: true, jika ingin kolom bisa dicari
                         searchable: true
                     },{
                         data: "deskripsi_kompetensi",
-                        className: "",
+                        className: "dt-head-center",
                         orderable:true,
                         searchable: true
                     },{
                         data: "aksi",
-                        className: "",
+                        className: "text-center",
                         orderable:false,
                         searchable: false
                     }

@@ -4,7 +4,6 @@
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">Halo, apakabar!!!</h3>
-        <h1> {{ auth()->user()->username }} </h1>
         <div class="card-tools"></div>
     </div>
     <div class="card-body">

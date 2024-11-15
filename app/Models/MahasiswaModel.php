@@ -28,21 +28,21 @@ class MahasiswaModel extends Authenticatable
         return $this->belongsTo(ProdiModel::class, 'id_prodi', 'id_prodi');
     }
 
-    // public function kompenDetail(): HasMany {
-    //     return $this->hasMany(KompenDetailModel::class, 'id_mahasiswa', 'id_mahasiswa');
-    // }
+    public function kompenDetail(): HasMany {
+        return $this->hasMany(KompenDetailModel::class, 'id_mahasiswa', 'id_mahasiswa');
+    }
 
     public function kompetensiMahasiswa(): HasMany {
         return $this->hasMany(ListKompetensiMahasiswaModel::class, 'id_mahasiswa', 'id_mahasiswa');
     }
 
-    // public function qrKode(): HasMany {
-    //     return $this->hasMany(QrKodeModel::class, 'id_mahasiswa', 'id_mahasiswa');
-    // }
+    public function qrKode(): HasMany {
+        return $this->hasMany(QrKodeModel::class, 'id_mahasiswa', 'id_mahasiswa');
+    }
 
-    // public function pengajuanKompen(): HasMany {
-    //     return $this->hasMany(PengajuanKompenModel::class, 'id_mahasiswa', 'id_mahasiswa');
-    // }
+    public function pengajuanKompen(): HasMany {
+        return $this->hasMany(PengajuanKompenModel::class, 'id_mahasiswa', 'id_mahasiswa');
+    }
 
     public function getRoleName() : string {
         return $this->level->nama_level;

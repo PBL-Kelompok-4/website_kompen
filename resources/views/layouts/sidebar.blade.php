@@ -67,8 +67,8 @@
                 </a>
             </li>
             @endif
-            <li class="nav-item {{ ($activeMenu == 'kompen_dibuka' || $activeMenu == 'kompen_selesai' || $activeMenu == 'kompen_diajukan') ? 'menu-open' : '' }} ">
-                <a href="#" class="nav-link {{ ($activeMenu == 'kompen_dibuka' || $activeMenu == 'kompen_selesai' || $activeMenu == 'kompen_diajukan') ? 'active' : '' }} ">
+            <li class="nav-item {{ ($activeMenu == 'kompen_dibuka' || $activeMenu == 'kompen_selesai' || $activeMenu == 'kompen_diajukan' || $activeMenu == 'kompen_ditolak') ? 'menu-open' : '' }} ">
+                <a href="#" class="nav-link {{ ($activeMenu == 'kompen_dibuka' || $activeMenu == 'kompen_selesai' || $activeMenu == 'kompen_diajukan' || $activeMenu == 'kompen_ditolak') ? 'active' : '' }} ">
                     <i class="nav-icon fa-solid fa-file-pen"></i>
                     <p>
                       Tugas Kompen
@@ -81,6 +81,12 @@
                         <a href="{{ url('/kompen_diajukan') }}" class="nav-link {{ $activeMenu == 'kompen_diajukan' ? 'active' : '' }} ">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Kompen Diajukan</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/kompen_ditolak') }}" class="nav-link {{ $activeMenu == 'kompen_ditolak' ? 'active' : '' }} ">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Kompen Ditolak</p>
                         </a>
                     </li>
                     @endif
