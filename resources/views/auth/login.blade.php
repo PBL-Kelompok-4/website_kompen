@@ -23,8 +23,11 @@
     <div class="login-box">
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
-            <div class="card-header text-center"><a href="{{ url('/') }}" class="h1"><b>JTI</b>KOMPEN</a></div>
-            <div class="card-body">
+            <div class="card-header text-center"><a href="{{ url('/') }}" >
+                <img src="{{ asset('image/jti_polinema.png') }}" alt="JTI KOMPEN Logo" >
+             </a></div>
+            
+             <div class="card-body">
                 <form action="{{ url('login') }}" method="POST" id="form-login">
                     @csrf
                     <div class="input-group mb-3">
