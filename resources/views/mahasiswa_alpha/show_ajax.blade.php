@@ -55,10 +55,10 @@
                         <th class="text-right col-3">Jumlah Alpha : </th>
                         <td class="col-9">{{ $mahasiswa_alpha->jam_alpha }}</td>
                     </tr>
-                    <tr>
+                    {{-- <tr>
                         <th class="text-right col-3">List Kompetensi</th>
                         <td class="col-9"></td>
-                    </tr>
+                    </tr> --}}
                 </table>
             </div>
             <div class="modal-footer">

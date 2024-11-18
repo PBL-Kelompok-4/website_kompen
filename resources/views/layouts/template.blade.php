@@ -52,8 +52,8 @@
     <link rel="stylesheet" href="{{ url('/') }}/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ url('/') }}/plugins/adminlte.min.css">
-    {{--  <!-- css tambahan -->
-    <link rel="stylesheet" href="../resources/css/style.css">  --}}
+    <!-- css tambahan -->
+    {{-- <link rel="stylesheet" href="../resources/css/style.css"> --}}
 
     @stack('css') <!-- Digunakan untuk memanggil custom css dari perintah push('css') pada masing-masing view -->
 </head>

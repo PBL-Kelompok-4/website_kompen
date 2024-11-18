@@ -76,7 +76,7 @@
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
-                    @if (auth()->user()->level->kode_level == "ADM")
+                    @if (auth()->user()->level->kode_level == "ADM" || auth()->user()->level->kode_level == "DSN" || auth()->user()->level->kode_level == "TDK")
                     <li class="nav-item">
                         <a href="{{ url('/kompen_diajukan') }}" class="nav-link {{ $activeMenu == 'kompen_diajukan' ? 'active' : '' }} ">
                             <i class="far fa-circle nav-icon"></i>

@@ -66,12 +66,14 @@
                 </table>
             </div>
             <div class="modal-footer">
+                @if (auth()->user()->level->kode_level == "ADM")
                 <form action="{{ url('/kompen_diajukan/'. $kompen_diajukan->id_kompen . '/diterima') }}" method="POST" id="form-diterima">
                     <button type="submit" class="btn btn-success">Accept</button>
                 </form>
                 <form action="{{ url('/kompen_diajukan/'. $kompen_diajukan->id_kompen . '/ditolak') }}" method="POST" id="form-ditolak">
                     <button type="submit" class="btn btn-danger">Reject</button>
                 </form>
+                @endif
                 <button type="button" data-dismiss="modal" class="btn btn-warning">Kembali</button>
             </div>
         </div>
