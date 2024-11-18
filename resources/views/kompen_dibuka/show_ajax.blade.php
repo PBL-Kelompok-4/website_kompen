@@ -67,6 +67,7 @@
                     </tr>
                 </table>
             </div>
+            <input type="number" value="{{ $kompen_dibuka->id_kompen }}" name="id_kompen" id="id_kompen" hidden>
             <div class="modal-footer">
                 @if (auth()->user()->level->kode_level == "MHS")
                 <button type="submit" class="btn btn-primary">Ajukan Kompen</button>

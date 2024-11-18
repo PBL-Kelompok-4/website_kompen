@@ -81,7 +81,7 @@ class MahasiswaController extends Controller
                 'jam_alpha' => 'required|integer',
                 'jam_kompen' => 'required|integer',
                 'jam_kompen_selesai' => 'required|integer',
-                'id_level' => 'required|integer'
+                // 'id_level' => 'required|integer'
             ];
 
             //use Illuminate\Support\Facades\Validator;

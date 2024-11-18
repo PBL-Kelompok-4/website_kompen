@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Str;
 
 class KompenDiajukanController extends Controller
 {
@@ -60,6 +61,57 @@ class KompenDiajukanController extends Controller
         $kompen_diajukan = KompenModel::find($id);
 
         return view('kompen_diajukan.show_ajax', ['kompen_diajukan' => $kompen_diajukan]);
+    }
+
+    public function create_ajax() {
+        $jenis_kompen = JenisKompenModel::select('id_jenis_kompen', 'nama_jenis')->get();
+
+        return view('kompen_diajukan.create_ajax')->with('jenis_kompen', $jenis_kompen);
+    }
+
+    public function store_ajax(Request $request) {
+        // cek apakah request berupa ajax
+        if($request->ajax() || $request->wantsJson()) {
+            $rules = [
+                'id_personil' => 'required|integer',
+                'nama' => 'required|string|min:3|max:40',
+                'deskripsi' => 'required|string|min:3|max:255',
+                'id_jenis_kompen' => 'required|integer',
+                'kuota' => 'required|integer',
+                'jam_kompen' => 'required|integer',
+                'tanggal_mulai' => 'required',
+                'tanggal_selesai' => 'required'
+            ];
+
+            //use Illuminate\Support\Facades\Validator;
+            $validator = Validator::make($request->all(), $rules);
+
+            if($validator->fails()){
+                return response()->json([
+                    'status' => false, // response status, false: error/gagal, true: berhasil
+                    'message' => 'Validasi Gagal',
+                    'msgField' => $validator->errors(), // pesan error validasi
+                ]);
+            }
+
+            // KompenModel::create($request->all());
+            KompenModel::create([
+                'nomor_kompen' => Str::uuid(),
+                'id_personil' => $request->id_personil,
+                'nama' => $request->nama,
+                'deskripsi' => $request->deskripsi,
+                'id_jenis_kompen' => $request->id_jenis_kompen,
+                'kuota' => $request->kuota,
+                'jam_kompen' => $request->jam_kompen,
+                'tanggal_mulai' => $request->tanggal_mulai,
+                'tanggal_selesai' => $request->tanggal_selesai
+            ]);
+            return response()->json([
+                'status' => true,
+                'message' => 'Pengajuan Kompen berhasil dilakukan'
+            ]);
+        }
+        redirect('/');
     }
 
     public function ditolak(string $id){

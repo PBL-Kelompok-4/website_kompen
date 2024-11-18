@@ -53,7 +53,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ url('/') }}/plugins/adminlte.min.css">
     <!-- css tambahan -->
-    <link rel="stylesheet" href="../resources/css/style.css">
+    {{-- <link rel="stylesheet" href="../resources/css/style.css"> --}}
 
     @stack('css') <!-- Digunakan untuk memanggil custom css dari perintah push('css') pada masing-masing view -->
 </head>

@@ -74,8 +74,8 @@ Route::middleware(['auth:web,personil'])->group(function () {
     Route::group(['prefix' => 'level', 'middleware' => 'authorize:ADM'], function () {
         Route::get('/', [LevelController::class, 'index']);
         Route::post('/list', [LevelController::class, 'list']); // untuk list json datatables
-        Route::get('/create_ajax', [LevelController::class, 'create_ajax']);
-        Route::post('/ajax', [LevelController::class, 'store_ajax']);
+        // Route::get('/create_ajax', [LevelController::class, 'create_ajax']);
+        // Route::post('/ajax', [LevelController::class, 'store_ajax']);
         Route::get('/{id}/show_ajax', [LevelController::class, 'show_ajax']);
         Route::get('/{id}/edit_ajax', [LevelController::class, 'edit_ajax']);
         Route::put('/{id}/update_ajax', [LevelController::class, 'update_ajax']);
@@ -108,8 +108,8 @@ Route::middleware(['auth:web,personil'])->group(function () {
     Route::group(['prefix' => 'mahasiswa_alpha', 'middleware' => 'authorize:ADM,DSN,TDK'], function () {
         Route::get('/', [MahasiswaAlphaController::class, 'index']);
         Route::post('/list', [MahasiswaAlphaController::class, 'list']); // untuk list json datatables
-        Route::get('/create_ajax', [MahasiswaAlphaController::class, 'create_ajax']);
-        Route::post('/ajax', [MahasiswaAlphaController::class, 'store_ajax']);
+        // Route::get('/create_ajax', [MahasiswaAlphaController::class, 'create_ajax']);
+        // Route::post('/ajax', [MahasiswaAlphaController::class, 'store_ajax']);
         Route::get('/{id}/show_ajax', [MahasiswaAlphaController::class, 'show_ajax']);
         Route::get('/{id}/edit_ajax', [MahasiswaAlphaController::class, 'edit_ajax']);
         Route::put('/{id}/update_ajax', [MahasiswaAlphaController::class, 'update_ajax']);
@@ -125,8 +125,6 @@ Route::middleware(['auth:web,personil'])->group(function () {
     Route::group(['prefix' => 'kompen_dibuka', 'middleware' => 'authorize:ADM,DSN,TDK,MHS'], function () {
         Route::get('/', [KompenDibukaController::class, 'index']);
         Route::post('/list', [KompenDibukaController::class, 'list']); // untuk list json datatables
-        Route::get('/create_ajax', [KompenDibukaController::class, 'create_ajax']);
-        Route::post('/ajax', [KompenDibukaController::class, 'store_ajax']);
         Route::get('/{id}/show_ajax', [KompenDibukaController::class, 'show_ajax']);
         Route::get('/{id}/edit_ajax', [KompenDibukaController::class, 'edit_ajax']);
         Route::put('/{id}/update_ajax', [KompenDibukaController::class, 'update_ajax']);
@@ -153,6 +151,8 @@ Route::middleware(['auth:web,personil'])->group(function () {
     Route::group(['prefix' => 'kompen_diajukan', 'middleware' => 'authorize:ADM,DSN,TDK,MHS'], function () {
         Route::get('/', [KompenDiajukanController::class, 'index']);
         Route::post('/list', [KompenDiajukanController::class, 'list']); // untuk list json datatables
+        Route::get('/create_ajax', [KompenDiajukanController::class, 'create_ajax']);
+        Route::post('/ajax', [KompenDiajukanController::class, 'store_ajax']);
         Route::get('/{id}/show_ajax', [KompenDiajukanController::class, 'show_ajax']);
         Route::post('/{id}/diterima', [KompenDiajukanController::class, 'diterima']);
         Route::post('/{id}/ditolak', [KompenDiajukanController::class, 'ditolak']);
