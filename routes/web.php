@@ -9,6 +9,7 @@ use App\Http\Controllers\LevelController;
 use App\Http\Controllers\MahasiswaAlphaController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\PersonilAkademikController;
+use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -157,7 +158,14 @@ Route::middleware(['auth:web,personil'])->group(function () {
         Route::get('/export_excel', [KompenDiajukanController::class, 'export_excel']); // ajax import excel
         Route::get('/export_pdf', [KompenDiajukanController::class, 'export_pdf']); // ajax export pdf
     });
+    
+    Route::get('/profil', [ProfilController::class, 'index']);
+    Route::post('/profil/update', [ProfilController::class, 'update']);
+    Route::post('/profil/update_data_diri', [ProfilController::class, 'updateDataDiri']);
+    Route::post('/profil/update_password', [ProfilController::class, 'updatePassword']);
+    
 });
+
 
 // Route::get('/', [HomeController::class, 'index']);
     
