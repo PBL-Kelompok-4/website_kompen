@@ -50,7 +50,9 @@ class MahasiswaAlphaController extends Controller
             ->addColumn('aksi', function ($mahasiswa_alpha){ //menambahkan kolom aksi
 
                 $btn = '<button onclick="modalAction(\''.url('/mahasiswa_alpha/'. $mahasiswa_alpha->id_mahasiswa . '/show_ajax').'\')" class="btn btn-info btn-sm">Detail</button> ';
-                $btn .= '<button onclick="modalAction(\''.url('/mahasiswa_alpha/' . $mahasiswa_alpha->id_mahasiswa . '/edit_ajax').'\')" class="btn btn-warning btn-sm">Edit</button> ';
+                if(auth()->user()->level->kode_level == "ADM"){
+                    $btn .= '<button onclick="modalAction(\''.url('/mahasiswa_alpha/' . $mahasiswa_alpha->id_mahasiswa . '/edit_ajax').'\')" class="btn btn-warning btn-sm">Edit</button> ';
+                }
                 // $btn .= '<button onclick="modalAction(\''.url('/mahasiswa_alpha/' . $mahasiswa_alpha->id_mahasiswa . '/delete_ajax').'\')" class="btn btn-danger btn-sm">Hapus</button>';
                 return $btn;
             })
@@ -68,7 +70,7 @@ class MahasiswaAlphaController extends Controller
         $mahasiswa_alpha = MahasiswaModel::find($id);
         $prodi = ProdiModel::select('id_prodi', 'nama_prodi')->get();
 
-        return view('mahasiswa_alpha.edit_ajax',['mahasiswa' => $mahasiswa_alpha, 'prodi' => $prodi]);
+        return view('mahasiswa_alpha.edit_ajax',['mahasiswa_alpha' => $mahasiswa_alpha, 'prodi' => $prodi]);
     }
 
     public function update_ajax(Request $request, $id){
@@ -80,8 +82,7 @@ class MahasiswaAlphaController extends Controller
                 'username' => 'string|min:3|max:20|unique:mahasiswa,username,'.$id.',id_mahasiswa',
                 'nama' => 'string|min:3|max:150',
                 'semester' => 'integer|min:1|max:14',
-                'jam_alpha' => 'required|integer',
-                'id_level' => 'integer'
+                'jam_alpha' => 'required|integer'
             ];
 
             // use Illuminate\Support\Facades\Validator;

@@ -8,7 +8,7 @@
                 {{-- <button onclick="modalAction('{{ url('/mahasiswa/import') }}')" class="btn btn-info">Import Data Mahasiswa</button>
                 <a href="{{ url('/mahasisawa/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i> Export Data Mahasiswa</a>
                 <a href="{{ url('/mahasisawa/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i> Export Data Mahasiswa</a> --}}
-                <button onclick="modalAction('{{ url('mahasiswa/create_ajax') }}')" class="btn btn-success">Tambah Data (Ajax)</button>
+                {{-- <button onclick="modalAction('{{ url('mahasiswa/create_ajax') }}')" class="btn btn-success">Tambah Data (Ajax)</button> --}}
             </div>
         </div>
         <div class="card-body">
@@ -64,7 +64,7 @@
                         <th>Semester</th>
                         <th>Prodi</th>
                         <th>Jam Alpha</th>
-                        <th>List Kompetensi</th>
+                        {{-- <th>List Kompetensi</th> --}}
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -140,11 +140,11 @@
                         className: "",
                         orderable: true,
                         searchable: false
-                    },{
-                        data: "jam_alpha",
-                        className: "",
-                        orderable: true,
-                        searchable: false
+                    // },{
+                    //     data: "jam_alpha",
+                    //     className: "",
+                    //     orderable: true,
+                    //     searchable: false
                         
                         // data: 'list_kompetensi',
                         // className: '',
@@ -161,7 +161,7 @@
                         // }
                     },{
                         data: "aksi",
-                        className: "",
+                        className: "text-center",
                         orderable:false,
                         searchable: false
                     }

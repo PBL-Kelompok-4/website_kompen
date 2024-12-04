@@ -85,7 +85,34 @@ class PersonilAkademikSeeder extends Seeder
                 'nama' => 'Ferry Irwandi',
                 'password' => Hash::make('123456789'),
                 'nomor_telp' => '081234567890128',
-                'id_level' => 4
+                'id_level' => 1
+            ],
+            [
+                'id_personil' => 9,
+                'nomor_induk' => '000000000000000009',
+                'username' => 'Dosen',
+                'nama' => 'Dosen',
+                'password' => Hash::make('123456789'),
+                'nomor_telp' => '081234567890128',
+                'id_level' => 2
+            ],
+            [
+                'id_personil' => 10,
+                'nomor_induk' => '000000000000000010',
+                'username' => 'Admin',
+                'nama' => 'Admin',
+                'password' => Hash::make('123456789'),
+                'nomor_telp' => '081234567890128',
+                'id_level' => 1
+            ],
+            [
+                'id_personil' => 11,
+                'nomor_induk' => '000000000000000011',
+                'username' => 'Tendik',
+                'nama' => 'Tendik',
+                'password' => Hash::make('123456789'),
+                'nomor_telp' => '081234567890128',
+                'id_level' => 3
             ]
         ];
 

@@ -12,12 +12,12 @@
                     <h5><i class="icon fas fa-ban"></i> Kesalahan!!!</h5>
                     Data yang anda cari tidak ditemukan
                 </div>
-                <a href="{{ url('/mahasiswa') }}" class="btn btn-warning">Kembali</a>
+                <a href="{{ url('/mahasiswa)alpha') }}" class="btn btn-warning">Kembali</a>
             </div>
         </div>
     </div>
 @else
-    <form action="{{ url('/mahasiswa_alpha/' . $mahasiswa->id_mahasiswa . '/update_ajax') }}" method="POST" id="form-edit">
+    <form action="{{ url('/mahasiswa_alpha/' . $mahasiswa_alpha->id_mahasiswa . '/update_ajax') }}" method="POST" id="form-edit">
         @csrf
         @method('PUT')
         <div id="modal-master" class="modal-dialog modal-lg" role="document">
@@ -29,37 +29,37 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <input value="5" type="number" name="id_level" id="id_level" class="form-control" hidden>
+                    <input value="{{ $mahasiswa_alpha->id_level }}" type="number" name="id_level" id="id_level" class="form-control" hidden>
                     <div class="form-group">
                         <label>NIM</label>
-                        <input value="{{ $mahasiswa->nomor_induk }}" type="number" name="nomor_induk" id="nomor_induk" class="form-control" disabled>
+                        <input value="{{ $mahasiswa_alpha->nomor_induk }}" type="number" name="nomor_induk" id="nomor_induk" class="form-control" disabled>
                         <small id="error-nomor_induk" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">
                         <label>Username</label>
-                        <input value="{{ $mahasiswa->username }}" type="text" name="username" id="username" class="form-control" disabled>
+                        <input value="{{ $mahasiswa_alpha->username }}" type="text" name="username" id="username" class="form-control" disabled>
                         <small id="error-username" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">
                         <label>Nama</label>
-                        <input value="{{ $mahasiswa->nama }}" type="text" name="nama" id="nama" class="form-control" disabled>
+                        <input value="{{ $mahasiswa_alpha->nama }}" type="text" name="nama" id="nama" class="form-control" disabled>
                         <small id="error-nama" class="error-text form-text text-danger"></small>
                     </div>
                     
                     <div class="form-group">
                         <label>Prodi Mahasiswa</label>
-                        <input type="text" value="{{ $mahasiswa->prodi->id_prodi }}" name="id_prodi" id="id_prodi" class="form-control" hidden>
-                        <input type="text" value="{{ $mahasiswa->prodi->nama_prodi }}" name="id_prodi_tampil" id="id_prodi_tampil" class="form-control" disabled>
+                        <input type="text" value="{{ $mahasiswa_alpha->prodi->id_prodi }}" name="id_prodi" id="id_prodi" class="form-control" hidden>
+                        <input type="text" value="{{ $mahasiswa_alpha->prodi->nama_prodi }}" name="id_prodi_tampil" id="id_prodi_tampil" class="form-control" disabled>
                         <small id="error-id_prodi" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">
                         <label>Semester</label>
-                        <input value="{{ $mahasiswa->semester }}" type="number" name="semester" id="semester" class="form-control" disabled>
+                        <input value="{{ $mahasiswa_alpha->semester }}" type="number" name="semester" id="semester" class="form-control" disabled>
                         <small id="error-semester" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">
                         <label>Jumlah Jam Alpha</label>
-                        <input value="{{ $mahasiswa->jam_alpha }}" type="number" name="jam_alpha" id="jam_alpha" class="form-control" required>
+                        <input value="{{ $mahasiswa_alpha->jam_alpha }}" type="number" name="jam_alpha" id="jam_alpha" class="form-control" required>
                         <small id="error-jam_alpha" class="error-text form-text text-danger"></small>
                     </div>
                 </div>

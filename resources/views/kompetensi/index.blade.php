@@ -5,10 +5,12 @@
         <div class="card-header">
             <h3 class="card-title">{{ $page->title}}</h3>
             <div class="card-tools">
+                @if (auth()->user()->level->kode_level == "ADM")
                 {{-- <button onclick="modalAction('{{ url('/kompetensi/import') }}')" class="btn btn-info">Import Data Mahasiswa</button>
                 <a href="{{ url('/kompetensi/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i> Export Data Mahasiswa</a>
                 <a href="{{ url('/kompetensi/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i> Export Data Mahasiswa</a> --}}
                 <button onclick="modalAction('{{ url('kompetensi/create_ajax') }}')" class="btn btn-success">Tambah Data (Ajax)</button>
+                @endif
             </div>
         </div>
         <div class="card-body">
@@ -64,19 +66,19 @@
                         searchable: false
                     },{
                         data: "nama_kompetensi",
-                        className: "",
+                        className: "dt-head-center",
                         //orderable: true, jika ingin kolom bisa diurutkan
                         orderable: true,
                         //searchable: true, jika ingin kolom bisa dicari
                         searchable: true
                     },{
                         data: "deskripsi_kompetensi",
-                        className: "",
+                        className: "dt-head-center",
                         orderable:true,
                         searchable: true
                     },{
                         data: "aksi",
-                        className: "",
+                        className: "text-center",
                         orderable:false,
                         searchable: false
                     }

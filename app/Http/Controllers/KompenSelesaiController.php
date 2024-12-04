@@ -32,7 +32,7 @@ class KompenSelesaiController extends Controller
     }
 
     public function list(Request $request){
-        $kompens = KompenModel::select('id_kompen' ,'nomor_kompen', 'nama', 'deskripsi', 'id_personil', 'id_jenis_kompen', 'kuota', 'jam_kompen', 'status', 'is_selesai', 'tanggal_mulai', 'tanggal_selesai', 'status_acceptance')->where('status', 1)->where('is_selesai', 1)->where('status_acceptance', 'accept')->with('jenisKompen', 'personilAkademik')->get();
+        $kompens = KompenModel::select('id_kompen' ,'nomor_kompen', 'nama', 'deskripsi', 'id_personil', 'id_jenis_kompen', 'kuota', 'jam_kompen', 'status', 'is_selesai', 'tanggal_mulai', 'tanggal_selesai', 'status_acceptance')->where('status', 'dibuka')->where('is_selesai', 'yes')->where('status_acceptance', 'accept')->with('jenisKompen', 'personilAkademik')->get();
 
         //Filter data kompen berdasarkan id_jenis_kompen
         if($request->id_jenis_kompen){

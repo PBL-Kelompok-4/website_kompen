@@ -6,9 +6,9 @@
             <h3 class="card-title">{{ $page->title}}</h3>
             <div class="card-tools">
                 {{-- <button onclick="modalAction('{{ url('/kompen/import') }}')" class="btn btn-info">Import Data Mahasiswa</button>
-                <a href="{{ url('/kompen/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i> Export Data Mahasiswa</a>
-                <a href="{{ url('/kompen/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i> Export Data Mahasiswa</a> --}}
-                {{-- <button onclick="modalAction('{{ url('kompen/create_ajax') }}')" class="btn btn-success">Tambah Data (Ajax)</button> --}}
+                <a href="{{ url('/kompen_diajukan/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i> Export Data Mahasiswa</a>
+                <a href="{{ url('/kompen_diajukan/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i> Export Data Mahasiswa</a> --}}
+                {{-- <button onclick="modalAction('{{ url('kompen_diajukan/create_ajax') }}')" class="btn btn-success">Tambah Data (Ajax)</button> --}}
             </div>
         </div>
         <div class="card-body">
@@ -75,14 +75,14 @@
             });
         }
 
-        var dataKompenDibuka;
+        var dataKompenDitolak;
         $(document).ready(function(){
-            dataKompenDibuka = $('#table_kompen').DataTable({
+            dataKompenDitolak = $('#table_kompen').DataTable({
                 processing: true,
                 //serverSide: true, jika ingin menggunakan server side processing
                 serverSide: true,
                 ajax:{
-                    "url": "{{ url('kompen_dibuka/list') }}",
+                    "url": "{{ url('kompen_ditolak/list') }}",
                     "dataType": "json",
                     "type": "POST",
                     "data": function (d){
@@ -151,14 +151,14 @@
             });
             $('#table_mahasiswa_filter input').unbind().bind().on('keyup', function(e){
                 if(e.keyCode == 13){ // enter key
-                    dataKompenDibuka.search(this.value).draw();
+                    dataKompenDiajukan.search(this.value).draw();
                 }
             });
             $('#filter_kompetensi').on('change', function(){
-                dataKompenDibuka.ajax.reload();
+                dataKompenDiajukan.ajax.reload();
             });
             $('#filter_jenis_kompen').on('change', function(){
-                dataKompenDibuka.ajax.reload();
+                dataKompenDiajukan.ajax.reload();
             });
         });
     </script>
