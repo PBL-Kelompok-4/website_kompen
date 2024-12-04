@@ -175,7 +175,6 @@ Route::middleware(['auth:web,personil'])->group(function () {
 
 });
 
-
 // Route::get('/', [HomeController::class, 'index']);
     
 //     Route::group(['prefix' => 'mahasiswa'], function () {
