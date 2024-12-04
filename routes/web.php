@@ -172,7 +172,7 @@ Route::middleware(['auth:web,personil'])->group(function () {
         Route::get('/export_excel', [KompenDitolakController::class, 'export_excel']); // ajax import excel
         Route::get('/export_pdf', [KompenDitolakController::class, 'export_pdf']); // ajax export pdf
     });
-    
+
 });
 
 
