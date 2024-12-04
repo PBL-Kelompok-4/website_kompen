@@ -1,7 +1,7 @@
 <div class="sidebar">
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ url('/') }}/image/polinema-bw.png" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ url('/') }}/image/jti_polinema_1.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="{{ url('/profile')}}" class="d-block">Sikompen</a>

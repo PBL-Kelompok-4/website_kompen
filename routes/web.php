@@ -69,6 +69,8 @@ Route::middleware(['auth:web,personil'])->group(function () {
         Route::post('/import_ajax', [PersonilAkademikController::class, 'import_ajax']); // ajax import excel
         Route::get('/export_excel', [PersonilAkademikController::class, 'export_excel']); // ajax import excel
         Route::get('/export_pdf', [PersonilAkademikController::class, 'export_pdf']); // ajax export pdf
+
+        Route::get('/chartjs', [PersonilAkademikController::class, 'LoadChartJsPage']); 
     });
     
     Route::group(['prefix' => 'level', 'middleware' => 'authorize:ADM'], function () {
@@ -170,6 +172,8 @@ Route::middleware(['auth:web,personil'])->group(function () {
         Route::get('/export_pdf', [KompenDitolakController::class, 'export_pdf']); // ajax export pdf
     });
 });
+
+
 
 // Route::get('/', [HomeController::class, 'index']);
     

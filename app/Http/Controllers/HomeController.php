@@ -8,7 +8,7 @@ class HomeController extends Controller
 {
     public function index(){
         $breadcrumb = (object)[
-            'title' => 'Selamat Datang',
+            'title' => 'Dashboard',
             'list' => ['Home', 'Welcome']
         ];
 
