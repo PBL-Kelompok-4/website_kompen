@@ -6,14 +6,15 @@ use App\Http\Controllers\KompenDibukaController;
 use App\Http\Controllers\KompenSelesaiController;
 use App\Http\Controllers\KompetensiController;
 use App\Http\Controllers\LevelController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MahasiswaAlphaController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\PersonilAkademikController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\KompenDitolakController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\KompenDitolakController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +38,9 @@ Route::get('logout', [AuthController::class, 'logout'])->middleware('auth:web,pe
 
 Route::middleware(['auth:web,personil'])->group(function () {
 
-    Route::get('/', [HomeController::class, 'index']);
+    Route::get('/', [DashboardController::class, 'index']);
+    // Route::get('/', [DashboardController::class, 'admin']);
+
     
     Route::group(['prefix' => 'mahasiswa', 'middleware' => 'authorize:ADM'], function () {
         Route::get('/', [MahasiswaController::class, 'index']);
@@ -54,6 +57,7 @@ Route::middleware(['auth:web,personil'])->group(function () {
         Route::post('/import_ajax', [MahasiswaController::class, 'import_ajax']); // ajax import excel
         Route::get('/export_excel', [MahasiswaController::class, 'export_excel']); // ajax import excel
         Route::get('/export_pdf', [MahasiswaController::class, 'export_pdf']); // ajax export pdf
+        Route::get('/dashboard', [MahasiswaController::class, 'dashboardData']);
     });
     
     Route::group(['prefix' => 'personil_akademik', 'middleware' => 'authorize:ADM'], function () {
@@ -177,8 +181,7 @@ Route::middleware(['auth:web,personil'])->group(function () {
     Route::post('/profil/update', [ProfilController::class, 'update']);
     Route::post('/profil/update_data_diri', [ProfilController::class, 'updateDataDiri']);
     Route::post('/profil/update_password', [ProfilController::class, 'updatePassword']);
-
-
+    });
 
 // Route::get('/', [HomeController::class, 'index']);
     
