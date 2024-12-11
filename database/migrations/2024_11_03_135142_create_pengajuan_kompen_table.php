@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id('id_pengajuan_kompen');
             $table->unsignedBigInteger('id_kompen')->index();
             $table->unsignedBigInteger('id_mahasiswa')->index();
+            $table->string('alasan', 255);
             $table->enum('status', ['pending', 'acc', 'reject'])->default('pending');
             $table->timestamps();
 

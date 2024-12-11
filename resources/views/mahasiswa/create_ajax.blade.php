@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <input value="5" type="number" name="id_level" id="id_level" class="form-control" hidden>
+                {{-- <input value="4" type="number" name="id_level" id="id_level" class="form-control" hidden> --}}
                     <div class="form-group">
                         <label>Prodi Mahasiswa</label>
                         <select name="id_prodi" id="id_prodi" class="form-control" required>
@@ -89,7 +89,7 @@
                 jam_alpha: { required: true, number: true, min: 0 },
                 jam_kompen: { required: true, number: true, min: 0 },
                 jam_kompen_selesai: { required: true, number: true, min: 0 },
-                id_level: { number: true }
+                // id_level: { number: true }
             },
             submitHandler: function(form) {
                 $.ajax({

@@ -8,7 +8,7 @@
                 {{-- <button onclick="modalAction('{{ url('/level/import') }}')" class="btn btn-info">Import Data Mahasiswa</button>
                 <a href="{{ url('/level/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i> Export Data Mahasiswa</a>
                 <a href="{{ url('/level/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i> Export Data Mahasiswa</a> --}}
-                <button onclick="modalAction('{{ url('level/create_ajax') }}')" class="btn btn-success">Tambah Data (Ajax)</button>
+                {{-- <button onclick="modalAction('{{ url('level/create_ajax') }}')" class="btn btn-success">Tambah Data (Ajax)</button> --}}
             </div>
         </div>
         <div class="card-body">
