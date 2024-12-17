@@ -38,8 +38,13 @@ Route::get('logout', [AuthController::class, 'logout'])->middleware('auth:web,pe
 
 Route::middleware(['auth:web,personil'])->group(function () {
 
-    Route::get('/', [DashboardController::class, 'index']);
-    // Route::get('/', [DashboardController::class, 'admin']);
+    // Route::group(['prefix' => 'mahasiswa', 'middleware' => 'authorize:MHS'], function () {
+    Route::get('/', [DashboardController::class, 'mahasiswa']);
+    // });
+
+    // Route::group(['prefix' => '', 'middleware' => 'authorize:ADM,DSN,TDK'], function () {
+    Route::get('/', [DashboardController::class, 'admin']);
+    // });
 
     
     Route::group(['prefix' => 'mahasiswa', 'middleware' => 'authorize:ADM'], function () {

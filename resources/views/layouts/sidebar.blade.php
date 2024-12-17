@@ -10,15 +10,26 @@
     <!-- Sidebar Menu -->
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            @if (auth()->user()->level->kode_level == "MHS")
             <li class="nav-item">
-                <a href="{{ url('/') }}" class="nav-link {{ $activeMenu == 'dashboard' ? 'active' : '' }} ">
+                <a href="{{ url('/') }}" class="nav-link {{ $activeMenu == 'mahasiswa' ? 'active' : '' }} ">
                     <i class="nav-icon fa-solid fa-house-chimney"></i>
                     <p>Dashboard</p>
                 </a>
             </li>
+            @endif
+            
             @if (auth()->user()->level->kode_level == "ADM")
-            <li class="nav-item {{ ($activeMenu == 'mahasiswa' || $activeMenu == 'personil_akademik' || $activeMenu == 'level') ? 'menu-open' : '' }} ">
-                <a href="#" class="nav-link {{ ($activeMenu == 'mahasiswa' || $activeMenu == 'personil_akademik' || $activeMenu == 'level') ? 'active' : '' }} ">
+            <li class="nav-item {{ $activeMenu == 'admin' ? 'active' : ''  }} ">
+                <a href="{{ url('/') }}" class="nav-link {{ $activeMenu == 'admin' ? 'active' : '' }} ">
+                    <i class="nav-icon fa-solid fa-house-chimney"></i>
+                    <p>Dashboard</p>
+                </a>
+            </li>
+            @endif
+            @if (auth()->user()->level->kode_level == "MHS")
+            <li class="nav-item {{ $activeMenu == 'mahasiswa' ? 'active' : '' }} ">
+                <a href="#" class="nav-link {{ $activeMenu == 'mahasiswa' ? 'active' : ''  }} ">
                     <i class="nav-icon fa-solid fa-user"></i>
                     <p>
                       Manajemen User

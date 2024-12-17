@@ -3,10 +3,10 @@
 @section('content')
     <div class="card">
 
-        @if (auth()->user()->level->kode_level == 'ADM')
+        @if (auth()->user()->level->kode_level == 'ADM' || auth()->user()->level->kode_level == "DSN" || auth()->user()->level->kode_level == "TDK" ) 
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Jumlah total kompen mahasiswa</h3>
+                    <h3 class="card-title">Jumlah total jam kompen mahasiswa</h3>
                     <div class="card-tools"></div>
                 </div>
 
@@ -21,7 +21,7 @@
                 </div>
             </div>
 
-            {{--  @php
+            @php
                 // Query to fetch data from the mahasiswa table
                 $data = DB::table('mahasiswa')
                     ->select(
@@ -30,7 +30,8 @@
                         DB::raw('SUM(jam_kompen_selesai) as total_kompen_selesai'),
                     )
                     ->first();
-            @endphp  --}}
+            @endphp
+
 
             <script>
                 document.addEventListener("DOMContentLoaded", () => {
@@ -39,8 +40,11 @@
                         data: {
                             labels: ['Alpha', 'Kompen', 'Kompen Selesai'],
                             datasets: [{
-                                label: 'Jumlah total jam mahasiswa kompen',
-                                data: [ 125, 250, 80 
+                                label: 'Jumlah total jam kompen mahasiswa ',
+                                data: [ 
+                                {{ $data->total_alpha ?? 0 }},
+                                {{ $data->total_kompen ?? 0 }},
+                                {{ $data->total_kompen_selesai ?? 0 }}
                                 ],
                                 backgroundColor: [
                                     'rgb(235, 217, 179)',
@@ -56,14 +60,15 @@
                     });
                 });
             </script>
+            
         @endif
 
-        @if (auth()->user()->level->kode_level == 'MHS')
+        @if (auth()->user()->id_mahasiswa)
             <div class="card-header">
                 <h3 class="card-title">Dashboard Mahasiswa</h3>
                 <div class="card-tools"></div>
             </div>
-            <div class="card-body">
+            < class="card-body">
 
                 <style>
                     .Alpha {
@@ -147,7 +152,8 @@
 
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-3 col-6">
+                        <!-- Jam Alpha -->
+                        <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="small-box bg">
                                 <div class="Alpha inner">
                                     <h3>{{ $mahasiswa->jam_alpha }}</h3>
@@ -158,8 +164,9 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-lg-3 col-6">
+                
+                        <!-- Jam Kompen -->
+                        <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="small-box bg">
                                 <div class="Kompen inner">
                                     <h3>{{ $mahasiswa->jam_kompen }}</h3>
@@ -170,8 +177,9 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-lg-3 col-6">
+                
+                        <!-- Jam Kompen Selesai -->
+                        <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="small-box bg">
                                 <div class="Selesai inner">
                                     <h3>{{ $mahasiswa->jam_kompen_selesai }}</h3>
@@ -183,8 +191,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>                
         @endif
-    </div>
+
   </div>
 @endsection
