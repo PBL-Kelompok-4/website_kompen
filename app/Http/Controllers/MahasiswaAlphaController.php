@@ -27,8 +27,22 @@ class MahasiswaAlphaController extends Controller
         $activeMenu = 'mahasiswa_alpha'; // set menu yang sedang aktif
 
         $prodi = ProdiModel::all(); // ambil data prodi
+        $mahasiswa = MahasiswaModel::select('id_mahasiswa', 'nama', 'nomor_induk', 'jam_alpha')
+        ->where('jam_alpha', '0')
+        ->get();
 
-        return view('mahasiswa_alpha.index', ['breadcrumb' => $breadcrumb, 'page' => $page,'prodi' => $prodi, 'activeMenu' => $activeMenu]);
+        return view('mahasiswa_alpha.index', ['breadcrumb' => $breadcrumb, 'page' => $page,'prodi' => $prodi, 'activeMenu' => $activeMenu, 'mahasiswa' => $mahasiswa]);
+    }
+
+    public function get_mahasiswa_options() {
+        $mahasiswa = MahasiswaModel::select('id_mahasiswa', 'nama', 'nomor_induk', 'jam_alpha')
+            ->where('jam_alpha', '0')
+            ->get();
+        
+        return response()->json([
+            'status' => true,
+            'data' => $mahasiswa
+        ]);
     }
 
     public function list(Request $request){
@@ -73,6 +87,52 @@ class MahasiswaAlphaController extends Controller
         $mahasiswa_alpha = MahasiswaModel::find($id);
 
         return view('mahasiswa_alpha.show_ajax', ['mahasiswa_alpha' => $mahasiswa_alpha]);
+    }
+
+    public function create_ajax() {
+        $mahasiswa = MahasiswaModel::select('id_mahasiswa', 'nama', 'nomor_induk', 'jam_alpha')
+        ->where('jam_alpha', '0')
+        ->get();
+
+        return view('mahasiswa_alpha.create_ajax')->with(['mahasiswa' => $mahasiswa]);
+    }
+
+    public function store_ajax(Request $request) {
+        // cek apakah request berupa ajax
+        if($request->ajax() || $request->wantsJson()){
+            $rules =[
+                'jam_alpha' => 'required|integer'
+            ];
+
+            // use Illuminate\Support\Facades\Validator;
+            $validator = Validator::make($request->all(), $rules);
+
+            if($validator->fails()){
+                return response()->json([
+                    'status' => false, //respon json, true: berhasil, false: gagal
+                    'message' => 'Validasi gagal.',
+                    'msgField' => $validator->errors() // menunjukkan field mana yang error
+                ]);
+            }
+
+            $check = MahasiswaModel::find($request->id_mahasiswa);
+            if($check){
+                $check->update([
+                    'jam_alpha' => $request->jam_alpha,
+                    'jam_kompen' => ($request->jam_alpha * 2)
+                ]);
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Data berhasil diupdate'
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Data tidak ditemukan'
+                ]);
+            }
+        }
+        return redirect('/');
     }
 
     public function edit_ajax(string $id){

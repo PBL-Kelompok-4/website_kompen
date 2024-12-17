@@ -102,6 +102,9 @@ Route::middleware(['auth:web,personil'])->group(function () {
     Route::group(['prefix' => 'mahasiswa_alpha', 'middleware' => 'authorize:ADM'], function () {
         Route::get('/', [MahasiswaAlphaController::class, 'index']);
         Route::post('/list', [MahasiswaAlphaController::class, 'list']); // untuk list json datatables
+        Route::get('/create_ajax', [MahasiswaAlphaController::class, 'create_ajax']);
+        Route::get('/get_options', [MahasiswaAlphaController::class, 'get_mahasiswa_options']);
+        Route::post('/ajax', [MahasiswaAlphaController::class, 'store_ajax']);
         Route::get('/{id}/show_ajax', [MahasiswaAlphaController::class, 'show_ajax']);
         Route::get('/{id}/edit_ajax', [MahasiswaAlphaController::class, 'edit_ajax']);
         Route::put('/{id}/update_ajax', [MahasiswaAlphaController::class, 'update_ajax']);

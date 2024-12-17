@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\MahasiswaModel;
+use App\Models\PeriodeModel;
 use App\Models\ProdiModel;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
@@ -60,8 +61,9 @@ class MahasiswaController extends Controller
 
     public function create_ajax() {
         $prodi = ProdiModel::select('id_prodi', 'nama_prodi')->get();
+        $periode = PeriodeModel::all();
 
-        return view('mahasiswa.create_ajax')->with('prodi', $prodi);
+        return view('mahasiswa.create_ajax')->with(['prodi' => $prodi, 'periode' => $periode]);
     }
 
     public function store_ajax(Request $request) {
@@ -108,8 +110,9 @@ class MahasiswaController extends Controller
     public function edit_ajax(string $id){
         $mahasiswa = MahasiswaModel::find($id);
         $prodi = ProdiModel::select('id_prodi', 'nama_prodi')->get();
+        $periode = PeriodeModel::all();
 
-        return view('mahasiswa.edit_ajax',['mahasiswa' => $mahasiswa, 'prodi' => $prodi]);
+        return view('mahasiswa.edit_ajax',['mahasiswa' => $mahasiswa, 'prodi' => $prodi, 'periode' => $periode]);
     }
 
     public function update_ajax(Request $request, $id){
@@ -122,9 +125,9 @@ class MahasiswaController extends Controller
                 'nama' => 'required|string|min:3|max:150',
                 'id_periode' => 'required|integer',
                 'password' => 'nullable|min:6|max:20',
-                'jam_alpha' => 'required|integer',
-                'jam_kompen' => 'required|integer',
-                'jam_kompen_selesai' => 'required|integer',
+                // 'jam_alpha' => 'required|integer',
+                // 'jam_kompen' => 'required|integer',
+                // 'jam_kompen_selesai' => 'required|integer',
                 'id_level' => 'required|integer'
             ];
 

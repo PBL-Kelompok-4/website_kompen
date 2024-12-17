@@ -44,7 +44,12 @@
                     </div>
                     <div class="form-group">
                         <label>Periode</label>
-                        <input value="" type="number" name="id_periode" id="id_periode" class="form-control" required>
+                        <select name="id_periode" id="id_periode" class="form-control">
+                            <option value="">- Pilih Periode Mahasiswa -</option>
+                            @foreach ($periode as $p)
+                                <option value="{{ $p->id_periode }}">{{ $p->periode }}</option>
+                            @endforeach
+                        </select>
                         <small id="error-id_periode" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">

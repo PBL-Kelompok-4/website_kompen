@@ -351,26 +351,4 @@ class KompenDilakukanController extends Controller
             ]);
         }
     }
-
-    public function nyoba_qr(){
-
-        $bukti_kompen = KompenDetailModel::select('id_kompen_detail' ,'id_mahasiswa', 'id_kompen', 'status')
-        ->where('id_mahasiswa', auth()->user()->id_mahasiswa)
-        ->where('status', 'progres')
-        ->with('kompen','kompen.personilAkademik' ,'mahasiswa', 'mahasiswa.prodi')
-        ->first();
-
-        // $bukti_kompen = KompenDetailModel::find(1);
-        
-        return  QrCode::encoding('UTF-8')
-        ->size(150)
-        ->generate(
-            '[
-                Nama Mahasiswa : ' .$bukti_kompen->mahasiswa->nama.', 
-                Nama Kompen : ' .$bukti_kompen->kompen->nama. ', 
-                Pemberi Tugas : ' .$bukti_kompen->kompen->personilAkademik->nama . ', 
-                Jumlah Jam : ' .$bukti_kompen->kompen->jam_kompen. '
-            ]' 
-        );
-    }
 }
