@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <style>
-
         .sidebar,
         .main-sidebar,
         .main-sidebar .brand-link,
@@ -56,7 +54,11 @@
     <!-- css tambahan -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     {{-- <link rel="stylesheet" href="../resources/css/style.css"> --}}
-
+    
+    {{-- Select2 --}}
+    {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap4-theme@1.0.0/dist/select2-bootstrap4.min.css" rel="stylesheet"> --}}
+    
     @stack('css') <!-- Digunakan untuk memanggil custom css dari perintah push('css') pada masing-masing view -->
 </head>
 
@@ -114,14 +116,15 @@
     <script src="{{ url('/') }}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="{{ url('/') }}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="{{ url('/') }}/plugins/datatables-buttons/js/buttons.colvis.min.js"></script>
-
+    
+    {{-- Select2 --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
+    
     <!-- jquery-validation -->
     <script src="{{ url('/') }}/plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="{{ url('/') }}/plugins/jquery-validation/additional-methods.min.js"></script>
-
     <!-- SweetAlert2 -->
     <script src="{{ url('/') }}/plugins/sweetalert2/sweetalert2.min.js"></script>
-    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
     <!-- AdminLTE App -->
     <script src="{{ url('/') }}/plugins/adminlte.min.js"></script>
     <script>
@@ -133,8 +136,6 @@
         });
     </script>
     @stack('js') <!-- Digunakan untuk memanggil custom js dari perintah push('js') pada masing-masing view -->
-    {{-- <!-- AdminLTE for demo purposes -->
-<script src="{{ asset('adminlte/dist/js/demo.js') }}"></script> --}}
 </body>
 
 </html>
