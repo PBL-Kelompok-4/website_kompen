@@ -5,10 +5,8 @@
         <div class="card-header">
             <h3 class="card-title">{{ $page->title}}</h3>
             <div class="card-tools">
-                {{-- <button onclick="modalAction('{{ url('/kompen/import') }}')" class="btn btn-info">Import Data Mahasiswa</button>
-                <a href="{{ url('/kompen/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i> Export Data Mahasiswa</a>
-                <a href="{{ url('/kompen/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i> Export Data Mahasiswa</a> --}}
-                {{-- <button onclick="modalAction('{{ url('kompen/create_ajax') }}')" class="btn btn-success">Tambah Data (Ajax)</button> --}}
+                <a href="{{ url('/kompen_selesai/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i> Export Data Mahasiswa</a>
+                <a href="{{ url('/kompen_selesai/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i> Export Data Mahasiswa</a>
             </div>
         </div>
         <div class="card-body">
@@ -22,15 +20,6 @@
                 <div class="col-md-12">
                     <div class="form-group row">
                         <label class="col-1 control-label col-form-label">Filter:</label>
-                        <div class="col-3">
-                            <select name="filter_kompetensi" id="filter_kompetensi" class="form-control" required>
-                                <option value="">- Semua -</option>
-                                @foreach ($kompetensi as $item)
-                                    <option value="{{ $item->id_kompetensi }}">{{ $item->nama_kompetensi }}</option>
-                                @endforeach
-                            </select>
-                            <small class="form-text text-muted">Kompetensi Kompen</small>
-                        </div>
                         <div class="col-3">
                             <select name="filter_jenis_kompen" id="filter_jenis_kompen" class="form-control" required>
                                 <option value="">- Semua -</option>
@@ -89,7 +78,7 @@
                     "dataType": "json",
                     "type": "POST",
                     "data": function (d){
-                        d.id_kompetensi = $('#filter_kompetensi').val();
+                        // d.id_kompetensi = $('#filter_kompetensi').val();
                         d.id_jenis_kompen = $('#filter_jenis_kompen').val();
                         d.activeMenu = $('#activeMenu').val();
                         return d;
@@ -159,9 +148,9 @@
                     dataKompenSelesai.search(this.value).draw();
                 }
             });
-            $('#filter_kompetensi').on('change', function(){
-                dataKompenSelesai.ajax.reload();
-            });
+            // $('#filter_kompetensi').on('change', function(){
+            //     dataKompenSelesai.ajax.reload();
+            // });
             $('#filter_jenis_kompen').on('change', function(){
                 dataKompenSelesai.ajax.reload();
             });

@@ -29,14 +29,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <input value="5" type="number" name="id_level" id="id_level" class="form-control" hidden>
+                    <input value="4" type="number" name="id_level" id="id_level" class="form-control" hidden>
                     <div class="form-group">
                         <label>Prodi Mahasiswa</label>
                         <select name="id_prodi" id="id_prodi" class="form-control" required>
                             <option value="">- Pilih Prodi -</option>
                             @foreach ($prodi as $l)
-                                <option {{ $l->id_prodi == $mahasiswa->id_prodi ? 'selected' : '' }} value="{{ $l->id_prodi }}">
-                                    {{ $l->nama_prodi }}</option>
+                                <option {{ $l->id_prodi == $mahasiswa->id_prodi ? 'selected' : '' }} value="{{ $l->id_prodi }}">{{ $l->nama_prodi }}</option>
                             @endforeach
                         </select>
                         <small id="error-id_prodi" class="error-text form-text text-danger"></small>
@@ -73,11 +72,15 @@
                         <small id="error-nama" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">
-                        <label>Semester</label>
-                        <input value="{{ $mahasiswa->semester }}" type="number" name="semester" id="semester" class="form-control"
-                            required>
-                        <small id="error-semester" class="error-text form-text text-danger"></small>
-                    </div>
+                        <label>Periode</label>
+                        <select name="id_periode" id="id_periode" class="form-control">
+                            <option value="">- Pilih Periode Mahasiswa -</option>
+                            @foreach ($periode as $p)
+                                <option {{ $p->id_periode == $mahasiswa->id_periode ? 'selected' : '' }} value="{{ $p->id_periode }}">{{ $p->periode }}</option>
+                            @endforeach
+                        </select>
+                        <small id="error-id_periode" class="error-text form-text text-danger"></small>
+                    {{-- </div>
                     <div class="form-group">
                         <label>Jumlah Jam Alpha</label>
                         <input value="{{ $mahasiswa->jam_alpha }}" type="number" name="jam_alpha" id="jam_alpha" class="form-control"
@@ -95,7 +98,7 @@
                         <input value="{{ $mahasiswa->jam_kompen_selesai }}" type="number" name="jam_kompen_selesai" id="jam_kompen_selesai" class="form-control"
                             required>
                         <small id="error-jam_kompen_selesai" class="error-text form-text text-danger"></small>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
@@ -112,11 +115,11 @@
                     nomor_induk: { required: true, number: true },
                     username: { required: true, minlength: 3, maxlength: 20 },
                     nama: { required: true, minlength: 3, maxlength: 150 },
-                    semester: { required: true, number: true },
+                    id_periode: { required: true, number: true },
                     password: { minlength: 6, maxlength: 20 },
-                    jam_alpha: { required: true, number: true },
-                    jam_kompen: { required: true, number: true },
-                    jam_kompen_selesai: { required: true, number: true },
+                    // jam_alpha: { required: true, number: true },
+                    // jam_kompen: { required: true, number: true },
+                    // jam_kompen_selesai: { required: true, number: true },
                     id_level: { number: true }
                 },
                 submitHandler: function(form) {

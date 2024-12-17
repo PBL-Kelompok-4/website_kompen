@@ -22,7 +22,7 @@
                 <div class="col-md-12">
                     <div class="form-group row">
                         <label class="col-1 control-label col-form-label">Filter:</label>
-                        <div class="col-3">
+                        {{-- <div class="col-3">
                             <select name="filter_kompetensi" id="filter_kompetensi" class="form-control" required>
                                 <option value="">- Semua -</option>
                                 @foreach ($kompetensi as $item)
@@ -30,7 +30,7 @@
                                 @endforeach
                             </select>
                             <small class="form-text text-muted">Kompetensi Kompen</small>
-                        </div>
+                        </div> --}}
                         <div class="col-3">
                             <select name="filter_jenis_kompen" id="filter_jenis_kompen" class="form-control" required>
                                 <option value="">- Semua -</option>
@@ -48,7 +48,6 @@
                     <tr>
                         <th>No</th>
                         <th>Nama Kompen</th>
-                        <th>Deskripsi</th>
                         <th>Pemberi Tugas</th>
                         <th>Jenis Kompen</th>
                         <th>Kuota</th>
@@ -61,7 +60,7 @@
             </table>
         </div>
     </div>
-    <div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" data-width="75%" aria-hidden="true"></div>
+    <div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" data-width="50%" aria-hidden="true"></div>
 @endsection
 
 @push('css')
@@ -86,7 +85,7 @@
                     "dataType": "json",
                     "type": "POST",
                     "data": function (d){
-                        d.id_kompetensi = $('#filter_kompetensi').val();
+                        // d.id_kompetensi = $('#filter_kompetensi').val();
                         d.id_jenis_kompen = $('#filter_jenis_kompen').val();
                     }
                 },
@@ -103,11 +102,6 @@
                         //orderable: true, jika ingin kolom bisa diurutkan
                         orderable: true,
                         //searchable: true, jika ingin kolom bisa dicari
-                        searchable: true
-                    },{
-                        data: "deskripsi",
-                        className: "text-center",
-                        orderable:true,
                         searchable: true
                     },{
                         // mengambil data personil akademik dari hasil ORM berelasi
@@ -154,9 +148,9 @@
                     dataKompenDibuka.search(this.value).draw();
                 }
             });
-            $('#filter_kompetensi').on('change', function(){
-                dataKompenDibuka.ajax.reload();
-            });
+            // $('#filter_kompetensi').on('change', function(){
+            //     dataKompenDibuka.ajax.reload();
+            // });
             $('#filter_jenis_kompen').on('change', function(){
                 dataKompenDibuka.ajax.reload();
             });

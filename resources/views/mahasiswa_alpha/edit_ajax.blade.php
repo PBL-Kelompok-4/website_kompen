@@ -12,7 +12,7 @@
                     <h5><i class="icon fas fa-ban"></i> Kesalahan!!!</h5>
                     Data yang anda cari tidak ditemukan
                 </div>
-                <a href="{{ url('/mahasiswa)alpha') }}" class="btn btn-warning">Kembali</a>
+                <a href="{{ url('/mahasiswa_alpha') }}" class="btn btn-warning">Kembali</a>
             </div>
         </div>
     </div>
@@ -36,11 +36,6 @@
                         <small id="error-nomor_induk" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">
-                        <label>Username</label>
-                        <input value="{{ $mahasiswa_alpha->username }}" type="text" name="username" id="username" class="form-control" disabled>
-                        <small id="error-username" class="error-text form-text text-danger"></small>
-                    </div>
-                    <div class="form-group">
                         <label>Nama</label>
                         <input value="{{ $mahasiswa_alpha->nama }}" type="text" name="nama" id="nama" class="form-control" disabled>
                         <small id="error-nama" class="error-text form-text text-danger"></small>
@@ -53,9 +48,9 @@
                         <small id="error-id_prodi" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">
-                        <label>Semester</label>
-                        <input value="{{ $mahasiswa_alpha->semester }}" type="number" name="semester" id="semester" class="form-control" disabled>
-                        <small id="error-semester" class="error-text form-text text-danger"></small>
+                        <label>Periode</label>
+                        <input value="{{ $mahasiswa_alpha->periode->periode }}" type="number" name="id_periode" id="id_periode" class="form-control" disabled>
+                        <small id="error-id_periode" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">
                         <label>Jumlah Jam Alpha</label>
@@ -77,9 +72,8 @@
                     id_prodi: { required: true, number: true },
                     nomor_induk: { required: true, number: true },
                     nama: { required: true, minlength: 3, maxlength: 150 },
-                    semester: { required: true, number: true },
-                    jam_alpha: { required: true, number: true },
-                    id_level: { number: true }
+                    id_periode: { required: true, number: true },
+                    jam_alpha: { required: true, number: true }
                 },
                 submitHandler: function(form) {
                     $.ajax({

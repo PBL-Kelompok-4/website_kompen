@@ -64,14 +64,21 @@
                         <td class="col-9">{{ $kompen_diajukan->tanggal_selesai }}</td>
                     </tr>
                 </table>
+                @if (auth()->user()->level->kode_level == "ADM")
+                <div class="form-group">
+                    <label>Alasan</label>
+                    <input type="text" name="alasan" id="alasan" class="form-control" @required(true)>
+                    <small id="error-alasan" class="error-text form-text text-danger"></small>
+                </div>
+                @endif
             </div>
             <div class="modal-footer">
                 @if (auth()->user()->level->kode_level == "ADM")
                 <form action="{{ url('/kompen_diajukan/'. $kompen_diajukan->id_kompen . '/diterima') }}" method="POST" id="form-diterima">
-                    <button type="submit" class="btn btn-success">Accept</button>
+                    <button type="submit" class="btn btn-success">Setuju</button>
                 </form>
                 <form action="{{ url('/kompen_diajukan/'. $kompen_diajukan->id_kompen . '/ditolak') }}" method="POST" id="form-ditolak">
-                    <button type="submit" class="btn btn-danger">Reject</button>
+                    <button type="submit" class="btn btn-danger">Tolak</button>
                 </form>
                 @endif
                 <button type="button" data-dismiss="modal" class="btn btn-warning">Kembali</button>
@@ -80,9 +87,15 @@
     </div>
     <script>
         $(document).ready(function() {
+            $("#form-ditolak, #form-diterima").on('submit', function(e){
+                var alasanValue = $('#alasan').val();
+                $(this).append('<input type="hidden" name="alasan" id="alasan" value="' + alasanValue + '">');
+            });
+
             $("#form-ditolak").validate({
                 rules: {
-                    id_kompen: { required: true }
+                    id_kompen: { required: true },
+                    alasan: {required: true}
                 },
                 submitHandler: function(form) {
                     $.ajax({
@@ -127,7 +140,8 @@
             });
             $("#form-diterima").validate({
                 rules: {
-                    id_kompen: { required: true }
+                    id_kompen: { required: true },
+                    alasan: {required: true}
                 },
                 submitHandler: function(form) {
                     $.ajax({

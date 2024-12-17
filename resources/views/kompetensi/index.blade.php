@@ -6,10 +6,10 @@
             <h3 class="card-title">{{ $page->title}}</h3>
             <div class="card-tools">
                 @if (auth()->user()->level->kode_level == "ADM")
-                {{-- <button onclick="modalAction('{{ url('/kompetensi/import') }}')" class="btn btn-info">Import Data Mahasiswa</button>
-                <a href="{{ url('/kompetensi/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i> Export Data Mahasiswa</a>
-                <a href="{{ url('/kompetensi/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i> Export Data Mahasiswa</a> --}}
-                <button onclick="modalAction('{{ url('kompetensi/create_ajax') }}')" class="btn btn-success">Tambah Data (Ajax)</button>
+                <button onclick="modalAction('{{ url('/kompetensi/import') }}')" class="btn btn-info">Import Data Kompetensi</button>
+                <a href="{{ url('/kompetensi/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i> Export Data Kompetensi</a>
+                <a href="{{ url('/kompetensi/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i> Export Data Kompetensi</a>
+                <button onclick="modalAction('{{ url('kompetensi/create_ajax') }}')" class="btn btn-success">Tambah Data Kompetensi</button>
                 @endif
             </div>
         </div>

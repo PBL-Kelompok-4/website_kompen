@@ -33,16 +33,30 @@ class KompenDiajukanController extends Controller
     }
 
     public function list(Request $request){
-        $kompens = KompenModel::select('id_kompen' ,'nomor_kompen', 'nama', 'deskripsi', 'id_personil', 'id_jenis_kompen', 'kuota', 'jam_kompen', 'status', 'is_selesai', 'tanggal_mulai', 'tanggal_selesai', 'status_acceptance')->where('status', 'ditutup')->where('is_selesai', 'no')->where('status_acceptance', 'pending')->with('jenisKompen', 'personilAkademik')->get();
+        if(auth()->user()->level->kode_level == "ADM"){
+            $kompens = KompenModel::select('id_kompen' ,'nomor_kompen', 'nama', 'deskripsi', 'id_personil', 'id_jenis_kompen', 'kuota', 'jam_kompen', 'status', 'is_selesai', 'tanggal_mulai', 'tanggal_selesai', 'status_acceptance')
+            ->where('status', 'ditutup')
+            ->where('is_selesai', 'no')
+            ->where('status_acceptance', 'pending')
+            ->with('jenisKompen', 'personilAkademik');
+        } elseif (auth()->user()->level->kode_level == "DSN" || auth()->user()->level->kode_level == "TDK") {
+            $id_personil = auth()->user()->id_personil;
+            $kompens = KompenModel::select('id_kompen' ,'nomor_kompen', 'nama', 'deskripsi', 'id_personil', 'id_jenis_kompen', 'kuota', 'jam_kompen', 'status', 'is_selesai', 'tanggal_mulai', 'tanggal_selesai', 'status_acceptance')
+            ->where('status', 'ditutup')
+            ->where('is_selesai', 'no')
+            ->where('status_acceptance', 'pending')
+            ->where('id_personil', $id_personil)
+            ->with('jenisKompen', 'personilAkademik');
+        }
 
         //Filter data kompen berdasarkan id_jenis_kompen
         if($request->id_jenis_kompen){
             $kompens->where('id_jenis_kompen', $request->id_jenis_kompen);
         }
 
-        if($request->id_kompetensi){
-            $kompens->where('id_kompetensi', $request->id_kompetensi);
-        }
+        // if($request->id_kompetensi){
+        //     $kompens->where('id_kompetensi', $request->id_kompetensi);
+        // }
         return DataTables::of($kompens)
         // menambahkan kolom index / no urut (default nama kolom: DT_RowIndex)
         ->addIndexColumn()
@@ -77,8 +91,8 @@ class KompenDiajukanController extends Controller
                 'nama' => 'required|string|min:3|max:40',
                 'deskripsi' => 'required|string|min:3|max:255',
                 'id_jenis_kompen' => 'required|integer',
-                'kuota' => 'required|integer',
-                'jam_kompen' => 'required|integer',
+                'kuota' => 'required|integer|min:1',
+                'jam_kompen' => 'required|integer|min:1',
                 'tanggal_mulai' => 'required',
                 'tanggal_selesai' => 'required'
             ];
@@ -94,9 +108,11 @@ class KompenDiajukanController extends Controller
                 ]);
             }
 
+            $uuid = Str::uuid();
+
             // KompenModel::create($request->all());
             KompenModel::create([
-                'nomor_kompen' => Str::uuid(),
+                'nomor_kompen' => $uuid,
                 'id_personil' => $request->id_personil,
                 'nama' => $request->nama,
                 'deskripsi' => $request->deskripsi,
@@ -114,11 +130,27 @@ class KompenDiajukanController extends Controller
         redirect('/');
     }
 
-    public function ditolak(string $id){
+    public function ditolak(Request $request, string $id){
+
+        $rules = [
+            'alasan' => 'required'
+        ];
+
+        //use Illuminate\Support\Facades\Validator;
+        $validator = Validator::make($request->all(), $rules);
+
+        if($validator->fails()){
+            return response()->json([
+                'status' => false, // response status, false: error/gagal, true: berhasil
+                'message' => 'Mohon Isi Kolom Alasan',
+                'msgField' => $validator->errors(), // pesan error validasi
+            ]);
+        }
 
         $check = KompenModel::find($id);
         if($check){
             $check->update([
+                'alasan' => $request->alasan,
                 'status_acceptance' => 'reject'
             ]);
             return response()->json([
@@ -133,12 +165,28 @@ class KompenDiajukanController extends Controller
         }
     }
 
-    public function diterima(string $id){
+    public function diterima(Request $request, string $id){
+
+        $rules = [
+            'alasan' => 'required'
+        ];
+
+        //use Illuminate\Support\Facades\Validator;
+        $validator = Validator::make($request->all(), $rules);
+
+        if($validator->fails()){
+            return response()->json([
+                'status' => false, // response status, false: error/gagal, true: berhasil
+                'message' => 'Mohon Isi Kolom Alasan',
+                'msgField' => $validator->errors(), // pesan error validasi
+            ]);
+        }
 
         $check = KompenModel::find($id);
         if($check){
             $check->update([
                 'status' => 'dibuka',
+                'alasan' => $request->alasan,
                 'status_acceptance' => 'accept'
             ]);
             return response()->json([

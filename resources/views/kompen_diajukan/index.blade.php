@@ -22,7 +22,7 @@
                 <div class="col-md-12">
                     <div class="form-group row">
                         <label class="col-1 control-label col-form-label">Filter:</label>
-                        <div class="col-3">
+                        {{-- <div class="col-3">
                             <select name="filter_kompetensi" id="filter_kompetensi" class="form-control" required>
                                 <option value="">- Semua -</option>
                                 @foreach ($kompetensi as $item)
@@ -30,7 +30,7 @@
                                 @endforeach
                             </select>
                             <small class="form-text text-muted">Kompetensi Kompen</small>
-                        </div>
+                        </div> --}}
                         <div class="col-3">
                             <select name="filter_jenis_kompen" id="filter_jenis_kompen" class="form-control" required>
                                 <option value="">- Semua -</option>
@@ -43,21 +43,23 @@
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered table-striped table-hover table-sm" id="table_kompen">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Kompen</th>
-                        <th>Deskripsi</th>
-                        <th>Pemberi Tugas</th>
-                        <th>Jenis Kompen</th>
-                        <th>Kuota</th>
-                        <th>Jam Konversi</th>
-                        <th>Tanggal Mulai Pengerjaan</th>
-                        <th>Tanggal Selesai Pengerjaan</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
+            <table class="table-responsive">
+                <table class="table table-bordered table-striped table-hover table-sm display nowrap" width="100%" id="table_kompen" >
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Kompen</th>
+                            <th>Deskripsi</th>
+                            <th>Pemberi Tugas</th>
+                            <th>Jenis Kompen</th>
+                            <th>Kuota</th>
+                            <th>Jam Konversi</th>
+                            <th>Tanggal Mulai Pengerjaan</th>
+                            <th>Tanggal Selesai Pengerjaan</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                </table>
             </table>
         </div>
     </div>
@@ -81,12 +83,20 @@
                 processing: true,
                 //serverSide: true, jika ingin menggunakan server side processing
                 serverSide: true,
+                responsive: true, // Tambahkan ini
+                // Tambahkan konfigurasi responsive detail
+                responsive: {
+                    details: {
+                        type: 'column',
+                        target: 'tr'
+                    }
+                },
                 ajax:{
                     "url": "{{ url('kompen_diajukan/list') }}",
                     "dataType": "json",
                     "type": "POST",
                     "data": function (d){
-                        d.id_kompetensi = $('#filter_kompetensi').val();
+                        // d.id_kompetensi = $('#filter_kompetensi').val();
                         d.id_jenis_kompen = $('#filter_jenis_kompen').val();
                     }
                 },
@@ -154,9 +164,9 @@
                     dataKompenDiajukan.search(this.value).draw();
                 }
             });
-            $('#filter_kompetensi').on('change', function(){
-                dataKompenDiajukan.ajax.reload();
-            });
+            // $('#filter_kompetensi').on('change', function(){
+            //     dataKompenDiajukan.ajax.reload();
+            // });
             $('#filter_jenis_kompen').on('change', function(){
                 dataKompenDiajukan.ajax.reload();
             });

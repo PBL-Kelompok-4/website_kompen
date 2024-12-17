@@ -21,12 +21,12 @@
                     </div>
                     <div class="form-group">
                         <label>Nama Kompen</label>
-                        <input value="" type="text" name="nama" id="nama" class="form-control" required>
+                        <input type="text" name="nama" id="nama" class="form-control" required>
                         <small id="error-nama" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">
                         <label>Deskripsi</label>
-                        <input value="" type="text" name="deskripsi" id="deskripsi" class="form-control" required>
+                        <textarea name="deskripsi" id="deskripsi" class="form-control" cols="30" rows="5"></textarea>
                         <small id="error-deskripsi" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">
@@ -67,8 +67,8 @@
                 nama: { required: true },
                 deskripsi: { required: true },
                 id_jenis_kompen: { required: true, number: true },
-                kuota: { required: true, number: true },
-                jam_kompen: { required: true, number: true },
+                kuota: { required: true, number: true, min: 1 },
+                jam_kompen: { required: true, number: true, min: 1 },
                 tanggal_mulai: { required: true },
                 tanggal_selesai: { required: true }
             },
