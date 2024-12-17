@@ -51,8 +51,8 @@
                             <td class="col-9">{{ $mahasiswa->nama }}</td>
                         </tr>
                         <tr>
-                            <th class="text-right col-3">Semester : </th>
-                            <td class="col-9">{{ $mahasiswa->semester }}</td>
+                            <th class="text-right col-3">Periode : </th>
+                            <td class="col-9">{{ $mahasiswa->periode->periode }}</td>
                         </tr>
                         <tr>
                             <th class="text-right col-3">Jumlah Alpha : </th>

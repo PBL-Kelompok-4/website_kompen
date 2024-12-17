@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('jam_kompen');
             $table->enum('status', ['ditutup', 'dibuka', 'progres'])->default('ditutup');
             $table->enum('is_selesai', ['no', 'yes'])->default('no');
+            $table->string('alasan', 255)->nullable();
             $table->enum('status_acceptance', ['pending', 'accept', 'reject'])->default('pending');
             $table->dateTime('tanggal_mulai');
             $table->dateTime('tanggal_selesai');

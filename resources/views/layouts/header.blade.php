@@ -4,6 +4,14 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
+      <li class="nav-item">
+        <a href="">
+          <a href="#" class="btn btn-sm btn-primary">{{ auth()->user()->level->nama_level }}</a>
+        </a>
+        <button class="btn btn-sm btn-primary">
+          {{ auth()->user()->nama }}
+        </button>
+      </li>
     </ul>
 
     <!-- Right navbar links -->

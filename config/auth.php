@@ -44,6 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'personil_akademik'
         ],
+        'api' => [
+            'driver' => 'jwt',
+            'provider' => 'mahasiswa'
+        ]
     ],
 
     /*

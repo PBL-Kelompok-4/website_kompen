@@ -28,19 +28,19 @@
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{ url('/mahasiswa') }}" class="nav-link {{ $activeMenu == 'mahasiswa' ? 'active' : '' }}">
-                            <i class="far fa-circle nav-icon"></i>
+                            <i class="bi {{ $activeMenu == 'mahasiswa' ? 'bi-record-circle' : 'bi-circle' }} nav-icon"></i>
                             <p>Data Mahasiswa</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('/personil_akademik') }}" class="nav-link {{ $activeMenu == 'personil_akademik' ? 'active' : '' }}">
-                            <i class="far fa-circle nav-icon"></i>
+                            <i class="bi {{ $activeMenu == 'personil_akademik' ? 'bi-record-circle' : 'bi-circle' }} nav-icon"></i>
                             <p>Data Personil Akademik</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('/level') }}" class="nav-link {{ $activeMenu == 'level' ? 'active' : '' }} ">
-                            <i class="far fa-circle nav-icon"></i>
+                            <i class="bi {{ $activeMenu == 'level' ? 'bi-record-circle' : 'bi-circle' }} nav-icon"></i>
                             <p>Level User</p>
                         </a>
                     </li>
@@ -67,8 +67,8 @@
                 </a>
             </li>
             @endif
-            <li class="nav-item {{ ($activeMenu == 'kompen_dibuka' || $activeMenu == 'kompen_selesai' || $activeMenu == 'kompen_diajukan' || $activeMenu == 'kompen_ditolak') ? 'menu-open' : '' }} ">
-                <a href="#" class="nav-link {{ ($activeMenu == 'kompen_dibuka' || $activeMenu == 'kompen_selesai' || $activeMenu == 'kompen_diajukan' || $activeMenu == 'kompen_ditolak') ? 'active' : '' }} ">
+            <li class="nav-item {{ ($activeMenu == 'kompen_dibuka' || $activeMenu == 'kompen_selesai' || $activeMenu == 'kompen_diajukan' || $activeMenu == 'kompen_ditolak' || $activeMenu == 'kompen_dilakukan') ? 'menu-open' : '' }} ">
+                <a href="#" class="nav-link {{ ($activeMenu == 'kompen_dibuka' || $activeMenu == 'kompen_selesai' || $activeMenu == 'kompen_diajukan' || $activeMenu == 'kompen_ditolak' || $activeMenu == 'kompen_dilakukan') ? 'active' : '' }} ">
                     <i class="nav-icon fa-solid fa-file-pen"></i>
                     <p>
                       Tugas Kompen
@@ -79,26 +79,33 @@
                     @if (auth()->user()->level->kode_level == "ADM" || auth()->user()->level->kode_level == "DSN" || auth()->user()->level->kode_level == "TDK")
                     <li class="nav-item">
                         <a href="{{ url('/kompen_diajukan') }}" class="nav-link {{ $activeMenu == 'kompen_diajukan' ? 'active' : '' }} ">
-                            <i class="far fa-circle nav-icon"></i>
+                            <i class="bi {{ $activeMenu == 'kompen_diajukan' ? 'bi-record-circle' : 'bi-circle' }} nav-icon"></i>
                             <p>Kompen Diajukan</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('/kompen_ditolak') }}" class="nav-link {{ $activeMenu == 'kompen_ditolak' ? 'active' : '' }} ">
-                            <i class="far fa-circle nav-icon"></i>
+                            <i class="bi {{ $activeMenu == 'kompen_ditolak' ? 'bi-record-circle' : 'bi-circle' }} nav-icon"></i>
                             <p>Kompen Ditolak</p>
                         </a>
                     </li>
                     @endif
+                    
                     <li class="nav-item">
                         <a href="{{ url('/kompen_dibuka') }}" class="nav-link {{ $activeMenu == 'kompen_dibuka' ? 'active' : '' }} ">
-                            <i class="far fa-circle nav-icon"></i>
+                            <i class="bi {{ $activeMenu == 'kompen_dibuka' ? 'bi-record-circle' : 'bi-circle' }} nav-icon nav-icon"></i>
                             <p>Kompen Dibuka</p>
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ url('/kompen_dilakukan') }}" class="nav-link {{ $activeMenu == 'kompen_dilakukan' ? 'active' : '' }} ">
+                            <i class="bi {{ $activeMenu == 'kompen_dilakukan' ? 'bi-record-circle' : 'bi-circle' }} nav-icon"></i>
+                            <p>Kompen Dilakukan</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ url('/kompen_selesai') }}" class="nav-link {{ $activeMenu == 'kompen_selesai' ? 'active' : '' }} ">
-                            <i class="far fa-circle nav-icon"></i>
+                            <i class="bi {{ $activeMenu == 'kompen_selesai' ? 'bi-record-circle' : 'bi-circle' }} nav-icon nav-icon"></i>
                             <p>Kompen Selesai</p>
                         </a>
                     </li>

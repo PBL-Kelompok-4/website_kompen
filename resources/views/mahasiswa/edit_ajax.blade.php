@@ -29,7 +29,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <input value="5" type="number" name="id_level" id="id_level" class="form-control" hidden>
+                    <input value="4" type="number" name="id_level" id="id_level" class="form-control" hidden>
                     <div class="form-group">
                         <label>Prodi Mahasiswa</label>
                         <select name="id_prodi" id="id_prodi" class="form-control" required>
@@ -73,10 +73,10 @@
                         <small id="error-nama" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">
-                        <label>Semester</label>
-                        <input value="{{ $mahasiswa->semester }}" type="number" name="semester" id="semester" class="form-control"
+                        <label>Periode</label>
+                        <input value="{{ $mahasiswa->periode->periode }}" type="number" name="id_periode" id="id_periode" class="form-control"
                             required>
-                        <small id="error-semester" class="error-text form-text text-danger"></small>
+                        <small id="error-id_periode" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">
                         <label>Jumlah Jam Alpha</label>
@@ -112,7 +112,7 @@
                     nomor_induk: { required: true, number: true },
                     username: { required: true, minlength: 3, maxlength: 20 },
                     nama: { required: true, minlength: 3, maxlength: 150 },
-                    semester: { required: true, number: true },
+                    id_periode: { required: true, number: true },
                     password: { minlength: 6, maxlength: 20 },
                     jam_alpha: { required: true, number: true },
                     jam_kompen: { required: true, number: true },

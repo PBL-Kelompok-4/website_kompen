@@ -63,6 +63,10 @@
                         <th class="text-right col-3">Tanggal Selesai : </th>
                         <td class="col-9">{{ $kompen_ditolak->tanggal_selesai }}</td>
                     </tr>
+                    <tr>
+                        <th class="text-right col-3">Alasan Ditolak : </th>
+                        <td class="col-"><strong style="color:red">{{ $kompen_ditolak->alasan }}</strong></td>
+                    </tr>
                 </table>
             </div>
             <div class="modal-footer">
