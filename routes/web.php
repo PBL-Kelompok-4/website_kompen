@@ -35,6 +35,11 @@ Route::get('logout', [AuthController::class, 'logout'])->middleware('auth:web,pe
 Route::middleware(['auth:web,personil'])->group(function () {
 
     Route::get('/', [HomeController::class, 'index']);
+
+    Route::get('/profil', [ProfilController::class, 'index']);
+    Route::post('/profil/update', [ProfilController::class, 'update']);
+    Route::post('/profil/update_data_diri', [ProfilController::class, 'updateDataDiri']);
+    Route::post('/profil/update_password', [ProfilController::class, 'updatePassword']);
     
     Route::group(['prefix' => 'mahasiswa', 'middleware' => 'authorize:ADM'], function () {
         Route::get('/', [MahasiswaController::class, 'index']);
