@@ -14,7 +14,7 @@ class KompenModel extends Model
     protected $table = 'kompen';
     protected $primaryKey = 'id_kompen';
 
-    protected $fillable = ['id_personil', 'id_jenis_kompen', 'nomor_kompen', 'nama', 'deskripsi', 'kuota', 'jam_kompen', 'status', 'is_selesai','status_acceptance', 'tanggal_mulai', 'tanggal_selesai', 'created_at', 'updated_at'];
+    protected $fillable = ['id_personil', 'id_jenis_kompen', 'nomor_kompen', 'nama', 'deskripsi', 'kuota', 'jam_kompen', 'status', 'is_selesai','status_acceptance', 'tanggal_mulai', 'tanggal_selesai', 'alasan' ,'created_at', 'updated_at'];
 
     public function personilAkademik(): BelongsTo{
         return $this->belongsTo(PersonilAkademikModel::class, 'id_personil', 'id_personil');

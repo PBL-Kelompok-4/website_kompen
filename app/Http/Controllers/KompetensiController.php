@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KompenModel;
 use Illuminate\Http\Request;
 use App\Models\KompetensiModel;
 use Illuminate\Support\Facades\Validator;
@@ -169,5 +170,114 @@ class KompetensiController extends Controller
         $kompetensi = KompetensiModel::find($id);
 
         return view('kompetensi.show_ajax', ['kompetensi' => $kompetensi]);
+    }
+
+    public function import() {
+        return view('kompetensi.import');
+    }
+
+    public function import_ajax(Request $request){
+        if ($request->ajax() || $request->wantsJson()) {
+            $rules = [
+                // validasi file harus xls atau xlsx, max 1MB
+                'file_kompetensi' => ['required', 'mimes:xlsx', 'max:1024']
+            ];
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Validasi Gagal',
+                    'msgField' => $validator->errors()
+                ]);
+            }
+            $file = $request->file('file_kompetensi'); // ambil file dari request
+            $reader = IOFactory::createReader('Xlsx'); // load reader file excel
+            $reader->setReadDataOnly(true); // hanya membaca data
+            $spreadsheet = $reader->load($file->getRealPath()); // load file excel
+            $sheet = $spreadsheet->getActiveSheet(); // ambil sheet yang aktif
+            $data = $sheet->toArray(null, false, true, true); // ambil data excel
+            $insert = [];
+            if (count($data) > 1) { // jika data lebih dari 1 baris
+                foreach ($data as $baris => $value) {
+                    if ($baris > 1) { // baris ke 1 adalah header, maka lewati
+                        $insert[] = [
+                            'nama_kompetensi' => $value['A'],
+                            'deskripsi_kompetensi' => $value['B'],
+                            'created_at' => now(),
+                        ];
+                    }
+                }
+                if (count($insert) > 0) {
+                    // insert data ke database, jika data sudah ada, maka diabaikan
+                    KompetensiModel::insertOrIgnore($insert);
+                }
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Data berhasil diimport'
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Tidak ada data yang diimport'
+                ]);
+            }
+        }
+        return redirect('/personil_akademik');
+    }
+
+    public function export_excel(){
+        // Ambil data Level yang akan di export
+        $kompetensi = KompetensiModel::select('nama_kompetensi', 'deskripsi_kompetensi')->orderBy('nama_kompetensi')->get();
+        
+        // load library excel
+        $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet(); // ambil sheet yang aktif
+
+        $sheet->setCellValue('A1', 'No');
+        $sheet->setCellValue('B1', 'Nama Kompetensi');
+        $sheet->setCellValue('C1', 'Deskripsi');
+
+        $sheet->getStyle('A1:C1')->getFont()->setBold(true); // bold Header
+
+        $no = 1;    // nomor data dimulai dari 1
+        $baris = 2; // baris data dimulai dari baris ke 2
+        foreach($kompetensi as $key => $value){
+            $sheet->setCellValue('A'.$baris, $no);
+            $sheet->setCellValue('B'.$baris, $value->nama_kompetensi);
+            $sheet->setCellValue('C'.$baris, $value->deskripsi_kompetensi);
+            $baris++;
+            $no++;
+        }
+
+        foreach(range('A','C') as $columnID){
+            $sheet->getColumnDimension($columnID)->setAutoSize(true); // set auto size untuk kolom
+        }
+
+        $sheet->setTitle('Data Kompetensi'); // set title sheet
+
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $filename = 'Data Kompetensi '.date('Y-m-d H:i:s').'.xlsx';
+
+        header('Content-Type: appplication/vdn.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="'.$filename.'"');
+        header('Cache-Control: max-age=0');
+        header('Cache-Control: max-age=1');
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+        header('Last-Modified: '.gmdate('D, d M Y H:i:s') . ' GMT');
+        header('Cache-Control: cache, must-revalidate');
+        header('Pragma: public');
+
+        $writer->save('php://output');
+        exit;
+    }
+
+    public function export_pdf(){
+        $kompetensi = KompetensiModel::select('nama_kompetensi', 'deskripsi_kompetensi')->orderBy('nama_kompetensi')->get();
+        $pdf = Pdf::loadView('kompetensi.export_pdf', ['kompetensi' => $kompetensi]);
+        $pdf->setPaper('a4', 'potrait'); // set ukuran kertas dan orientasi
+        $pdf->setOption("isRemoteEnabled", true); // set true jika ada gambar dari url 
+        $pdf->render();
+
+        return $pdf->stream('Data Kompetensi '.date('Y-m-d H:i:s').'.pdf');
     }
 }

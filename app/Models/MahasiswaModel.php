@@ -7,21 +7,34 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class MahasiswaModel extends Authenticatable
+class MahasiswaModel extends Authenticatable implements JWTSubject
 {
+    public function getJWTIdentifier() {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims() {
+        return [];
+    }
+
     use HasFactory;
 
     protected $table = 'mahasiswa';
     protected $primaryKey = 'id_mahasiswa';
 
-    protected $fillable = ['id_level', 'password' ,'id_prodi', 'nomor_induk', 'username', 'nama', 'semester', 'jam_alpha', 'jam_kompen', 'jam_kompen_selesai', 'created_at', 'updated_at'];
+    protected $fillable = ['id_level', 'password' ,'id_prodi', 'nomor_induk', 'username', 'nama', 'id_periode', 'jam_alpha', 'jam_kompen', 'jam_kompen_selesai', 'created_at', 'updated_at'];
     
     protected $hidden = ['password'];
     protected $casts = ['password' => 'hashed'];
 
     public function level(): BelongsTo{
         return $this->belongsTo(LevelModel::class, 'id_level', 'id_level');
+    }
+
+    public function periode(): BelongsTo{
+        return $this->belongsTo(PeriodeModel::class, 'id_periode', 'id_periode');
     }
 
     public function prodi(): BelongsTo{

@@ -48,9 +48,10 @@
                         <small id="error-nama" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">
-                        <label>Semester</label>
-                        <input value="" type="number" name="semester" id="semester" class="form-control" required>
-                        <small id="error-semester" class="error-text form-text text-danger"></small>
+                        //ganti ke select
+                        <label>Periode</label>
+                        <input value="" type="number" name="id_periode" id="id_periode" class="form-control" required>
+                        <small id="error-periode" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">
                         <label>Jumlah Jam Alpha</label>
@@ -84,7 +85,7 @@
                 nomor_induk: { required: true, maxlength: 10 },
                 username: { required: true, minlength: 3, maxlength: 20 },
                 nama: { required: true, minlength: 3, maxlength: 150 },
-                semester: { required: true, number: true },
+                id_periode: { required: true, number: true },
                 password: { required:true, minlength: 6, maxlength: 20 },
                 jam_alpha: { required: true, number: true },
                 jam_kompen: { required: true, number: true },
