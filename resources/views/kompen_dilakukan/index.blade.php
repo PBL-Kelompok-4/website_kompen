@@ -51,7 +51,6 @@
             </table>
         </div>
     </div>
-    <a href="{{ url('kompen_dilakukan/nyoba_qr') }}" class="btn btn-sm btn-primary">Klik Sini Untuk Nyoba QR</a>
     <div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" data-width="50%" aria-hidden="true"></div>
 @endsection
 

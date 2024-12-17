@@ -9,6 +9,7 @@ use App\Http\Controllers\LevelController;
 use App\Http\Controllers\MahasiswaAlphaController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\PersonilAkademikController;
+use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KompenDilakukanController;
 use App\Http\Controllers\KompenDitolakController;
@@ -162,7 +163,6 @@ Route::middleware(['auth:web,personil'])->group(function () {
         Route::post('/konfirmasi_pekerjaan', [KompenDilakukanController::class, 'konfirmasi_pekerjaan'])->name('konfirmasi_pekerjaan')->middleware('authorize:ADM,DSN,TDK');
         Route::post('/selesaikan_kompen', [KompenDilakukanController::class, 'selesaikan_kompen'])->middleware('authorize:ADM,DSN,TDK');
         Route::get('/export_bukti_kompen', [KompenDilakukanController::class, 'export_bukti_kompen']);
-        // Route::get('/nyoba_qr', [KompenDilakukanController::class, 'nyoba_qr']);
     });
     
     Route::group(['prefix' => 'kompen_selesai', 'middleware' => 'authorize:ADM,DSN,TDK,MHS'], function () {
