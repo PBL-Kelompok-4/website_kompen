@@ -189,6 +189,10 @@ class PersonilAkademikController extends Controller
         return view('personil_akademik.show_ajax', ['personil_akademik' => $personil]);
     }
 
+
+    public function LoadChartJsPage (){
+        return view ('home');
+
     public function import() {
         return view('personil_akademik.import');
     }

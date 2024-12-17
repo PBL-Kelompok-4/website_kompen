@@ -38,7 +38,7 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ url('/') }}/plugins/fontawesome-free/css/all.min.css">
-    {{-- DataTables --}}
+    <!-- DataTables -->
     <link rel="stylesheet" href="{{ url('/') }}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="{{ url('/') }}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="{{ url('/') }}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
@@ -51,6 +51,12 @@
     <link rel="stylesheet" href="{{ url('/') }}/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ url('/') }}/plugins/adminlte.min.css">
+    <!-- ChartJs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Bootstrap icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+
+
     <!-- css tambahan -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     {{-- <link rel="stylesheet" href="../resources/css/style.css"> --}}
@@ -103,6 +109,8 @@
     <script src="{{ url('/') }}/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="{{ url('/') }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap 5 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> 
     {{-- DataTables & Plugins --}}
     <script src="{{ url('/') }}/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="{{ url('/') }}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

@@ -6,6 +6,7 @@ use App\Http\Controllers\KompenDibukaController;
 use App\Http\Controllers\KompenSelesaiController;
 use App\Http\Controllers\KompetensiController;
 use App\Http\Controllers\LevelController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MahasiswaAlphaController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\PersonilAkademikController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\KompenDilakukanController;
 use App\Http\Controllers\KompenDitolakController;
 use App\Http\Controllers\MahasiswaKompenController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +36,14 @@ Route::post('login', [AuthController::class, 'postlogin']);
 Route::get('logout', [AuthController::class, 'logout'])->middleware('auth:web,personil');
 
 Route::middleware(['auth:web,personil'])->group(function () {
+
+    // Route::group(['prefix' => 'mahasiswa', 'middleware' => 'authorize:MHS'], function () {
+    Route::get('/', [DashboardController::class, 'mahasiswa']);
+    // });
+
+    // Route::group(['prefix' => '', 'middleware' => 'authorize:ADM,DSN,TDK'], function () {
+    Route::get('/', [DashboardController::class, 'admin']);
+    // });
 
     Route::get('/', [HomeController::class, 'index']);
 
@@ -57,6 +67,7 @@ Route::middleware(['auth:web,personil'])->group(function () {
         Route::post('/import_ajax', [MahasiswaController::class, 'import_ajax']); // ajax import excel
         Route::get('/export_excel', [MahasiswaController::class, 'export_excel']); // ajax import excel
         Route::get('/export_pdf', [MahasiswaController::class, 'export_pdf']); // ajax export pdf
+        Route::get('/dashboard', [MahasiswaController::class, 'dashboardData']);
     });
     
     Route::group(['prefix' => 'personil_akademik', 'middleware' => 'authorize:ADM'], function () {
@@ -74,6 +85,8 @@ Route::middleware(['auth:web,personil'])->group(function () {
         Route::post('/import_ajax', [PersonilAkademikController::class, 'import_ajax']); // ajax import excel
         Route::get('/export_excel', [PersonilAkademikController::class, 'export_excel']); // ajax import excel
         Route::get('/export_pdf', [PersonilAkademikController::class, 'export_pdf']); // ajax export pdf
+
+        Route::get('/chartjs', [PersonilAkademikController::class, 'LoadChartJsPage']); 
     });
     
     Route::group(['prefix' => 'level', 'middleware' => 'authorize:ADM'], function () {
@@ -140,6 +153,12 @@ Route::middleware(['auth:web,personil'])->group(function () {
         Route::get('/{id}/show_ajax', [KompenDitolakController::class, 'show_ajax']);
         Route::get('/export_excel', [KompenDitolakController::class, 'export_excel'])->middleware('authorize:ADM'); // ajax import excel
         Route::get('/export_pdf', [KompenDitolakController::class, 'export_pdf'])->middleware('authorize:ADM'); // ajax export pdf
+    });
+    
+    Route::get('/profil', [ProfilController::class, 'index']);
+    Route::post('/profil/update', [ProfilController::class, 'update']);
+    Route::post('/profil/update_data_diri', [ProfilController::class, 'updateDataDiri']);
+    Route::post('/profil/update_password', [ProfilController::class, 'updatePassword']);
     });
 
     Route::group(['prefix' => 'kompen_dibuka', 'middleware' => 'authorize:ADM,DSN,TDK,MHS'], function () {
