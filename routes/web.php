@@ -37,8 +37,6 @@ Route::get('logout', [AuthController::class, 'logout'])->middleware('auth:web,pe
 
 Route::middleware(['auth:web,personil'])->group(function () {
 
-<<<<<<< HEAD
-=======
     // Route::group(['prefix' => 'mahasiswa', 'middleware' => 'authorize:MHS'], function () {
     Route::get('/', [DashboardController::class, 'mahasiswa']);
     // });
@@ -47,7 +45,6 @@ Route::middleware(['auth:web,personil'])->group(function () {
     Route::get('/', [DashboardController::class, 'admin']);
     // });
 
->>>>>>> 8249acdd86268e056134c2c005f6bbc8a73a08c5
     Route::get('/', [HomeController::class, 'index']);
 
     Route::get('/profil', [ProfilController::class, 'index']);
@@ -197,8 +194,4 @@ Route::middleware(['auth:web,personil'])->group(function () {
         Route::get('/export_excel', [KompenSelesaiController::class, 'export_excel'])->middleware('authorize:ADM'); // ajax import excel
         Route::get('/export_pdf', [KompenSelesaiController::class, 'export_pdf'])->middleware('authorize:ADM'); // ajax export pdf
     });
-<<<<<<< HEAD
-});
-=======
-});
->>>>>>> 8249acdd86268e056134c2c005f6bbc8a73a08c5
+
