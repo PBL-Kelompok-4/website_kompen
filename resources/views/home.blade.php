@@ -2,8 +2,7 @@
 
 @section('content')
     <div class="card">
-
-        @if (auth()->user()->level->kode_level == 'ADM' || auth()->user()->level->kode_level == "DSN" || auth()->user()->level->kode_level == "TDK" ) 
+        @if (auth()->user()->level->kode_level == 'ADM')
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Jumlah total jam kompen mahasiswa</h3>
@@ -20,7 +19,6 @@
                     </div>
                 </div>
             </div>
-
             @php
                 // Query to fetch data from the mahasiswa table
                 $data = DB::table('mahasiswa')
@@ -31,8 +29,6 @@
                     )
                     ->first();
             @endphp
-
-
             <script>
                 document.addEventListener("DOMContentLoaded", () => {
                     new Chart(document.querySelector("#pieChart"), {
@@ -41,10 +37,10 @@
                             labels: ['Alpha', 'Kompen', 'Kompen Selesai'],
                             datasets: [{
                                 label: 'Jumlah total jam kompen mahasiswa ',
-                                data: [ 
-                                {{ $data->total_alpha ?? 0 }},
-                                {{ $data->total_kompen ?? 0 }},
-                                {{ $data->total_kompen_selesai ?? 0 }}
+                                data: [
+                                    {{ $data->total_alpha ?? 0 }},
+                                    {{ $data->total_kompen ?? 0 }},
+                                    {{ $data->total_kompen_selesai ?? 0 }}
                                 ],
                                 backgroundColor: [
                                     'rgb(235, 217, 179)',
@@ -61,9 +57,11 @@
                 });
             </script>
             
-        @endif
+        @elseif(auth()->user()->level->kode_level == 'DSN' || auth()->user()->level->kode_level == 'TDK')
+            {{-- KODE TAMPILAN HTML TARUH SINI BUL GAWE DOSEN AMBEK TENDIK --}}
 
-        @if (auth()->user()->id_mahasiswa)
+        @elseif(auth()->user()->level->kode_level == 'MHS')
+            {{-- IKI GAWE MAHASISWA DEPEK NDEK IF KENE, LAK JUPUK DATA TEKOK CONTROLLER AE OJO TEKOK BLADE E --}}
             <div class="card-header">
                 <h3 class="card-title">Dashboard Mahasiswa</h3>
                 <div class="card-tools"></div>
@@ -149,7 +147,6 @@
                     /* Jarak antar huruf */
                     }
                 </style>
-
                 <div class="card-body">
                     <div class="row">
                         <!-- Jam Alpha -->
@@ -164,7 +161,7 @@
                                 </div>
                             </div>
                         </div>
-                
+
                         <!-- Jam Kompen -->
                         <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="small-box bg">
@@ -177,7 +174,7 @@
                                 </div>
                             </div>
                         </div>
-                
+
                         <!-- Jam Kompen Selesai -->
                         <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="small-box bg">
@@ -191,8 +188,7 @@
                             </div>
                         </div>
                     </div>
-                </div>                
+                </div>
         @endif
-
-  </div>
+    </div>
 @endsection

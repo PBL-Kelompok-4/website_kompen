@@ -51,20 +51,10 @@
     <link rel="stylesheet" href="{{ url('/') }}/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ url('/') }}/plugins/adminlte.min.css">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 8249acdd86268e056134c2c005f6bbc8a73a08c5
     <!-- ChartJs -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Bootstrap icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
-
-<<<<<<< HEAD
-=======
-=======
-
->>>>>>> 8249acdd86268e056134c2c005f6bbc8a73a08c5
     <!-- css tambahan -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     {{-- <link rel="stylesheet" href="../resources/css/style.css"> --}}
@@ -73,10 +63,6 @@
     {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap4-theme@1.0.0/dist/select2-bootstrap4.min.css" rel="stylesheet"> --}}
     
-<<<<<<< HEAD
->>>>>>> 1200ebc93d600b70015b978891e1d53d11724d0e
-=======
->>>>>>> 8249acdd86268e056134c2c005f6bbc8a73a08c5
     @stack('css') <!-- Digunakan untuk memanggil custom css dari perintah push('css') pada masing-masing view -->
 </head>
 
@@ -136,9 +122,6 @@
     <script src="{{ url('/') }}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="{{ url('/') }}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="{{ url('/') }}/plugins/datatables-buttons/js/buttons.colvis.min.js"></script>
-    
-    {{-- Select2 --}}
-    {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
     
     <!-- jquery-validation -->
     <script src="{{ url('/') }}/plugins/jquery-validation/jquery.validate.min.js"></script>
