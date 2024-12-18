@@ -16,8 +16,8 @@
                     <p>Dashboard</p>
                 </a>
             </li>
-            <li class="nav-item {{ ($activeMenu == 'mahasiswa' || $activeMenu == 'personil_akademik' || $activeMenu == 'level') ? 'menu-open' : '' }} ">
-                <a href="#" class="nav-link {{ ($activeMenu == 'mahasiswa' || $activeMenu == 'personil_akademik' || $activeMenu == 'level') ? 'active' : '' }} ">
+            <li class="nav-item {{ ($activeMenu == 'mahasiswa' || $activeMenu == 'personil_akademik' || $activeMenu == 'level' || $activeMenu == 'periode') ? 'menu-open' : '' }} ">
+                <a href="#" class="nav-link {{ ($activeMenu == 'mahasiswa' || $activeMenu == 'personil_akademik' || $activeMenu == 'level' || $activeMenu == 'periode') ? 'active' : '' }} ">
                     <i class="nav-icon fa-solid fa-user"></i>
                     <p>
                       Manajemen User
@@ -43,6 +43,12 @@
                             <p>Level User</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/periode') }}" class="nav-link {{ $activeMenu == 'periode' ? 'active' : '' }} ">
+                            <i class="bi {{ $activeMenu == 'peride' ? 'bi-record-circle' : 'bi-circle' }} nav-icon"></i>
+                            <p>Periode Mahasiswa</p>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li class="nav-item">
@@ -61,6 +67,12 @@
                 <a href="{{ url('/mahasiswa_kompen') }}" class="nav-link {{ $activeMenu == 'mahasiswa_kompen' ? 'active' : '' }} ">
                     <i class="nav-icon fa-regular fa-rectangle-list"></i>
                     <p>Data Mahasiswa Kompen</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('/jenis_kompen') }}" class="nav-link {{ $activeMenu == 'jenis_kompen' ? 'active' : '' }} ">
+                    <i class="nav-icon fa-solid fa-list"></i>
+                    <p>Jenis Kompen</p>
                 </a>
             </li>
             <li class="nav-item {{ ($activeMenu == 'kompen_dibuka' || $activeMenu == 'kompen_selesai' || $activeMenu == 'kompen_diajukan' || $activeMenu == 'kompen_ditolak' || $activeMenu == 'kompen_dilakukan') ? 'menu-open' : '' }} ">

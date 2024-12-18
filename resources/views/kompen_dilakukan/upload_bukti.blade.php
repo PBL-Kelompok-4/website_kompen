@@ -17,7 +17,7 @@
         </div>
     </div>
 @else
-<form action="{{ url('/kompen_dilakukan/' . $kompen_detail->id_kompen_detail . '/store_bukti') }}" method="POST" id="form-update">
+<form action="{{ url('/kompen_dilakukan/' . $kompen_detail->id_kompen_detail . '/store_bukti') }}" method="POST" id="form-update" enctype="multipart/form-data">
     @csrf
     @method('PUT')    
         <div id="modal-master" class="modal-dialog modal-lg" role="document">
@@ -55,12 +55,10 @@
                             <td class="col-9">
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" name="bukti_kompen" id="bukti_kompen" class="custom-file-input">
-                                        <label for="bukti_kompen" class="custom-file-label">Pilih File</label>
-                                        {{-- <div class="form-text text-muted">Upload file dengan format PDF (max. 2MB)</div> --}}
+                                        <input type="file" name="bukti_kompen" id="bukti_kompen" class="form-control">
                                     </div>
                                 </div>
-                                <small class="form-text text-muted">Upload file dengan format .pdf (max. 2MB)</small>
+                                <small class="form-text text-muted">Upload file dengan format .pdf (max. 1MB)</small>
                             </td>
                         </tr>
                     </table>
@@ -74,7 +72,60 @@
     </form>
     <script>
         $(document).ready(function() {
-            
+            $("#form-update").validate({
+                rules: {
+                    bukti_kompen: { required: true }
+                },
+                submitHandler: function(form) {
+                    var formData = new FormData(form);
+                    $.ajax({
+                        url: form.action,
+                        type: form.method,
+                        data: formData,
+                        processData: false,    // Jangan proses data
+                        contentType: false,
+                        success: function(response) {
+                            if (response.status === true) {
+                                $('#myModal').modal('hide');
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Berhasil',
+                                    text: response.message
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Terjadi Kesalahan',
+                                    text: response.message
+                                });
+                            }
+                        },
+                        error: function(xhr) {5
+                            var errorMessage = xhr.responseJSON 
+                                ? (xhr.responseJSON.message || 'Terjadi kesalahan')
+                                : 'Terjadi kesalahan saat upload';
+                            
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Kesalahan',
+                                text: errorMessage
+                            });
+                        }
+                    });
+                    return false;
+                },
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
         });
     </script>
 @endempty

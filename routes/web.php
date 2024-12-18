@@ -37,20 +37,14 @@ Route::get('logout', [AuthController::class, 'logout'])->middleware('auth:web,pe
 
 Route::middleware(['auth:web,personil'])->group(function () {
 
-    // Route::group(['prefix' => 'mahasiswa', 'middleware' => 'authorize:MHS'], function () {
-    Route::get('/', [DashboardController::class, 'mahasiswa']);
-    // });
-
-    // Route::group(['prefix' => '', 'middleware' => 'authorize:ADM,DSN,TDK'], function () {
-    Route::get('/', [DashboardController::class, 'admin']);
-    // });
-
     Route::get('/', [HomeController::class, 'index']);
 
-    Route::get('/profil', [ProfilController::class, 'index']);
-    Route::post('/profil/update', [ProfilController::class, 'update']);
-    Route::post('/profil/update_data_diri', [ProfilController::class, 'updateDataDiri']);
-    Route::post('/profil/update_password', [ProfilController::class, 'updatePassword']);
+    Route::group(['prefix' => 'profil'], function (){
+        Route::get('/', [ProfilController::class, 'index']);
+        Route::post('/update', [ProfilController::class, 'update']);
+        Route::post('/update_data_diri', [ProfilController::class, 'updateDataDiri']);
+        Route::post('/update_password', [ProfilController::class, 'updatePassword']);
+    });
     
     Route::group(['prefix' => 'mahasiswa', 'middleware' => 'authorize:ADM'], function () {
         Route::get('/', [MahasiswaController::class, 'index']);
@@ -85,8 +79,6 @@ Route::middleware(['auth:web,personil'])->group(function () {
         Route::post('/import_ajax', [PersonilAkademikController::class, 'import_ajax']); // ajax import excel
         Route::get('/export_excel', [PersonilAkademikController::class, 'export_excel']); // ajax import excel
         Route::get('/export_pdf', [PersonilAkademikController::class, 'export_pdf']); // ajax export pdf
-
-        Route::get('/chartjs', [PersonilAkademikController::class, 'LoadChartJsPage']); 
     });
     
     Route::group(['prefix' => 'level', 'middleware' => 'authorize:ADM'], function () {
@@ -154,12 +146,6 @@ Route::middleware(['auth:web,personil'])->group(function () {
         Route::get('/export_excel', [KompenDitolakController::class, 'export_excel'])->middleware('authorize:ADM'); // ajax import excel
         Route::get('/export_pdf', [KompenDitolakController::class, 'export_pdf'])->middleware('authorize:ADM'); // ajax export pdf
     });
-    
-    Route::get('/profil', [ProfilController::class, 'index']);
-    Route::post('/profil/update', [ProfilController::class, 'update']);
-    Route::post('/profil/update_data_diri', [ProfilController::class, 'updateDataDiri']);
-    Route::post('/profil/update_password', [ProfilController::class, 'updatePassword']);
-    });
 
     Route::group(['prefix' => 'kompen_dibuka', 'middleware' => 'authorize:ADM,DSN,TDK,MHS'], function () {
         Route::get('/', [KompenDibukaController::class, 'index']);
@@ -181,7 +167,7 @@ Route::middleware(['auth:web,personil'])->group(function () {
         Route::put('/{id}/update_progres', [KompenDilakukanController::class, 'update_progres'])->middleware('authorize:MHS');
         Route::post('/list_pekerja', [KompenDilakukanController::class, 'list_pekerja'])->middleware('authorize:ADM,DSN,TDK'); // untuk list json datatables
         Route::get('/{id}/upload_bukti', [KompenDilakukanController::class, 'upload_bukti_kompen'])->middleware('authorize:MHS');
-        Route::put('/{id}/store_bukti', [KompenDilakukanController::class, 'store_bukti'])->middleware('authorize:MHS');
+        Route::put('/{id}/store_bukti', [KompenDilakukanController::class, 'store_bukti_kompen'])->middleware('authorize:MHS');
         Route::post('/konfirmasi_pekerjaan', [KompenDilakukanController::class, 'konfirmasi_pekerjaan'])->name('konfirmasi_pekerjaan')->middleware('authorize:ADM,DSN,TDK');
         Route::post('/selesaikan_kompen', [KompenDilakukanController::class, 'selesaikan_kompen'])->middleware('authorize:ADM,DSN,TDK');
         Route::get('/export_bukti_kompen', [KompenDilakukanController::class, 'export_bukti_kompen']);
@@ -194,4 +180,4 @@ Route::middleware(['auth:web,personil'])->group(function () {
         Route::get('/export_excel', [KompenSelesaiController::class, 'export_excel'])->middleware('authorize:ADM'); // ajax import excel
         Route::get('/export_pdf', [KompenSelesaiController::class, 'export_pdf'])->middleware('authorize:ADM'); // ajax export pdf
     });
-
+});
