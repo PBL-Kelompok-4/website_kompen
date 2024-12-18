@@ -24,9 +24,9 @@ class MahasiswaController extends Controller
             'title' => 'Daftar mahasiswa yang terdaftar dalam sistem'
         ];
 
-        $activeMenu = 'mahasiswa'; // set menu yang sedang aktif
+        $activeMenu = 'mahasiswa';
 
-        $prodi = ProdiModel::all(); // ambil data prodi
+        $prodi = ProdiModel::all();
 
         return view('mahasiswa.index', ['breadcrumb' => $breadcrumb, 'page' => $page,'prodi' => $prodi, 'activeMenu' => $activeMenu]);
     }
@@ -34,22 +34,20 @@ class MahasiswaController extends Controller
     public function list(Request $request){
         $mahasiswas = MahasiswaModel::select('id_mahasiswa' ,'id_prodi', 'nomor_induk', 'username', 'nama', 'id_periode', 'jam_alpha', 'jam_kompen', 'jam_kompen_selesai')->with('prodi', 'periode');
 
-        //Filter data mahasiswa berdasarkan id_prodi
         if($request->id_prodi){
             $mahasiswas->where('id_prodi', $request->id_prodi);
         }
 
         return DataTables::of($mahasiswas)
-            // menambahkan kolom index / no urut (default nama kolom: DT_RowIndex)
             ->addIndexColumn()
-            ->addColumn('aksi', function ($mahasiswa){ //menambahkan kolom aksi
+            ->addColumn('aksi', function ($mahasiswa){
 
                 $btn = '<button onclick="modalAction(\''.url('/mahasiswa/'. $mahasiswa->id_mahasiswa . '/show_ajax').'\')" class="btn btn-info btn-sm">Detail</button> ';
                 $btn .= '<button onclick="modalAction(\''.url('/mahasiswa/' . $mahasiswa->id_mahasiswa . '/edit_ajax').'\')" class="btn btn-warning btn-sm">Edit</button> ';
                 $btn .= '<button onclick="modalAction(\''.url('/mahasiswa/' . $mahasiswa->id_mahasiswa . '/delete_ajax').'\')" class="btn btn-danger btn-sm">Hapus</button>';
                 return $btn;
             })
-            ->rawColumns(['aksi']) // memberitahu bahwa kolom aksi adalah html
+            ->rawColumns(['aksi'])
             ->make(true);
     }
 
@@ -78,7 +76,6 @@ class MahasiswaController extends Controller
                 'jam_alpha' => 'required|integer',
             ];
 
-            //use Illuminate\Support\Facades\Validator;
             $validator = Validator::make($request->all(), $rules);
 
             if($validator->fails()){
@@ -125,26 +122,22 @@ class MahasiswaController extends Controller
                 'nama' => 'required|string|min:3|max:150',
                 'id_periode' => 'required|integer',
                 'password' => 'nullable|min:6|max:20',
-                // 'jam_alpha' => 'required|integer',
-                // 'jam_kompen' => 'required|integer',
-                // 'jam_kompen_selesai' => 'required|integer',
                 'id_level' => 'required|integer'
             ];
 
-            // use Illuminate\Support\Facades\Validator;
             $validator = Validator::make($request->all(), $rules);
 
             if($validator->fails()){
                 return response()->json([
-                    'status' => false, //respon json, true: berhasil, false: gagal
+                    'status' => false,
                     'message' => 'Validasi gagal.',
-                    'msgField' => $validator->errors() // menunjukkan field mana yang error
+                    'msgField' => $validator->errors() 
                 ]);
             }
 
             $check = MahasiswaModel::find($id);
             if($check){
-                if(!$request->filled('password')){//jika password tidak diisim maka hapus dari request
+                if(!$request->filled('password')){
                     $request->request->remove('password');
                 }
 
@@ -170,7 +163,6 @@ class MahasiswaController extends Controller
     }
 
     public function delete_ajax(Request $request, $id){
-        // cek apakah request dari ajax
         if($request->ajax() || $request->wantsJson()){
             $mahasiswa = MahasiswaModel::find($id);
             if($mahasiswa){
@@ -191,16 +183,14 @@ class MahasiswaController extends Controller
 
     public function destroy(string $id){
         $check = MahasiswaModel::find($id);
-        if(!$check){ // untuk mengecek apakah data mahasiswa dengan id yang dimaksud ada atau tidak
+        if(!$check){ 
             return redirect('/mahasiswa')->with('error', 'Data mahasiswa tidak ditemukan');
         }
 
         try{
-            MahasiswaModel::destroy($id); //Hapus data mahasiswa
+            MahasiswaModel::destroy($id); 
             return redirect('/mahasiswa')->with('success', 'Data mahasiswa berhasil dihapus');
         } catch(\Illuminate\Database\QueryException $e){
-
-            //jika terjadi error ketika menghapus data, redirect kembali ke halaman dengan membawa pesan error
             return redirect('/mahasiswa')->with('error', 'Data mahasiswa gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
         }
     }

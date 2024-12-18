@@ -162,7 +162,7 @@ Route::middleware(['auth:web,personil'])->group(function () {
         Route::put('/{id}/update_progres', [KompenDilakukanController::class, 'update_progres'])->middleware('authorize:MHS');
         Route::post('/list_pekerja', [KompenDilakukanController::class, 'list_pekerja'])->middleware('authorize:ADM,DSN,TDK'); // untuk list json datatables
         Route::get('/{id}/upload_bukti', [KompenDilakukanController::class, 'upload_bukti_kompen'])->middleware('authorize:MHS');
-        Route::put('/{id}/store_bukti', [KompenDilakukanController::class, 'store_bukti'])->middleware('authorize:MHS');
+        Route::put('/{id}/store_bukti', [KompenDilakukanController::class, 'store_bukti_kompen'])->middleware('authorize:MHS');
         Route::post('/konfirmasi_pekerjaan', [KompenDilakukanController::class, 'konfirmasi_pekerjaan'])->name('konfirmasi_pekerjaan')->middleware('authorize:ADM,DSN,TDK');
         Route::post('/selesaikan_kompen', [KompenDilakukanController::class, 'selesaikan_kompen'])->middleware('authorize:ADM,DSN,TDK');
         Route::get('/export_bukti_kompen', [KompenDilakukanController::class, 'export_bukti_kompen']);
