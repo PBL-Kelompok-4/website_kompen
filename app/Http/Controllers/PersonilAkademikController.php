@@ -10,8 +10,7 @@ use Yajra\DataTables\Facades\DataTables;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Barryvdh\DomPDF\Facade\Pdf;
 
-class PersonilAkademikController extends Controller
-{
+class PersonilAkademikController extends Controller {
     public function index(){
         $breadcrumb = (object)[
             'title' => 'Daftar personil akademik',
@@ -188,7 +187,6 @@ class PersonilAkademikController extends Controller
 
         return view('personil_akademik.show_ajax', ['personil_akademik' => $personil]);
     }
-
 
     public function LoadChartJsPage (){
         return view ('home');
