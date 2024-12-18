@@ -26,11 +26,6 @@
                         <small id="error-nomor_induk" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">
-                        <label>Username</label>
-                        <input value="" type="text" name="username" id="username" class="form-control" required>
-                        <small id="error-username" class="error-text form-text text-danger"></small>
-                    </div>
-                    <div class="form-group">
                         <label>Password</label>
                         <div class="input-group">
                             <input value="" type="password" name="password" id="password" class="form-control">
@@ -48,24 +43,19 @@
                         <small id="error-nama" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">
-                        <label>Semester</label>
-                        <input value="" type="number" name="semester" id="semester" class="form-control" required>
-                        <small id="error-semester" class="error-text form-text text-danger"></small>
+                        <label>Periode</label>
+                        <select name="id_periode" id="id_periode" class="form-control">
+                            <option value="">- Pilih Periode Mahasiswa -</option>
+                            @foreach ($periode as $p)
+                                <option value="{{ $p->id_periode }}">{{ $p->periode }}</option>
+                            @endforeach
+                        </select>
+                        <small id="error-id_periode" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">
                         <label>Jumlah Jam Alpha</label>
                         <input value="" type="number" name="jam_alpha" id="jam_alpha" class="form-control" required>
                         <small id="error-jam_alpha" class="error-text form-text text-danger"></small>
-                    </div>
-                    <div class="form-group">
-                        <label>Jumlah Jam Kompen</label>
-                        <input value="" type="number" name="jam_kompen" id="jam_kompen" class="form-control" required>
-                        <small id="error-jam_kompen" class="error-text form-text text-danger"></small>
-                    </div>
-                    <div class="form-group">
-                        <label>Jumlah Jam Kompen Selesai</label>
-                        <input value="" type="number" name="jam_kompen_selesai" id="jam_kompen_selesai" class="form-control" required>
-                        <small id="error-jam_kompen_selesai" class="error-text form-text text-danger"></small>
                     </div>
             </div>
             <div class="modal-footer">
@@ -82,14 +72,10 @@
             rules: {
                 id_prodi: { required: true, number: true },
                 nomor_induk: { required: true, maxlength: 10 },
-                username: { required: true, minlength: 3, maxlength: 20 },
                 nama: { required: true, minlength: 3, maxlength: 150 },
-                semester: { required: true, number: true, max: 14, min: 1 },
+                id_periode: { required: true, number: true, min: 2000 },
                 password: {required:true, minlength: 6, maxlength: 20 },
-                jam_alpha: { required: true, number: true, min: 0 },
-                jam_kompen: { required: true, number: true, min: 0 },
-                jam_kompen_selesai: { required: true, number: true, min: 0 },
-                // id_level: { number: true }
+                jam_alpha: { required: true, number: true, min: 0 }
             },
             submitHandler: function(form) {
                 $.ajax({

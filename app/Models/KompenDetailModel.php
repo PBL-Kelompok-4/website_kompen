@@ -13,7 +13,7 @@ class KompenDetailModel extends Model
     protected $table = 'kompen_detail';
     protected $primaryKey = 'id_kompen_detail';
 
-    protected $fillable = ['id_kompen', 'id_mahasiswa', 'progres_1', 'progres_2'];
+    protected $fillable = ['id_kompen', 'id_mahasiswa', 'progres_1', 'progres_2', 'status', 'bukti_kompen'];
 
     public function kompen(): BelongsTo{
         return $this->belongsTo(KompenModel::class, 'id_kompen', 'id_kompen');

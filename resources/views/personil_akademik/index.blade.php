@@ -5,10 +5,10 @@
         <div class="card-header">
             <h3 class="card-title">{{ $page->title}}</h3>
             <div class="card-tools">
-                {{-- <button onclick="modalAction('{{ url('/mahasiswa/import') }}')" class="btn btn-info">Import Data Mahasiswa</button>
-                <a href="{{ url('/mahasisawa/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i> Export Data Mahasiswa</a>
-                <a href="{{ url('/mahasisawa/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i> Export Data Mahasiswa</a> --}}
-                <button onclick="modalAction('{{ url('personil_akademik/create_ajax') }}')" class="btn btn-success">Tambah Data (Ajax)</button>
+                <button onclick="modalAction('{{ url('/personil_akademik/import') }}')" class="btn btn-info">Import Data Personil Akademik</button>
+                <a href="{{ url('/personil_akademik/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i> Export Data Personil Akademik</a>
+                <a href="{{ url('/personil_akademik/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i> Export Data Personil Akademik</a>
+                <button onclick="modalAction('{{ url('personil_akademik/create_ajax') }}')" class="btn btn-success">Tambah Data Personil Akademik</button>
             </div>
         </div>
         <div class="card-body">

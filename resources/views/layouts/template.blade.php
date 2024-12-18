@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <style>
-
         .sidebar,
         .main-sidebar,
         .main-sidebar .brand-link,
@@ -45,6 +43,7 @@
     <link rel="stylesheet" href="{{ url('/') }}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="{{ url('/') }}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <link rel="stylesheet" href="{{ url('/') }}/plugins/fontawesome-free-6.6.0-web/css/all.min.css">
+    {{-- <link rel="stylesheet" href="{{ url('/') }}/plugins/bootstrap-icons.min.css"> --}}
     <!-- Font Awesome 6.6.0 -->
     <script src="https://kit.fontawesome.com/7bd5045ab4.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -52,11 +51,22 @@
     <link rel="stylesheet" href="{{ url('/') }}/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ url('/') }}/plugins/adminlte.min.css">
+<<<<<<< HEAD
     <!-- ChartJs -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Bootstrap icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
 
+=======
+    <!-- css tambahan -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    {{-- <link rel="stylesheet" href="../resources/css/style.css"> --}}
+    
+    {{-- Select2 --}}
+    {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap4-theme@1.0.0/dist/select2-bootstrap4.min.css" rel="stylesheet"> --}}
+    
+>>>>>>> 1200ebc93d600b70015b978891e1d53d11724d0e
     @stack('css') <!-- Digunakan untuk memanggil custom css dari perintah push('css') pada masing-masing view -->
 </head>
 
@@ -69,14 +79,14 @@
 
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <!-- Brand Logo -->
-            {{-- <a href="{{ url('/') }}" class="brand-link">
-      <img src="{{ asset('adminlte/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">PWL - Starter Code</span>
-    </a> --}}
-
             <!-- Sidebar -->
-            @include('layouts.sidebar')
+            @if (auth()->user()->level->kode_level == "ADM")
+                @include('layouts.sidebar_admin')
+            @elseif (auth()->user()->level->kode_level == "DSN" || auth()->user()->level->kode_level == "TDK")
+                @include('layouts.sidebar_dosen_tendik')
+            @elseif (auth()->user()->level->kode_level == "MHS")
+                @include('layouts.sidebar_mahasiswa')
+            @endif
             <!-- /.sidebar -->
         </aside>
 
@@ -116,11 +126,13 @@
     <script src="{{ url('/') }}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="{{ url('/') }}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="{{ url('/') }}/plugins/datatables-buttons/js/buttons.colvis.min.js"></script>
-
+    
+    {{-- Select2 --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
+    
     <!-- jquery-validation -->
     <script src="{{ url('/') }}/plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="{{ url('/') }}/plugins/jquery-validation/additional-methods.min.js"></script>
-
     <!-- SweetAlert2 -->
     <script src="{{ url('/') }}/plugins/sweetalert2/sweetalert2.min.js"></script>
     <!-- AdminLTE App -->
@@ -134,8 +146,6 @@
         });
     </script>
     @stack('js') <!-- Digunakan untuk memanggil custom js dari perintah push('js') pada masing-masing view -->
-    {{-- <!-- AdminLTE for demo purposes -->
-<script src="{{ asset('adminlte/dist/js/demo.js') }}"></script> --}}
 </body>
 
 </html>
