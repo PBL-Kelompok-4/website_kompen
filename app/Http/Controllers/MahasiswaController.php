@@ -33,6 +33,12 @@ class MahasiswaController extends Controller
         return view('mahasiswa.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'prodi' => $prodi, 'activeMenu' => $activeMenu]);
     }
 
+<<<<<<< HEAD
+=======
+    public function list(Request $request)
+    {
+        $mahasiswas = MahasiswaModel::select('id_mahasiswa', 'id_prodi', 'nomor_induk', 'username', 'nama', 'semester', 'jam_alpha', 'jam_kompen', 'jam_kompen_selesai')->with('prodi');
+>>>>>>> 8249acdd86268e056134c2c005f6bbc8a73a08c5
     public function list(Request $request){
         $mahasiswas = MahasiswaModel::select('id_mahasiswa' ,'id_prodi', 'nomor_induk', 'username', 'nama', 'id_periode', 'jam_alpha', 'jam_kompen', 'jam_kompen_selesai')->with('prodi', 'periode');
 
@@ -118,6 +124,11 @@ class MahasiswaController extends Controller
         $prodi = ProdiModel::select('id_prodi', 'nama_prodi')->get();
         $periode = PeriodeModel::all();
 
+<<<<<<< HEAD
+=======
+
+        return view('mahasiswa.edit_ajax', ['mahasiswa' => $mahasiswa, 'prodi' => $prodi]);
+>>>>>>> 8249acdd86268e056134c2c005f6bbc8a73a08c5
         return view('mahasiswa.edit_ajax',['mahasiswa' => $mahasiswa, 'prodi' => $prodi, 'periode' => $periode]);
     }
 
@@ -215,6 +226,12 @@ class MahasiswaController extends Controller
         }
     }
 
+<<<<<<< HEAD
+=======
+
+    
+
+>>>>>>> 8249acdd86268e056134c2c005f6bbc8a73a08c5
     public function import() {
         return view('mahasiswa.import');
     }
