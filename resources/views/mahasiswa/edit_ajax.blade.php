@@ -80,25 +80,7 @@
                             @endforeach
                         </select>
                         <small id="error-id_periode" class="error-text form-text text-danger"></small>
-                    {{-- </div>
-                    <div class="form-group">
-                        <label>Jumlah Jam Alpha</label>
-                        <input value="{{ $mahasiswa->jam_alpha }}" type="number" name="jam_alpha" id="jam_alpha" class="form-control"
-                            required>
-                        <small id="error-jam_alpha" class="error-text form-text text-danger"></small>
                     </div>
-                    <div class="form-group">
-                        <label>Jumlah Jam Kompen</label>
-                        <input value="{{ $mahasiswa->jam_kompen }}" type="number" name="jam_kompen" id="jam_kompen" class="form-control"
-                            required>
-                        <small id="error-jam_kompen" class="error-text form-text text-danger"></small>
-                    </div>
-                    <div class="form-group">
-                        <label>Jumlah Jam Kompen Selesai</label>
-                        <input value="{{ $mahasiswa->jam_kompen_selesai }}" type="number" name="jam_kompen_selesai" id="jam_kompen_selesai" class="form-control"
-                            required>
-                        <small id="error-jam_kompen_selesai" class="error-text form-text text-danger"></small>
-                    </div> --}}
                 </div>
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
@@ -117,9 +99,6 @@
                     nama: { required: true, minlength: 3, maxlength: 150 },
                     id_periode: { required: true, number: true },
                     password: { minlength: 6, maxlength: 20 },
-                    // jam_alpha: { required: true, number: true },
-                    // jam_kompen: { required: true, number: true },
-                    // jam_kompen_selesai: { required: true, number: true },
                     id_level: { number: true }
                 },
                 submitHandler: function(form) {

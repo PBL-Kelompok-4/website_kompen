@@ -68,39 +68,109 @@
     <body>
         <table class="border-bottom-header">
             <tr>
-                <td width="15%" class="text-center"><img src="{{ asset('assets/polinema-bw.png') }}" class="logo-image"></td>
+                <td width="15%" class="text-center"><img src="./assets/polinema-bw.png" class="logo-image"></td>
                 <td width="85%">
-                    <span class="text-center d-block font-11 font-bold mb-1">KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET, DAN TEKNOLOGI</span>
-                    <span class="text-center d-block font-13 font-bold mb-1">POLITEKNIK NEGERI MALANG</span>
-                    <span class="text-center d-block font-10">JL, Soekarno-Hatta No.9 Malang 65141</span>
-                    <span class="text-center d-block font-10">Telepon (0341) 404424 Pes. 101-105 0341-404420, Fax.(0341)404420, <a href="https://www.poltek-malang.ac.id/" target="_blank" rel="noopener noreferrer">https://www.poltek-malang.ac.id</a></span>
+                <span class="text-center d-block font-11 font-bold mb-1">KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET, DAN TEKNOLOGI</span>
+                <span class="text-center d-block font-13 font-bold mb-1">POLITEKNIK NEGERI MALANG</span>
+                <span class="text-center d-block font-10">JL, Soekarno-Hatta No.9 Malang 65141</span>
+                <span class="text-center d-block font-10">Telepon (0341) 404424 Pes. 101-105 0341-404420, Fax. (0341) 404420</span>
+                <span class="text-center d-block font-10">Laman: www.polinema.ac.id</span>
                 </td>
             </tr>
         </table>
-
         <h3 class="text-center"> <u>BERITA ACARA KOMPENSASI PRESENSI</u></h3>
+        <table class="content">
+            <tr>
+                <td style="width: 30%">Nama Pemberi Tugas</td>
+                <td style="width: 20%">: {{ $bukti_kompen->kompen->personilAkademik->nama }}</td>
+                <td style="width: 30%"></td>
+                <td style="width: 20%">                    
+                    <div style="width: 10px; height: 10px;">
+                        <img src="data:image/png;base64,{{ $qr_code }}" alt="QR Code">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>NIP</td>
+                <td>: {{$bukti_kompen->kompen->personilAkademik->nomor_induk}}</td>
+                <td></td>
+                <td></td>
+            </tr>
 
-        <br>
-        <p>Nama Pengajar : {{ $bukti_kompen->kompen->personilAkademik->nama }} </p>
-        <p>NIP : {{ $bukti_kompen->kompen->personilAkademik->nomor_induk }}</p>
-        <br>
-        <p><b>Memberikan tugas kompensasi kepada :</b></p>
-        <p>Nama Mahasiswa : {{ $bukti_kompen->mahasiswa->nama }} </p>
-        <p>NIM : {{ $bukti_kompen->mahasiswa->nomor_induk }} </p>
-        <p>Kelas : .......... </p>
-        <p>Semester : .......................</p>
-        <p>Pekerjaan : {{ $bukti_kompen->kompen->nama }} </p>
-        <p>Jumlah Jam : {{ $bukti_kompen->kompen->jam_kompen }} </p>
-        {{-- <img src="data:image/png;base64,{{ $qr_code }}" alt="QR CODE"> --}}
-        <div class="container-bawah" style="border: 2px solid red">
-            <div class="ttd-kajur bagian-bawah" id="ttd-kajur" >
-            </div>
-            <div class="div-qr bagian-bawah" id="div-qr">
-                <div style="width: 200px; height: 200px;">
-                    <img src="data:image/png;base64,{{ $qr_code }}" alt="QR Code">
-                </div>
-            </div>
-            <div class="ttd-pemberi-tugas bagian-bawah" id="ttd-pemberi-tugas"></div>
-        </div>
+            <br><br>
+            <tr>
+                <h4><b>Memberikan tugas kompensasi kepada :</b></h4>
+            </tr>
+
+            <tr>
+                <td>Nama Mahasiswa</td>
+                <td>: {{$bukti_kompen->mahasiswa->nama}}</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>NIM</td>
+                <td>: {{$bukti_kompen->mahasiswa->nomor_induk}}</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Kelas</td>
+                <td>: ..........</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Semester</td>
+                <td>: .................</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Pekerjaan</td>
+                <td>: {{$bukti_kompen->kompen->nama}}</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Jumlah Jam</td>
+                <td>: {{$bukti_kompen->kompen->jam_kompen}}</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <br><br><br><br><br><br>
+            <tr>
+                <td class="text-center">Mengetahui </td>
+                <td></td>
+                <td></td>
+                <td>Malang, ...........-.........-........</td>
+            </tr>
+            <tr>
+                <td class="text-center">Ka. Progam Studi</td>
+                <td></td>
+                <td></td>
+                <td>Yang Memberikan tugas kompen</td>
+            </tr>
+            <br><br><br><br><br>
+            <tr>
+                <td class="text-center"><b><u>(Hendra Pradibta, SE., M.Sc.)</u></b></td>
+                <td></td>
+                <td></td>
+                <td><b><u>({{ $bukti_kompen->kompen->personilAkademik->nama }})</u></b></td>
+            </tr>
+            <tr>
+                <td class="text-center"> NIP . 1983052122006041003</td>
+                <td></td>
+                <td></td>
+                <td>NIP. {{ $bukti_kompen->kompen->personilAkademik->nomor_induk }}</td>
+            </tr>
+            <br><br>
+            <tr>
+                <td>No : {{ $bukti_kompen->kompen->nomor_kompen }}</td>
+            </tr>
+            <tr>
+                <td><b>NB : Form ini wajib disimpan untuk keperluan bebas tanggungan</b></td>
+            </tr>
+        </table>
     </body>
 </html>

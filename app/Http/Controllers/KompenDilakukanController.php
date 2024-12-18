@@ -15,6 +15,7 @@ use Yajra\DataTables\Facades\DataTables;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Barryvdh\DomPDF\Facade\Pdf;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Support\Facades\File;
 
 class KompenDilakukanController extends Controller
 {
@@ -263,7 +264,10 @@ class KompenDilakukanController extends Controller
             }
 
         } catch (\Exception $e) {
-            //throw $th;
+            return response()->json([
+                'status' => false,
+                'massage' => 'Terjadi kesalahan pada sistem'
+            ]);
         }
     }
 
@@ -278,8 +282,40 @@ class KompenDilakukanController extends Controller
         return view('kompen_dilakukan.upload_bukti', ['kompen_detail' => $kompen_detail]);
     }
 
-    public function store_bukti_kompen(Request $request){
+    public function store_bukti_kompen(Request $request, $id){
+        $validator = Validator::make($request->all(), [
+            'bukti_kompen' => 'required|file|mimes:pdf|max:1024'
+        ]);
 
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Validasi Gagal',
+                'errors' => $validator->errors()
+            ], 400);
+        }
+
+        try {
+            $kompen_detail = KompenDetailModel::find($id);
+            $file = $request->file('bukti_kompen');
+            $fileName = $file->hashName() . '.'. $file->getClientOriginalExtension();
+            $uploadPath = public_path('uploads/dokumen');
+            if (!File::exists($uploadPath)) {
+                File::makeDirectory($uploadPath, 0755, true);
+            }
+            $file->move($uploadPath, $fileName);
+            $kompen_detail->bukti_kompen = 'uploads/dokumen/' . $fileName;
+            $kompen_detail->save();
+            return response()->json([
+                'status' => true,
+                'message' => 'Upload Bukti Kompen Berhasil'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'massage' => 'Terjadi kesalahan ketika upload'
+            ]);
+        }
     }
 
     public function export_bukti_kompen(){
