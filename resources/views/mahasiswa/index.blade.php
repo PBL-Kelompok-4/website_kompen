@@ -40,7 +40,7 @@
                         <th>No</th>
                         <th>NIM</th>
                         <th>Nama</th>
-                        <th>Periode</th>
+                        <th>Tahun Masuk</th>
                         <th>Prodi</th>
                         <th>Aksi</th>
                     </tr>
