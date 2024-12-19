@@ -10,15 +10,6 @@
     <!-- Sidebar Menu -->
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            @if (auth()->user()->level->kode_level == "MHS")
-            <li class="nav-item">
-                <a href="{{ url('/') }}" class="nav-link {{ $activeMenu == 'mahasiswa' ? 'active' : '' }} ">
-                    <i class="nav-icon fa-solid fa-house-chimney"></i>
-                    <p>Dashboard</p>
-                </a>
-            </li>
-            @endif
-            
             @if (auth()->user()->level->kode_level == "ADM")
             <li class="nav-item {{ $activeMenu == 'admin' ? 'active' : ''  }} ">
                 <a href="{{ url('/') }}" class="nav-link {{ $activeMenu == 'admin' ? 'active' : '' }} ">
@@ -26,10 +17,24 @@
                     <p>Dashboard</p>
                 </a>
             </li>
+            @elseif (auth()->user()->level->kode_level == "DSN" || auth()->user()->level->kode_level == "TDK")
+            <li class="nav-item {{ $activeMenu == 'personil_akademik' ? 'active' : ''  }} ">
+                <a href="{{ url('/') }}" class="nav-link {{ $activeMenu == 'personil_akademik' ? 'active' : '' }} ">
+                    <i class="nav-icon fa-solid fa-house-chimney"></i>
+                    <p>Dashboard</p>
+                </a>
+            </li>
+            @elseif (auth()->user()->level->kode_level == "MHS")
+            <li class="nav-item">
+                <a href="{{ url('/') }}" class="nav-link {{ $activeMenu == 'mahasiswa' ? 'active' : '' }} ">
+                    <i class="nav-icon fa-solid fa-house-chimney"></i>
+                    <p>Dashboard</p>
+                </a>
+            </li>
             @endif
             @if (auth()->user()->level->kode_level == "MHS")
             <li class="nav-item {{ $activeMenu == 'mahasiswa' ? 'active' : '' }} ">
-                <a href="#" class="nav-link {{ $activeMenu == 'mahasiswa' ? 'active' : ''  }} ">
+                <a href="{{ url('/dashboard_mahasiswa') }}" class="nav-link {{ $activeMenu == 'mahasiswa' ? 'active' : ''  }} ">
                     <i class="nav-icon fa-solid fa-user"></i>
                     <p>
                       Manajemen User
