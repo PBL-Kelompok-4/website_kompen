@@ -47,7 +47,7 @@ class DashboardController extends Controller
                 'title' => 'Dashboard'
             ];
         
-            $activeMenu = ' dashboard';
+            $activeMenu = 'dashboard';
         
             // Menghitung total status_acceptance berdasarkan id_personil 2 dan 3
             $totalReject = KompenModel::whereIn('id_personil', [2, 3])

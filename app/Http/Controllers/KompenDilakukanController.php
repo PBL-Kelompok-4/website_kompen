@@ -323,7 +323,7 @@ class KompenDilakukanController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'massage' => 'Terjadi kesalahan ketika upload'
+                'massage' => 'Terjadi kesalahan ketika upload' . $e->getMessage()
             ]);
         }
     }
