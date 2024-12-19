@@ -3,7 +3,12 @@
 @section('content')
     <div class="card">
 
-        @if (auth()->user()->mahasiswa)
+        @php
+            $id_mahasiswa = auth()->user()->id_mahasiswa;
+        @endphp
+
+        @if auth()->user()->level->kode_level == "MHS"
+        
             <div class="card-header">
                 <h3 class="card-title">Dashboard Mahasiswa</h3>
                 <div class="card-tools"></div>
@@ -54,7 +59,7 @@
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="small-box">
                             <div class="Alpha inner">
-                                <h3>{{ $mahasiswa->jam_alpha ?? 0 }}</h3>
+                                <h3>{{ $mahasiswa->jam_alpha ?? 0}}</h3>
                                 <p>Jam Alpha</p>
                             </div>
                             <div class="icon">
@@ -67,7 +72,7 @@
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="small-box">
                             <div class="Kompen inner">
-                                <h3>{{ $mahasiswa->jam_kompen ?? 0 }}</h3>
+                                <h3>{{ $mahasiswa->jam_kompen ?? 0}}</h3>
                                 <p>Jam Kompen</p>
                             </div>
                             <div class="icon">
@@ -80,7 +85,7 @@
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="small-box">
                             <div class="Selesai inner">
-                                <h3>{{ $mahasiswa->jam_kompen_selesai ?? 0 }}</h3>
+                                <h3>{{ $mahasiswa->jam_kompen_selesai ?? 0}}</h3>
                                 <p>Jam Kompen Selesai</p>
                             </div>
                             <div class="icon">

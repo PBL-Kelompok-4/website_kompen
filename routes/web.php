@@ -39,7 +39,7 @@ Route::get('logout', [AuthController::class, 'logout'])->middleware('auth:web,pe
 
 Route::middleware(['auth:web,personil'])->group(function () {
 
-    Route::get('/', [HomeController::class, 'index']);
+    Route::get('/', [DashboardController::class, 'index']);
 
     Route::group(['prefix' => 'profil'], function (){
         Route::get('/', [ProfilController::class, 'index']);
