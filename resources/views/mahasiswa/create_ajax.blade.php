@@ -73,7 +73,7 @@
                 id_prodi: { required: true, number: true },
                 nomor_induk: { required: true, maxlength: 10 },
                 nama: { required: true, minlength: 3, maxlength: 150 },
-                id_periode: { required: true, number: true, min: 2000 },
+                id_periode: { required: true, number: true },
                 password: {required:true, minlength: 6, maxlength: 20 },
                 jam_alpha: { required: true, number: true, min: 0 }
             },

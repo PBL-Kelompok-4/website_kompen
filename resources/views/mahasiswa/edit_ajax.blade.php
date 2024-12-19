@@ -97,7 +97,7 @@
                     nomor_induk: { required: true, number: true },
                     username: { required: true, minlength: 3, maxlength: 20 },
                     nama: { required: true, minlength: 3, maxlength: 150 },
-                    id_periode: { required: true, number: true },
+                    id_periode: { required: true, number: true },s
                     password: { minlength: 6, maxlength: 20 },
                     id_level: { number: true }
                 },
