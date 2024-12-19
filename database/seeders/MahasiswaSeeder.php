@@ -30,8 +30,8 @@ class MahasiswaSeeder extends Seeder
             ],
             [
                 'id_mahasiswa' => 2,
-                'nomor_induk' => '2241760060',
-                'username' => '2241760060',
+                'nomor_induk' => '2241760039',
+                'username' => '2241760039',
                 'nama' => 'M. Khasbul Hadi Fauzan',
                 'id_periode' => 3,
                 'id_prodi' => 2,
@@ -108,8 +108,8 @@ class MahasiswaSeeder extends Seeder
             ],
             [
                 'id_mahasiswa' => 8,
-                'nomor_induk' => '2241760069',
-                'username' => '2241760069',
+                'nomor_induk' => '2241760025',
+                'username' => '2241760025',
                 'nama' => 'Hertin Nurhayati',
                 'id_periode' => 4,
                 'id_prodi' => 1,
@@ -121,8 +121,8 @@ class MahasiswaSeeder extends Seeder
             ],
             [
                 'id_mahasiswa' => 9,
-                'nomor_induk' => '2241760087',
-                'username' => '2241760087',
+                'nomor_induk' => '2241760089',
+                'username' => '2241760089',
                 'nama' => 'Hilmy Zaky Mustakim',
                 'id_periode' => 4,
                 'id_prodi' => 3,
@@ -134,8 +134,8 @@ class MahasiswaSeeder extends Seeder
             ],
             [
                 'id_mahasiswa' => 10,
-                'nomor_induk' => '2241760080',
-                'username' => '2241760080',
+                'nomor_induk' => '2241760094',
+                'username' => '2241760094',
                 'nama' => 'M. Ivan Yoda Bellamy',
                 'id_periode' => 5,
                 'id_prodi' => 3,
