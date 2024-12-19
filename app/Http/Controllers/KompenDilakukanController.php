@@ -329,32 +329,39 @@ class KompenDilakukanController extends Controller
     }
 
     public function export_bukti_kompen(){
-        $id_mahasiswa = auth()->user()->id_mahasiswa;
-        $bukti_kompen = KompenDetailModel::select('id_kompen_detail' ,'id_mahasiswa', 'id_kompen', 'status')
-            ->where('id_mahasiswa', $id_mahasiswa)
-            ->where('status', 'progres')
-            ->with('kompen','kompen.personilAkademik' ,'mahasiswa', 'mahasiswa.prodi')
-            ->first();
-
-        // Generate QR sebagai SVG
-        $qr_code = QrCode::size(200)
-            ->generate(
-                '[
-                    Nama Mahasiswa : ' .$bukti_kompen->mahasiswa->nama.', 
-                    Nama Kompen : ' .$bukti_kompen->kompen->nama. ', 
-                    Pemberi Tugas : ' .$bukti_kompen->kompen->personilAkademik->nama . ', 
-                    Jumlah Jam : ' .$bukti_kompen->kompen->jam_kompen. '
-                ]'
-            );
-
-        $pdf = PDF::loadView('kompen_dilakukan.export_bukti_kompen', 
-            ['bukti_kompen' => $bukti_kompen, 
-            'qr_code' => base64_encode($qr_code)
+        try {
+            $id_mahasiswa = auth()->user()->id_mahasiswa;
+            $bukti_kompen = KompenDetailModel::select('id_kompen_detail' ,'id_mahasiswa', 'id_kompen', 'status')
+                ->where('id_mahasiswa', $id_mahasiswa)
+                ->where('status', 'diterima')
+                ->with('kompen','kompen.personilAkademik' ,'mahasiswa', 'mahasiswa.prodi')
+                ->first();
+            // Generate QR sebagai SVG
+            $qr_code = QrCode::size(200)
+                ->generate(
+                    '
+                        Nama Mahasiswa : ' .$bukti_kompen->mahasiswa->nama.'; 
+                        Nomor Kompen : ' .$bukti_kompen->kompen->nomor_kompen.'; 
+                        Nama Kompen : ' .$bukti_kompen->kompen->nama. ';
+                        Pemberi Tugas : ' .$bukti_kompen->kompen->personilAkademik->nama . '; 
+                        Jumlah Jam : ' .$bukti_kompen->kompen->jam_kompen. '
+                    '
+                );
+    
+            $pdf = PDF::loadView('kompen_dilakukan.export_bukti_kompen', 
+                ['bukti_kompen' => $bukti_kompen, 
+                'qr_code' => base64_encode($qr_code)
+                ]);
+            $pdf->setPaper('a4', 'landscape');
+            $pdf->setOption('isRemoteEnabled', true);
+            $pdf->render();
+            return $pdf->stream('Bukti_Kompen '.date('Y-m-d H:i:s'). '.pdf');
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'massage' => 'Terjadi kesalahan: ' . $e->getMessage()
             ]);
-        $pdf->setPaper('a4', 'landscape');
-        $pdf->setOption('isRemoteEnabled', true);
-        $pdf->render();
-        return $pdf->stream('Bukti_Kompen '.date('Y-m-d H:i:s'). '.pdf');
+        }
     }
 
     public function selesaikan_kompen(Request $request){
