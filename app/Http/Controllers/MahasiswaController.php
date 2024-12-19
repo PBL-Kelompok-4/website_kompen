@@ -237,13 +237,16 @@ class MahasiswaController extends Controller
                         } elseif ($value['A'] == "PPLS") {
                             $id_prodi = 3;
                         }
+                        $tahun_masuk = PeriodeModel::select('id_periode', 'periode')
+                        ->where('periode', $value['D'])
+                        ->first();
                         $insert[] = [
                             'id_prodi'=> $id_prodi,
                             'nama' => $value['B'],
                             'nomor_induk' => $value['C'],
                             'username' => $value['C'],
                             'password' => $value['C'],
-                            'id_periode' => $value['D'],
+                            'id_periode' => $tahun_masuk->id_periode,
                             'jam_alpha' => $value['E'],
                             'jam_kompen' => ($value['E'] * 2),
                             'created_at' => now(),
