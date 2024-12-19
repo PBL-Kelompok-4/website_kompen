@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Kesalahan</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -22,7 +22,7 @@
     <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Daftar Pekerja Kompen</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
@@ -40,6 +40,7 @@
                         <th class="text-center col-3">Prodi</th>
                         <th class="text-center col-3">Progres 1</th>
                         <th class="text-center col-3">Progres 2</th>
+                        <th class="text-center col-3">Bukti Kompen</th>
                         <th class="text-center col-3">Aksi</th>
                     </tr>
                 </thead>
@@ -47,7 +48,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-success btn-selesai" id="button-selesai">Selesaikan Kompen</button>
-            <button type="button" data-dismiss="modal" class="btn btn-warning">Kembali</button>
+            <button type="button" data-bs-dismiss="modal" class="btn btn-warning">Kembali</button>
         </div>
     </div>
 </div>
@@ -93,6 +94,11 @@
                     orderable: true,
                     searchable: true
                 },{
+                    data: "bukti_kompen",
+                    className: "text-center",
+                    orderable: true,
+                    searchable: true
+                },{
                     data: "aksi",
                     className: "text-center",
                     orderable: true,
@@ -118,7 +124,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: '/kompen_dilakukan/selesaikan_kompen',
+                            url: 'kompen_dilakukan/selesaikan_kompen',
                             type: 'POST',
                             data: {
                                 _token: '{{ csrf_token() }}',
@@ -133,7 +139,7 @@
                                     }).then(() => {
                                         listPekerja.ajax.reload();
                                         dataKompenDilakukan.ajax.reload();
-                                        $('#modal-master').modal('hide');
+                                        $('#myModal').modal('hide');
                                     });
                                 } else {
                                     Swal.fire({

@@ -1,4 +1,4 @@
-@empty($level)
+@empty($jenis_kompen)
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -12,34 +12,34 @@
                     <h5><i class="icon fas fa-ban"></i> Kesalahan!!!</h5>
                     Data yang anda cari tidak ditemukan
                 </div>
-                <a href="{{ url('/level') }}" class="btn btn-warning">Kembali</a>
+                <a href="{{ url('/jenis_kompen') }}" class="btn btn-warning">Kembali</a>
             </div>
         </div>
     </div>
 @else
-    <form action="{{ url('/level/' . $level->id_level . '/update_ajax') }}" method="POST" id="form-edit">
+    <form action="{{ url('/jenis_kompen/' . $jenis_kompen->id_jenis_kompen . '/update_ajax') }}" method="POST" id="form-edit">
         @csrf
         @method('PUT')
         <div id="modal-master" class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Level</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Periode</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" arialabel="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Kode Level</label>
-                        <input value="{{ $level->kode_level }}" type="text" name="kode_level" id="kode_level"
-                            class="form-control" required>
-                        <small id="error-kode_level" class="error-text form-text text-danger"></small>
+                        <label>Kode</label>
+                        <input value="{{ $jenis_kompen->kode_jenis }}" type="text" name="kode_jenis" id="kode_jenis" class="form-control" required>
+                        <small id="error-kode_jenis" class="error-text form-text text-danger"></small>
                     </div>
+                </div>
+                <div class="modal-body">
                     <div class="form-group">
-                        <label>Nama Level</label>
-                        <input value="{{ $level->nama_level }}" type="text" name="nama_level" id="nama_level"
-                            class="form-control" required>
-                        <small id="error-nama_level" class="error-text form-text text-danger"></small>
+                        <label>Nama</label>
+                        <input value="{{ $jenis_kompen->nama_jenis }}" type="text" name="nama_jenis" id="nama_jenis" class="form-control" required>
+                        <small id="error-nama_jenis" class="error-text form-text text-danger"></small>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -53,8 +53,8 @@
         $(document).ready(function() {
             $("#form-edit").validate({
                 rules: {
-                    kode_level: { required: true, maxlength: 18 },
-                    nama_level: { required: true, minlength: 3, maxlength: 150 }
+                    kode_jenis: { required: true, minlength: 3, maxlength: 10},
+                    nama_jenis: { required: true, minlength: 3, maxlength: 255}
                 },
                 submitHandler: function(form) {
                     $.ajax({
@@ -69,7 +69,7 @@
                                     title: 'Berhasil',
                                     text: response.message
                                 });
-                                dataLevel.ajax.reload();
+                                dataJenisKompen.ajax.reload();
                             } else {
                                 $('.error-text').text('');
                                 $.each(response.msgField, function(prefix, val) {

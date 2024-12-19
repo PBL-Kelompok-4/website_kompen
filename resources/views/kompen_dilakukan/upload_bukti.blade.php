@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Kesalahan</h5>
-                <button type="button" class="close" data-dismiss="modal" arialabel="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" arialabel="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -17,6 +17,43 @@
         </div>
     </div>
 @else
+@if ($kompen_detail->status == "ditolak")
+<div id="modal-master" class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">PERHATIAN</h5>
+            <button type="button" class="close" data-bs-dismiss="modal" arialabel="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-danger">
+                <h5><i class="icon fas fa-ban"></i> Pengerjaan Kompen Anda Ditolak!!!</h5>
+                Pengerjaan tugas kompen anda ditolak oleh pemberi tugas, silahkan menghubungi pemberi tugas terkait masalah tersebut
+            </div>
+            <a href="{{ url('/kompen_dilakukan') }}" class="btn btn-warning">Kembali</a>
+        </div>
+    </div>
+</div>
+@elseif ($kompen_detail->status == "progres")
+<div id="modal-master" class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">PERHATIAN</h5>
+            <button type="button" class="close" data-bs-dismiss="modal" arialabel="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-danger">
+                <h5><i class="icon fas fa-ban"></i> Pengerjaan Kompen Belum Selesai!!!</h5>
+                Silahkan lanjutkan pengerjaan tugas kompen anda dahulu sebelum mencetak bukti kompen
+            </div>
+            <a href="{{ url('/kompen_dilakukan') }}" class="btn btn-warning">Kembali</a>
+        </div>
+    </div>
+</div>
+@else
 <form action="{{ url('/kompen_dilakukan/' . $kompen_detail->id_kompen_detail . '/store_bukti') }}" method="POST" id="form-update" enctype="multipart/form-data">
     @csrf
     @method('PUT')    
@@ -24,7 +61,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Upload bukti kompen</h5>
-                    <button type="button" class="close" data-dismiss="modal" arialabel="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" arialabel="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -64,7 +101,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
+                    <button type="button" data-bs-dismiss="modal" class="btn btn-warning">Batal</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </div>
@@ -128,4 +165,5 @@
             });
         });
     </script>
+    @endif
 @endempty

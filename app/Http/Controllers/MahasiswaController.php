@@ -113,7 +113,6 @@ class MahasiswaController extends Controller
         $mahasiswa = MahasiswaModel::find($id);
         $prodi = ProdiModel::select('id_prodi', 'nama_prodi')->get();
         $periode = PeriodeModel::all();
-      
         return view('mahasiswa.edit_ajax',['mahasiswa' => $mahasiswa, 'prodi' => $prodi, 'periode' => $periode]);
     }
 

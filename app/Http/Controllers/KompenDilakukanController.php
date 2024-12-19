@@ -16,6 +16,7 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use Barryvdh\DomPDF\Facade\Pdf;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 
 class KompenDilakukanController extends Controller
 {
@@ -68,12 +69,7 @@ class KompenDilakukanController extends Controller
         if($request->id_jenis_kompen){
             $kompens->where('id_jenis_kompen', $request->id_jenis_kompen);
         }
-
-        // if($request->id_kompetensi){
-        //     $kompens->where('id_kompetensi', $request->id_kompetensi);
-        // }
         return DataTables::of($kompens)
-        // menambahkan kolom index / no urut (default nama kolom: DT_RowIndex)
         ->addIndexColumn()
         ->addColumn('aksi', function ($kompen){ //menambahkan kolom aksi
 
@@ -99,12 +95,11 @@ class KompenDilakukanController extends Controller
 
     public function upload_progres(string $id){
         $id_mahasiswa = auth()->user()->id_mahasiswa;
-        $progres_kompen = KompenDetailModel::select('id_kompen_detail', 'id_kompen', 'id_mahasiswa', 'progres_1', 'progres_2')
+        $progres_kompen = KompenDetailModel::select('id_kompen_detail', 'id_kompen', 'id_mahasiswa', 'progres_1', 'progres_2', 'status')
         ->where('id_kompen', $id)
         ->where('id_mahasiswa', $id_mahasiswa)
         ->with('kompen')
         ->first();
-        // dd($progres_kompen);
         return view('kompen_dilakukan.upload_progres', ['progres_kompen' => $progres_kompen]);
     }
 
@@ -186,6 +181,18 @@ class KompenDilakukanController extends Controller
                 }
                 return $btn;
             })
+            ->addColumn('bukti_kompen', function($pekerja_kompen){
+                $btn = '';
+                if($pekerja_kompen->bukti_kompen == null){
+                    $btn .= '<a href="#" class="btn btn-danger btn-sm" download>';
+                    $btn .= '<i class="fa fa-file-pdf"></i>';
+                    $btn .= 'Belum ada bukti kompen';
+                    $btn .= '</a>';
+                } else {
+                    $btn .= '<a href="'.asset($pekerja_kompen->bukti_kompen) .'" class="btn btn-warning btn-sm" download><i class="fa fa-file-pdf"></i>Download Bukti Kompen</a>';
+                }
+                return $btn;
+            })
             ->addColumn('aksi', function($pekerja_kompen){
                 $btn = '';
                 if ($pekerja_kompen->status == "diterima") {
@@ -206,7 +213,7 @@ class KompenDilakukanController extends Controller
                 }
                 return $btn;
             })
-            ->rawColumns(['aksi', 'progres_1', 'progres_2'])
+            ->rawColumns(['aksi', 'progres_1', 'progres_2', 'bukti_kompen'])
             ->make(true);
     }
 
@@ -252,6 +259,9 @@ class KompenDilakukanController extends Controller
                     'massage' => 'Pekerjaan mahasiswa berhasil diterima'
                 ]);
             } elseif($request->status == 'reject') {
+                $kompen_detail->status = 'ditolak';
+                $kompen_detail->updated_at = now();
+                $kompen_detail->save();
                 return response()->json([
                     'status' => true,
                     'massage' => 'Pekerjaan mahasiswa berhasil ditolak'
@@ -348,6 +358,7 @@ class KompenDilakukanController extends Controller
     }
 
     public function selesaikan_kompen(Request $request){
+        DB::beginTransaction();
         try {
             $id_kompen = $request->id_kompen;
             
@@ -370,11 +381,21 @@ class KompenDilakukanController extends Controller
                     'massage' => "Data kompen tidak ditemukan"
                 ]);
             }
-    
+
+            $pekerja_kompen = KompenDetailModel::select('id_kompen_detail', 'id_kompen', 'id_mahasiswa', 'status')
+            ->where('id_kompen', $id_kompen)
+            ->where('status', 'diterima')
+            ->get();
+
+            foreach ($pekerja_kompen as $value) {
+                $value->mahasiswa->jam_kompen_selesai = ($kompen->jam_kompen + $value->mahasiswa->jam_kompen_selesai);
+                $value->mahasiswa->save();
+            }
+
             $kompen->is_selesai = 'yes';
             $kompen->updated_at = now();
             $kompen->save();
-    
+            DB::commit();
             return response()->json([
                 'status' => true,
                 'massage' => 'Kompen berhasil diselesaikan'
