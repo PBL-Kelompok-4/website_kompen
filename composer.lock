@@ -1599,7 +1599,6 @@
         },
         {
             "name": "laravel/prompts",
-<<<<<<< HEAD
             "version": "v0.1.25",
             "source": {
                 "type": "git",
@@ -1851,8 +1850,6 @@
         },
         {
             "name": "lcobucci/clock",
-=======
->>>>>>> 8249acdd86268e056134c2c005f6bbc8a73a08c5
             "version": "2.3.0",
             "source": {
                 "type": "git",
@@ -1901,10 +1898,6 @@
             "description": "Yet another clock abstraction",
             "support": {
                 "issues": "https://github.com/lcobucci/clock/issues",
-<<<<<<< HEAD
-=======
-
->>>>>>> 8249acdd86268e056134c2c005f6bbc8a73a08c5
                 "source": "https://github.com/lcobucci/clock/tree/2.3.0"
             },
             "funding": [
@@ -6509,13 +6502,6 @@
             },
             "type": "library",
             "extra": {
-<<<<<<< HEAD
-=======
-                "branch-alias": {
-                    "dev-develop": "1.0-dev",
-                    "dev-2.x": "2.0-dev"
-                },
->>>>>>> 8249acdd86268e056134c2c005f6bbc8a73a08c5
                 "laravel": {
                     "aliases": {
                         "JWTAuth": "Tymon\\JWTAuth\\Facades\\JWTAuth",

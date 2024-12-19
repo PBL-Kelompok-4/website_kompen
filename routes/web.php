@@ -12,9 +12,11 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\PersonilAkademikController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\JenisKompenController;
 use App\Http\Controllers\KompenDilakukanController;
 use App\Http\Controllers\KompenDitolakController;
 use App\Http\Controllers\MahasiswaKompenController;
+use App\Http\Controllers\PeriodeController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -87,6 +89,33 @@ Route::middleware(['auth:web,personil'])->group(function () {
         Route::get('/{id}/show_ajax', [LevelController::class, 'show_ajax']);
     });
     
+    Route::group(['prefix' => 'periode', 'middleware' => 'authorize:ADM'], function() {
+        Route::get('/', [PeriodeController::class, 'index']);
+        Route::post('/list', [PeriodeController::class, 'list']);
+        Route::get('/create_ajax', [PeriodeController::class, 'create_ajax']);
+        Route::post('/ajax', [PeriodeController::class, 'store_ajax']);
+        Route::get('/{id}/show_ajax', [PeriodeController::class, 'show_ajax']);
+        Route::get('/{id}/edit_ajax', [PeriodeController::class, 'edit_ajax']);
+        Route::put('/{id}/update_ajax', [PeriodeController::class, 'update_ajax']);
+        Route::get('/{id}/delete_ajax', [PeriodeController::class, 'confirm_ajax']);
+        Route::delete('/{id}/delete_ajax', [PeriodeController::class, 'delete_ajax']);
+        Route::delete('/{id}', [PeriodeController::class, 'destroy']);
+    });
+
+    Route::group(['prefix' => 'jenis_kompen', 'middleware' => 'authorize:ADM'], function() {
+        Route::get('/', [JenisKompenController::class, 'index']);
+        Route::get('/', [JenisKompenController::class, 'index']);
+        Route::post('/list', [JenisKompenController::class, 'list']);
+        Route::get('/create_ajax', [JenisKompenController::class, 'create_ajax']);
+        Route::post('/ajax', [JenisKompenController::class, 'store_ajax']);
+        Route::get('/{id}/show_ajax', [JenisKompenController::class, 'show_ajax']);
+        Route::get('/{id}/edit_ajax', [JenisKompenController::class, 'edit_ajax']);
+        Route::put('/{id}/update_ajax', [JenisKompenController::class, 'update_ajax']);
+        Route::get('/{id}/delete_ajax', [JenisKompenController::class, 'confirm_ajax']);
+        Route::delete('/{id}/delete_ajax', [JenisKompenController::class, 'delete_ajax']);
+        Route::delete('/{id}', [JenisKompenController::class, 'destroy']);
+    });
+
     Route::group(['prefix' => 'kompetensi', 'middleware' => 'authorize:ADM,DSN,TDK,MHS'], function () {
         Route::get('/', [KompetensiController::class, 'index']);
         Route::post('/list', [KompetensiController::class, 'list']); // untuk list json datatables
@@ -169,7 +198,7 @@ Route::middleware(['auth:web,personil'])->group(function () {
         Route::get('/{id}/upload_bukti', [KompenDilakukanController::class, 'upload_bukti_kompen'])->middleware('authorize:MHS');
         Route::put('/{id}/store_bukti', [KompenDilakukanController::class, 'store_bukti_kompen'])->middleware('authorize:MHS');
         Route::post('/konfirmasi_pekerjaan', [KompenDilakukanController::class, 'konfirmasi_pekerjaan'])->name('konfirmasi_pekerjaan')->middleware('authorize:ADM,DSN,TDK');
-        Route::post('/selesaikan_kompen', [KompenDilakukanController::class, 'selesaikan_kompen'])->middleware('authorize:ADM,DSN,TDK');
+        Route::post('/selesaikan_kompen', [KompenDilakukanController::class, 'selesaikan_kompen'])->middleware('authorize:ADM');
         Route::get('/export_bukti_kompen', [KompenDilakukanController::class, 'export_bukti_kompen']);
     });
     
