@@ -22,7 +22,7 @@ class DashboardController extends Controller
             'title' => 'Dashboard'
         ];
 
-        $activeMenu = 'Dashboard';
+        $activeMenu = 'dashboard';
 
         if (auth()->user()->level->kode_level == "ADM") {
             $data = DB::table('mahasiswa')
@@ -47,7 +47,7 @@ class DashboardController extends Controller
                 'title' => 'Dashboard'
             ];
         
-            $activeMenu = 'Dashboard';
+            $activeMenu = 'dashboard';
         
             // Menghitung total status_acceptance berdasarkan id_personil 2 dan 3
             $totalReject = KompenModel::whereIn('id_personil', [2, 3])
@@ -82,7 +82,7 @@ class DashboardController extends Controller
                 'title' => 'Dashboard'
             ];
 
-            $activeMenu = 'Dashboard';
+            $activeMenu = 'dashboard';
             $id_mahasiswa = auth()->user()->id_mahasiswa;
 
             // Ambil data mahasiswa langsung dari model
@@ -120,7 +120,7 @@ class DashboardController extends Controller
             )
             ->first();
 
-        $activeMenu = 'Dashboard';
+        $activeMenu = 'dashboard';
 
         // Mengirim data ke view
         return view('home', [
@@ -166,7 +166,7 @@ class DashboardController extends Controller
             'title' => 'Dashboard'
         ];
 
-        $activeMenu = 'Dashboard';
+        $activeMenu = 'dashboard';
         $id_mahasiswa = auth()->user()->id_mahasiswa;
 
         $jam_alpha_mahasiswa = MahasiswaModel::select('jam_alpha')->where('id_mahasiswa', $id_mahasiswa);
